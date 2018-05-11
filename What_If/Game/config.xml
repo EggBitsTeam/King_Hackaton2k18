@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+	<app framerate_cap="60">
+		<title>What If ...</title>
+		<organization>EggBitsTeam</organization>
+	</app>
+	<renderer>
+		<vsync value="true" />
+	</renderer>
+	<font>
+		<default_font file="fonts/FritzQuadrata Regular.ttf" size="12" />
+	</font>
+	<gui>
+		<atlas file="textures/GUI/ui_atlas.png" />
+		<pause_menu file="textures/GUI/PauseMenu.png" />
+		<button>
+			<fx pressed="audio/fx/pressed_btn.wav" released="audio/fx/released_btn.wav" hover="audio/fx/hover_btn.wav" />
+		</button>
+	</gui>
+	<window>
+		<resolution width="968" height="648" scale="2" />
+		<fullscreen value="false" />
+		<borderless value="false" />
+		<resizable value="false" />
+		<fullscreen_window value="false" />
+	</window>
+	<audio fx="25" music="50">
+		<lvlMusic name="textures/source_spritesheet.png" />
+	</audio>
+		
+	<file_system>
+		<path>data.zip</path>
+	</file_system>
+	
+</config>
