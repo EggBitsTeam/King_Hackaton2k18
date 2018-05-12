@@ -223,6 +223,8 @@ void Goal_PressStart::Activate()
 	goalStatus = GoalStatus_Active;
 	// -----
 
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 	alpha = 255;
 }
 

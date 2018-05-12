@@ -99,7 +99,12 @@ bool SceneCity::Start()
 	girlEntity = (Girl*)App->entities->SpawnEntity(200, 260, EntityType::GIRL);
 	blackEntity = (Black*)App->entities->SpawnEntity(120, 260, EntityType::BLACK);
 	homelessEntity = (Homeless*)App->entities->SpawnEntity(60, 260, EntityType::HOMELESS);
-
+/*
+	whiteEntity = (White*)App->entities->SpawnEntity(-270, 260, EntityType::WHITE);
+	girlEntity = (Girl*)App->entities->SpawnEntity(-200, 260, EntityType::GIRL);
+	blackEntity = (Black*)App->entities->SpawnEntity(-120, 260, EntityType::BLACK);
+	homelessEntity = (Homeless*)App->entities->SpawnEntity(60, 260, EntityType::HOMELESS);
+*/
 	// Player's brain
 	blackBrain = new Goal_Think(blackEntity);
 	blackBrain->RemoveAllSubgoals();
@@ -113,7 +118,7 @@ bool SceneCity::Start()
 	// Intro cinematic
 	blackBrain->AddGoal_IntroCinematic(title, pressStart);
 
-	currentPlayer = HOMELESS_ACTUAL;
+	currentPlayer = NO_FOLLOW;
 
 	homelessEntity->StopPlayer(false);
 	girlEntity->StopPlayer(true);
@@ -121,7 +126,6 @@ bool SceneCity::Start()
 	blackEntity->StopPlayer(true);
 
 	App->win->GetWindowSize(width, height);
-	barHeight = 100;
 
 	barHeight = 150;
 
