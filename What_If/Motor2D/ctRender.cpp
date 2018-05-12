@@ -441,7 +441,8 @@ iPoint ctRender::ScreenToWorld(int x, int y) const
 	return ret;
 }
 
-bool ctRender::Is_inScreen(int x, int y) {
-	bool ret = true;
-	return ret;
+bool ctRender::IsInScreen(const SDL_Rect& item) const
+{
+	SDL_Rect cameraRect{ -camera.x, -camera.y, camera.w, camera.h };
+	return SDL_HasIntersection(&item, &cameraRect);
 }
