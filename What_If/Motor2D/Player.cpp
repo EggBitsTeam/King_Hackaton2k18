@@ -4,8 +4,14 @@
 
 Player::Player(int x, int y, EntityType type) : Entity(x,y,type)
 {
-	anims[Animations::Idle].PushBack({ 0,0,0,0 });
-	anims[Animations::Move].PushBack({ 0,0,0,0 });
+	anims[Animations::Idle].PushBack({ 1,1,16,47 });
+	anims[Animations::Idle].speedFactor = 9.0f;
+	anims[Animations::Move].PushBack({ 18,1,16,47 });
+	anims[Animations::Move].PushBack({ 35,1,16,47 });
+	anims[Animations::Move].speedFactor = 9.0f;
+
+	statesPlayer = Idle_state;
+	anim = &anims[Animations::Idle];
 }
 
 Player::~Player()
@@ -14,7 +20,6 @@ Player::~Player()
 
 void Player::Update(float dt)
 {
-
 	switch (statesPlayer)
 	{
 	case Idle:
@@ -34,4 +39,6 @@ void Player::Update(float dt)
 		}
 		break;
 	}
+
+	anim->speed = anim->speedFactor * dt;
 }

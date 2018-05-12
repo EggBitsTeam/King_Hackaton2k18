@@ -44,6 +44,7 @@ bool SceneCity::Start()
 {
 	bool ret = true;
 
+	App->entities->SpawnEntity(0, 0, EntityType::PLAYER);
 
 	return ret;
 }
