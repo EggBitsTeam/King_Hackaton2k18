@@ -4,9 +4,7 @@
 #include "ctModule.h"
 #include "SDL\include\SDL_pixels.h"
 
-
-
-#define DEFAULT_FONT "Fonts/8bitlim.ttf"
+#define DEFAULT_FONT "Fonts/MSMINCHO.TTF"
 #define Second_Font "Fonts/FritzQuadrata Regular.ttf"
 
 #define DEFAULT_FONT_SIZE 15

@@ -11,7 +11,7 @@
 		<default_font file="fonts/FritzQuadrata Regular.ttf" size="12" />
 	</font>
 	<gui>
-		<atlas file="textures/GUI/ui_atlas.png" />
+		<atlas file="textures/ui_spritesheet.png" />
 		<pause_menu file="textures/GUI/PauseMenu.png" />
 		<button>
 			<fx pressed="audio/fx/pressed_btn.wav" released="audio/fx/released_btn.wav" hover="audio/fx/hover_btn.wav" />
@@ -22,7 +22,7 @@
 		<fullscreen value="false" />
 		<borderless value="false" />
 		<resizable value="false" />
-		<fullscreen_window value="true" />
+		<fullscreen_window value="false" />
 	</window>
 	<audio fx="25" music="50">
 		<lvlMusic name="textures/source_spritesheet.png" />

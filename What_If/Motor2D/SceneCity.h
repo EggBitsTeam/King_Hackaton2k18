@@ -13,6 +13,9 @@ class Black;
 class White;
 class Girl;
 
+class UIImage;
+class UILabel;
+
 class SceneCity : public ctModule
 {
 
@@ -62,7 +65,11 @@ public:
 	} currentPlayer = NO_FOLLOW;
 
 private:
-	Goal_Think* brain = nullptr;
+
+	Goal_Think* homelessBrain = nullptr;
+	Goal_Think* girlBrain = nullptr;
+	Goal_Think* blackBrain = nullptr;
+	Goal_Think* whiteBrain = nullptr;
 
 	// Map
 	SDL_Texture* mapTexture = nullptr;
@@ -70,6 +77,9 @@ private:
 	// Debug
 	bool isDebugCollision = false;
 
+	// UI
+	UIImage* title = nullptr;
+	UILabel* pressStart = nullptr;
 };
 
 

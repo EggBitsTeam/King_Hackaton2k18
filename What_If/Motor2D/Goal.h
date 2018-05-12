@@ -13,6 +13,9 @@ using namespace std;
 class Entity;
 class Player;
 
+class UIImage;
+class UILabel;
+
 enum GoalType {
 
 	GoalType_NoType,
@@ -136,14 +139,15 @@ public:
 	// Arbitrate between available strategies, choosing the most appropriate
 	// to be pursued. Calculate the desirability of the strategies
 	//void Arbitrate();
-	void AddGoal_IntroCinematic();
+	void AddGoal_IntroCinematic(UIImage* title, UILabel* pressStart);
+	void AddGoal_Goal_MoveCameraDownAndStartGame(UIImage* title);
 };
 
 class Goal_IntroCinematic :public CompositeGoal
 {
 public:
 
-	Goal_IntroCinematic(Player* owner);
+	Goal_IntroCinematic(Player* owner, UIImage* title, UILabel* pressStart);
 
 	void Activate();
 	GoalStatus Process(float dt);
@@ -151,14 +155,16 @@ public:
 
 private:
 
+	UIImage* title = nullptr;
+	UILabel* pressStart = nullptr;
 };
 
 
-class Goal_MoveToPos :public AtomicGoal
+class Goal_PressStart :public AtomicGoal
 {
 public:
 
-	Goal_MoveToPos(Player* owner);
+	Goal_PressStart(Player* owner, UIImage* title, UILabel* pressStart);
 
 	void Activate();
 	GoalStatus Process(float dt);
@@ -166,6 +172,27 @@ public:
 
 private:
 
+	UIImage* title = nullptr;
+	UILabel* pressStart = nullptr;
+
+	int alpha = 0;
+};
+
+class Goal_MoveCameraDownAndStartGame :public AtomicGoal
+{
+public:
+
+	Goal_MoveCameraDownAndStartGame(Player* owner, UIImage* title);
+
+	void Activate();
+	GoalStatus Process(float dt);
+	void Terminate();
+
+private:
+
+	UIImage* title = nullptr;
+
+	int alpha = 0;
 };
 
 #endif //__GOAL_H__

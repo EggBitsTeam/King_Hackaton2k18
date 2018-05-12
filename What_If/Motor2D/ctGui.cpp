@@ -41,6 +41,8 @@ bool ctGui::Start()
 {
 	bool ret = true;
 
+	atlas = App->tex->Load(atlas_file_name.data());
+
 	//atlas = App->tex->Load(atlas_file_name.c_str());
 	//pause_menu_image = App->tex->Load(pause_menu_image_file_name.c_str());
 	/*
@@ -107,6 +109,8 @@ bool ctGui::CleanUp()
 	}
 
 	ui_elements.clear();
+
+	App->tex->UnLoad(atlas);
 
 	return true;
 }

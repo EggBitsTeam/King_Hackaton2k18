@@ -3,8 +3,12 @@
 
 #include "ctApp.h"
 #include "Goal.h"
+#include "ctGui.h"
+#include "UIImage.h"
+#include "UILabel.h"
 #include "Entity.h"
 #include "Player.h"
+#include "ctInput.h"
 
 //#include "Brofiler\Brofiler.h"
 
@@ -163,14 +167,19 @@ void Goal_Think::Terminate()
 	// TODO: Add some code here
 }
 
-void Goal_Think::AddGoal_IntroCinematic()
+void Goal_Think::AddGoal_IntroCinematic(UIImage* title, UILabel* pressStart)
 {
-	AddSubgoal(new Goal_IntroCinematic(owner));
+	AddSubgoal(new Goal_IntroCinematic(owner, title, pressStart));
+}
+
+void Goal_Think::AddGoal_Goal_MoveCameraDownAndStartGame(UIImage* title)
+{
+	AddSubgoal(new Goal_MoveCameraDownAndStartGame(owner, title));
 }
 
 // Goal_WalkingIntro ---------------------------------------------------------------------
 
-Goal_IntroCinematic::Goal_IntroCinematic(Player* owner) :CompositeGoal(owner, GoalType_IntroCinematic) {}
+Goal_IntroCinematic::Goal_IntroCinematic(Player* owner, UIImage* title, UILabel* pressStart) :CompositeGoal(owner, GoalType_IntroCinematic), title(title), pressStart(pressStart) {}
 
 void Goal_IntroCinematic::Activate()
 {
@@ -178,12 +187,13 @@ void Goal_IntroCinematic::Activate()
 	goalStatus = GoalStatus_Active;
 	// -----
 
-	AddSubgoal(new Goal_MoveToPos(owner));
+	AddSubgoal(new Goal_PressStart(owner, title, pressStart));
 }
 
 GoalStatus Goal_IntroCinematic::Process(float dt)
 {
 	ActivateIfInactive();
+
 	goalStatus = ProcessSubgoals(dt);
 	// -----
 
@@ -195,29 +205,80 @@ void Goal_IntroCinematic::Terminate()
 	// This happens once (when this goal is completed)
 }
 
-// Goal_MoveToPos ---------------------------------------------------------------------
+// Goal_PressStart ---------------------------------------------------------------------
 
-Goal_MoveToPos::Goal_MoveToPos(Player* owner) :AtomicGoal(owner, GoalType_MoveToPos) {}
+Goal_PressStart::Goal_PressStart(Player* owner, UIImage* title, UILabel* pressStart) :AtomicGoal(owner, GoalType_MoveToPos), title(title), pressStart(pressStart) {}
 
-void Goal_MoveToPos::Activate()
+void Goal_PressStart::Activate()
 {
 	// This happens once (when this goal is started)
 	goalStatus = GoalStatus_Active;
 	// -----
 }
 
-GoalStatus Goal_MoveToPos::Process(float dt)
+GoalStatus Goal_PressStart::Process(float dt)
 {
 	ActivateIfInactive();
 	// -----
 
-	// if (myGoalIsCompleted)
-	goalStatus = GoalStatus_Completed;
+	float speed = 0.0f;
+	alpha -= 5.0f * dt;
+	if (alpha <= 0)
+		alpha = 255;
+
+	pressStart->alpha = alpha;
+
+	if (App->input->gamepad.A == GAMEPAD_STATE::PAD_BUTTON_DOWN) {
+
+		alpha = 255;
+		goalStatus = GoalStatus_Completed;
+	}
 
 	return goalStatus;
 }
 
-void Goal_MoveToPos::Terminate()
+void Goal_PressStart::Terminate()
 {
 	// This happens once (when this goal is completed)
+	App->gui->DeleteUIElement(*(UIElement*)pressStart);
+
+	pressStart = nullptr;
+}
+
+// Goal_MoveCameraDownAndStartGame ---------------------------------------------------------------------
+
+Goal_MoveCameraDownAndStartGame::Goal_MoveCameraDownAndStartGame(Player* owner, UIImage* title) :AtomicGoal(owner, GoalType_MoveToPos), title(title) {}
+
+void Goal_MoveCameraDownAndStartGame::Activate()
+{
+	// This happens once (when this goal is started)
+	goalStatus = GoalStatus_Active;
+	// -----
+}
+
+GoalStatus Goal_MoveCameraDownAndStartGame::Process(float dt)
+{
+	ActivateIfInactive();
+	// -----
+
+	float speed = 0.0f;
+	alpha -= 5.0f * dt;
+	if (alpha <= 0)
+		alpha = 0;
+
+	title->alpha = alpha;
+
+
+
+	//goalStatus = GoalStatus_Completed;
+
+	return goalStatus;
+}
+
+void Goal_MoveCameraDownAndStartGame::Terminate()
+{
+	// This happens once (when this goal is completed)
+	App->gui->DeleteUIElement(*(UIElement*)title);
+
+	title = nullptr;
 }

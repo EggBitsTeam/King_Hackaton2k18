@@ -54,7 +54,9 @@ bool SceneCity::Start()
 
 	int scale = App->win->GetScale();
 
-	App->gui->AddUILabel(0, 0, "Hello", ColorWhite, 20, this);
+	// UI
+	title = (UIImage*)App->gui->AddUIImage(0, 0, { 80,1,103,31 });
+	pressStart = (UILabel*)App->gui->AddUILabel(100, 100, "Press A to start", ColorWhite, 12);
 
 	// Map
 	mapTexture = App->tex->Load("textures/map.png");
@@ -90,17 +92,17 @@ bool SceneCity::Start()
 	SDL_Rect endRect = { 3941,151,253,147 };
 	App->collision->CreateCollider(ColliderType_End, endRect, this);
 
-	// Player's brain
-	brain = new Goal_Think(homelessEntity);
-	brain->RemoveAllSubgoals();
-
-	// Intro cinematic
-	brain->AddGoal_IntroCinematic();
-
 	homelessEntity = (Homeless*)App->entities->SpawnEntity(0, 260, EntityType::HOMELESS);
 	girlEntity = (Girl*)App->entities->SpawnEntity(0, 260, EntityType::GIRL);
 	blackEntity = (Black*)App->entities->SpawnEntity(0, 260, EntityType::BLACK);
 	whiteEntity = (White*)App->entities->SpawnEntity(0, 260, EntityType::WHITE);
+
+	// Player's brain
+	blackBrain = new Goal_Think(blackEntity);
+	blackBrain->RemoveAllSubgoals();
+
+	// Intro cinematic
+	blackBrain->AddGoal_IntroCinematic(title, pressStart);
 
 	currentPlayer = NO_FOLLOW;
 
