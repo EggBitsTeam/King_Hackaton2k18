@@ -67,16 +67,13 @@ bool SceneCity::Start()
 	SDL_Rect diningRoomRect = { 0,0,0,0 };
 	App->collision->CreateCollider(ColliderType_Barrio, diningRoomRect, this);
 
-	// Player
-	iPoint playerPos = { 0,0 };
-	player = new Player(playerPos.x, playerPos.y, EntityType::PLAYER);
-
 	// Player's brain
 	brain = new Goal_Think(player);
 	brain->RemoveAllSubgoals();
 
 	// Intro cinematic
 	brain->AddGoal_IntroCinematic();
+	App->entities->SpawnEntity(0, 0, EntityType::PLAYER);
 
 	return ret;
 }

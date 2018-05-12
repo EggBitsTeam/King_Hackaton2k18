@@ -20,14 +20,14 @@ bool ctEntities::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Entities from config file");
 	bool ret = true;
-
-	atlasEntities = App->tex->Load("");
 	
 	return ret;
 }
 
 bool ctEntities::Start()
 {
+	atlasEntities = App->tex->Load("textures/player.png");
+
 	return true;
 }
 
@@ -100,7 +100,7 @@ bool ctEntities:: SpawnEntity(int x, int y, EntityType type)
 	return ret;
 }
 
-const SDL_Texture * ctEntities::GetAtlas() const
+const SDL_Texture* ctEntities::GetAtlas() const
 {
-	return nullptr;
+	return atlasEntities;
 }
