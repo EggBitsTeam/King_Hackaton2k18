@@ -8,6 +8,7 @@
 #include "ctRender.h"
 #include "ctTextures.h"
 #include "ctAudio.h"
+#include "SceneCity.h"
 #include "ctEntities.h"
 #include "ctGui.h"
 #include "ctFonts.h"
@@ -25,6 +26,7 @@ ctApp::ctApp(int argc, char* args[]) : argc(argc), args(args)
 	render = new ctRender();
 	tex = new ctTextures();
 	audio = new ctAudio();
+	city = new SceneCity();
 	entities = new ctEntities();
 	gui = new ctGui();
 	fonts = new ctFonts();
@@ -38,6 +40,9 @@ ctApp::ctApp(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
+
+	AddModule(city);
+
 	AddModule(entities);
 	AddModule(gui);
 	AddModule(fonts);
@@ -49,6 +54,7 @@ ctApp::ctApp(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(render);
 
 	//the start one
+
 
 	//disable modules here
 

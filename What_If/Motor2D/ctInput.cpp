@@ -42,15 +42,20 @@ bool ctInput::Awake(pugi::xml_node& config)
 		ret = false;
 	}
 
-	LOG("Init the controller (search and asign)");
-	controller = nullptr;
-	for (int i = 0; i < SDL_NumJoysticks(); i++)
+	if (SDL_NumJoysticks() < 1)
+		LOG("Warning: No joystick detected");
+	else
 	{
-		if (SDL_IsGameController(i)) {
-			controller = SDL_GameControllerOpen(i);
-			if (controller) {
-				break;
-			}
+		joystick = SDL_JoystickOpen(0);
+		if (joystick == NULL)
+		{
+			LOG("Warning: Unable to open joystick! SDL Error: %s", SDL_GetError());
+		}
+		else
+		{
+			controller = SDL_GameControllerOpen(0);
+			if (controller == NULL)
+				LOG("Warning: Couldn't initialize the controller! SDL Error: %s", SDL_GetError());
 		}
 	}
 
@@ -138,6 +143,41 @@ bool ctInput::PreUpdate()
 			//LOG("Mouse button %d up", event.button.button-1);
 			break;
 
+		case SDL_JOYAXISMOTION:
+			if (event.jaxis.which == 0)
+			{
+				if (event.jaxis.axis == 0)
+				{
+					if (event.jaxis.value < -J_DEAD_ZONE || event.jaxis.value > J_DEAD_ZONE)
+					{
+						xAxis = event.jaxis.value;
+						xDeadZone = false;
+						if (xAxis > 0)
+							if (axis[(int)Axis::RIGHT] == ctKeyState::KEY_DOWN || axis[(int)Axis::RIGHT] == ctKeyState::KEY_REPEAT)
+								axis[(int)Axis::RIGHT] = ctKeyState::KEY_REPEAT;
+							else
+								axis[(int)Axis::RIGHT] = ctKeyState::KEY_DOWN;
+
+						else if (xAxis < 0)
+							if (axis[(int)Axis::LEFT] == ctKeyState::KEY_DOWN || axis[(int)Axis::LEFT] == ctKeyState::KEY_REPEAT)
+								axis[(int)Axis::LEFT] = ctKeyState::KEY_REPEAT;
+							else
+								axis[(int)Axis::LEFT] = ctKeyState::KEY_DOWN;
+					}
+					else
+					{
+						xAxis = 0;
+						xDeadZone = true;
+						if (axis[(int)Axis::RIGHT] == ctKeyState::KEY_DOWN || axis[(int)Axis::RIGHT] == ctKeyState::KEY_REPEAT)
+							axis[(int)Axis::RIGHT] = ctKeyState::KEY_UP;
+						else axis[(int)Axis::RIGHT] = ctKeyState::KEY_IDLE;
+
+						if (axis[(int)Axis::LEFT] == ctKeyState::KEY_DOWN || axis[(int)Axis::LEFT] == ctKeyState::KEY_REPEAT)
+							axis[(int)Axis::LEFT] = ctKeyState::KEY_UP;
+						else axis[(int)Axis::LEFT] = ctKeyState::KEY_IDLE;
+
+					}
+				}
 		case SDL_MOUSEMOTION:
 			int scale = App->win->GetScale();
 			mouse_motion_x = event.motion.xrel / scale;
@@ -146,6 +186,7 @@ bool ctInput::PreUpdate()
 			mouse_y = event.motion.y / scale;
 			//LOG("Mouse motion x %d y %d", mouse_motion_x, mouse_motion_y);
 			break;
+			}
 		}
 	}
 
@@ -159,6 +200,24 @@ bool ctInput::CleanUp()
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }
+
+float ctInput::GetPercentageFromAxis() const
+{
+	float moduleVec = sqrtf((pow(xAxis, 2.0f) + pow(yAxis, 2.0f)));
+
+	return moduleVec / MAX_JAXIS_VALUE;
+}
+
+float ctInput::GetAngleFromAxis() const
+{
+	float angle = RAD_TO_DEG(atan2(yAxis, xAxis));
+
+	if (angle < 0)
+		angle += 360.0f;
+
+	return angle;
+}
+
 
 // ---------
 bool ctInput::GetWindowEvent(ctEventWindow ev)
