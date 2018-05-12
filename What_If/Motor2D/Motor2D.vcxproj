@@ -28,12 +28,15 @@
     <ClCompile Include="Entity.cpp" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClCompile Include="Player.cpp" />
 =======
     <ClCompile Include="Goal.cpp" />
     <ClCompile Include="j1Collision.cpp" />
     <ClCompile Include="j1Printer.cpp" />
 >>>>>>> d6de81f1340dc9ed4e5b9b6c19af7b17fd1ac4a0
+=======
+>>>>>>> parent of 72013a5... Player created
 =======
 >>>>>>> parent of 72013a5... Player created
     <ClCompile Include="pugixml.cpp" />
