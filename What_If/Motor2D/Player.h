@@ -21,7 +21,7 @@ protected:
 		Move_state,
 		Go_out_state,
 		Enter_state,
-		Cinematic_state
+		Stop_state
 	} statesPlayer = No_state;
 
 	ctAnimation anims[Max_anim];

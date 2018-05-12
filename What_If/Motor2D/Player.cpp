@@ -46,7 +46,7 @@ void Player::Update(float dt)
 		}
 		break;
 
-	case Cinematic_state:
+	case Stop_state:
 
 
 		break;
@@ -70,7 +70,7 @@ void Player::Update(float dt)
 void Player::StopPlayer(bool enableCinematic)
 {
 	if (enableCinematic)
-		statesPlayer = Cinematic_state;
+		statesPlayer = Stop_state;
 	else
 	{
 		statesPlayer = Idle_state;
