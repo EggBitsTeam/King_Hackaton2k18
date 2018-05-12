@@ -54,6 +54,8 @@ bool SceneCity::Start()
 
 	int scale = App->win->GetScale();
 
+	App->gui->AddUILabel(0, 0, "Hello", ColorWhite, 20, this);
+
 	// Map
 	mapTexture = App->tex->Load("textures/map.png");
 

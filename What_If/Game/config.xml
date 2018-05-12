@@ -20,9 +20,9 @@
 	<window>
 		<resolution width="256" height="144" scale="1" />
 		<fullscreen value="false" />
-		<borderless value="true" />
-		<resizable value="true" />
-		<fullscreen_window value="false" />
+		<borderless value="false" />
+		<resizable value="false" />
+		<fullscreen_window value="true" />
 	</window>
 	<audio fx="25" music="50">
 		<lvlMusic name="textures/source_spritesheet.png" />
