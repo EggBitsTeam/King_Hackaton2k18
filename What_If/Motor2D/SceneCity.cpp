@@ -10,6 +10,8 @@
 #include "j1Collision.h"
 #include "Player.h"
 #include "Goal.h"
+#include "ctRender.h"
+#include "j1Printer.h"
 
 #include "UIElement.h"
 
@@ -45,6 +47,11 @@ bool SceneCity::Awake(pugi::xml_node& config)
 bool SceneCity::Start()
 {
 	bool ret = true;
+
+	int scale = App->win->GetScale();
+
+	// Map
+	mapTexture = App->tex->Load("textures/map.png");
 
 	// Colliders
 	SDL_Rect inemRect = { 0,0,0,0 };
@@ -83,7 +90,23 @@ bool SceneCity::PreUpdate()
 // Called each loop iteration
 bool SceneCity::Update(float dt)
 {
-	
+	int scale = App->win->GetScale();
+
+	// Blit map
+	int mapWidth = 4194;
+	int mapHeight = 316;
+	App->printer->PrintSprite({ 0,0 }, mapTexture, { 0,0,mapWidth * scale, mapHeight * scale }, Layers_Map);
+
+	// Debug camera
+	float cameraSpeed = 500.0f;
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		App->render->camera.x += cameraSpeed * dt;
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		App->render->camera.x -= cameraSpeed * dt;
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		App->render->camera.y += cameraSpeed * dt;
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		App->render->camera.y -= cameraSpeed * dt;
 
 	return true;
 }
@@ -104,6 +127,7 @@ bool SceneCity::CleanUp()
 {
 	LOG("Freeing SceneCity");
 
+	App->tex->UnLoad(mapTexture);
 
 	return true;
 }

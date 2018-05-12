@@ -46,8 +46,13 @@ public:
 
 private:
 
+	// Player
 	Player* player = nullptr;
 	Goal_Think* brain = nullptr;
+
+	// Map
+	SDL_Texture* mapTexture = nullptr;
+
 };
 
 

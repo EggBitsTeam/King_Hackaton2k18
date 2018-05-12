@@ -14,15 +14,8 @@ class SDL_Texture;
 
 enum Layers
 {
-	Layers_Map = -2,
-	Layers_Paws = 0,
-	Layers_FloorColliders = 1,
-	Layers_Entities = 2,
-	Layers_PreviewBuildings = 3,
-	Layers_PreviewBuildingsQuad = 4,
-	Layers_BasicParticles = 5,
-	Layers_DragonGryphon = 6,
-	Layers_QuadsPrinters = 7
+	Layers_Map = -1,
+	Layers_Entities = 0,
 };
 
 class DrawingElem

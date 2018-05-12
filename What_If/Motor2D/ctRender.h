@@ -51,6 +51,7 @@ public:
 	bool IsInScreen(const SDL_Rect& item) const;
 
 public:
+
 	double          scale_factor = 1;
 	SDL_Renderer*	renderer = nullptr;
 	SDL_Rect		camera = { 0, 0, 0, 0 };
