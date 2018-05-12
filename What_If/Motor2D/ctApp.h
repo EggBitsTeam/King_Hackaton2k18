@@ -17,6 +17,9 @@ class ctAudio;
 class ctEntities;
 class ctGui;
 class ctFonts;
+
+class SceneCity;
+
 class ctFadeToBlack;
 
 class ctApp
@@ -96,6 +99,9 @@ public:
 	ctTextures*			tex = nullptr;
 	ctAudio*			audio = nullptr;
 	ctEntities*			entities = nullptr;
+
+	SceneCity*			city = nullptr;
+
 	ctGui*				gui = nullptr;
 	ctFonts*			fonts = nullptr;
 	ctFadeToBlack*		fadeToBlack = nullptr;
