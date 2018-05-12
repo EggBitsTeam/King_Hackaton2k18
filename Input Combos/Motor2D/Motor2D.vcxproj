@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bandaDelPatio.cpp" />
     <ClCompile Include="Black.cpp" />
     <ClCompile Include="ctApp.cpp" />
     <ClCompile Include="ctAudio.cpp" />
@@ -34,6 +35,7 @@
     <ClCompile Include="j1Collision.cpp" />
     <ClCompile Include="j1Printer.cpp" />
     <ClCompile Include="Npc.cpp" />
+    <ClCompile Include="NPCbadboy.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="pugixml.cpp" />
     <ClCompile Include="SceneCity.cpp" />
@@ -46,6 +48,7 @@
     <ClCompile Include="White.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bandaDelPatio.h" />
     <ClInclude Include="Black.h" />
     <ClInclude Include="ctAnimation.h" />
     <ClInclude Include="ctApp.h" />
@@ -73,6 +76,7 @@
     <ClInclude Include="j1Printer.h" />
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="Npc.h" />
+    <ClInclude Include="NPCbadboy.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="pugiconfig.hpp" />
     <ClInclude Include="pugixml.hpp" />

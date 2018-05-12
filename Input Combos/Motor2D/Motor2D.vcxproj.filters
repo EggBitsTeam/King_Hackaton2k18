@@ -127,6 +127,12 @@
     <ClCompile Include="Npc.cpp">
       <Filter>Core\Modules\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="NPCbadboy.cpp">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="bandaDelPatio.cpp">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ctApp.h">
@@ -239,6 +245,12 @@
       <Filter>Core\Modules\GUI</Filter>
     </ClInclude>
     <ClInclude Include="Npc.h">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCbadboy.h">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="bandaDelPatio.h">
       <Filter>Core\Modules\Entities</Filter>
     </ClInclude>
   </ItemGroup>
