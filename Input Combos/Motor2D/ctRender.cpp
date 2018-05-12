@@ -81,7 +81,10 @@ bool ctRender::Update(float dt)
 	App->win->GetWindowSize(winWidth, winHeight);
 
 	if (App->city->currentPlayer != SceneCity::Current_Player::NO_FOLLOW)
-		camera.x = -((int)App->city->homelessEntity->GetPos().x * (int)App->win->GetScale()) + 40;
+	{
+		camera.x = -((int)App->city->homelessEntity->GetPos().x * (int)App->win->GetScale()) + 240;
+		camera.y = -((int)App->city->homelessEntity->GetPos().y * (int)App->win->GetScale()) + 240;
+	}
 
 //	camera.x = -App->entities->GetPlayer()->position.x - 40;
 	return true;
