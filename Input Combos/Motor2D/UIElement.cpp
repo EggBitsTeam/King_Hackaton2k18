@@ -5,6 +5,7 @@
 #include "ctInput.h"
 #include "UIButton.h"
 #include "ctTextures.h"
+#include "Dialogs.h"
 
 UIElement::UIElement(int x, int y, UI_Type type, UIElement* parent) : screen_position(x,y), type(type), parent(parent)
 {
@@ -66,7 +67,7 @@ void UIElement::Draw(SDL_Texture* sprites)
 			App->render->Blit(texture, screen_position.x, screen_position.y, &current_rect, 0.0f, SDL_FLIP_NONE, 0.0, this->alpha);
 			break;
 		case DIALOG:
-			//App->render->Blit(App->dialogs->atlas, screen_position.x, screen_position.y, &current_animation.GetCurrentFrame(), 2.0f, SDL_FLIP_NONE, 0.0, this->alpha);
+			App->render->Blit(App->dialogs->atlas, screen_position.x, screen_position.y, &current_animation.GetCurrentFrame(), 2.0f, SDL_FLIP_NONE, 0.0, this->alpha);
 			break;
 		default:
 			break;

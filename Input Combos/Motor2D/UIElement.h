@@ -18,21 +18,21 @@ enum UI_State {
 	STATE_RIGHT_MOUSE_RELEASED,
 	STATE_FOCUSED,
 	STATE_EXECUTED,
-	
+
 	STATE_NO_DEF
 };
 
 class UIElement
 {
 protected:
-	ctModule* callback = nullptr;
-	iPoint local_position = iPoint(0,0);
+	ctModule * callback = nullptr;
+	iPoint local_position = iPoint(0, 0);
 	//iPoint screen_position = iPoint(0, 0);
 	uint mouse_in_fx = 0u;
 	int mouse_motion_x = 0, mouse_motion_y = 0;
 	int tmp_mouse_x, tmp_mouse_y;
 	uint pressed_fx = 0u;
-	
+
 
 private:
 	bool debug_draw = false;
@@ -43,6 +43,7 @@ public:
 	bool to_destroy = false;
 	bool non_drawable = false;
 	SDL_Texture* texture = nullptr;
+	ctAnimation current_animation;
 	SDL_Rect current_rect = { 0,0,0,0 };
 	UIElement* parent = nullptr;
 	UI_Type type = UI_NOT_DEF;
