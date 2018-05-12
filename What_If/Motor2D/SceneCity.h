@@ -52,7 +52,14 @@ public:
 	Black* blackEntity = nullptr;
 	White* whiteEntity = nullptr;
 
-	bool swapPlayers = false;
+	enum Current_Player
+	{
+		NO_FOLLOW,
+		WHITE_ACTUAL,
+		BLACK_ACTUAL,
+		HOMELESS_ACTUAL,
+		GIRL_ACTUAL,
+	} currentPlayer = NO_FOLLOW;
 
 private:
 	Goal_Think* brain = nullptr;
