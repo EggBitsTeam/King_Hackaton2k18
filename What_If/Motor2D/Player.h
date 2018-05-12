@@ -9,8 +9,8 @@ class Player : public Entity
 private:
 	enum Animations
 	{
-		Idle,
-		Move,
+		Idle_homeless,
+		Move_homeless,
 		Max_anim,
 	};
 
@@ -22,6 +22,12 @@ private:
 		Homeless,
 		Girl,
 	} playerIs = No_type;
+
+	enum CutsceneAnimation
+	{
+		Idle_Cutscene_anim,
+		Move_Cutscene_anim,
+	};
 
 	enum PlayerStates
 	{
@@ -43,6 +49,8 @@ public:
 	void SetPlayerForCinematic(bool enableCinematic);
 	void SetAnimation(Animations animToSet);
 	int GetWhoIAm();
+
+	void SetPlayerAnim(CutsceneAnimation anim);
 };
 
 #endif
