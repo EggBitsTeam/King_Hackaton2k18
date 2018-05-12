@@ -7,7 +7,6 @@
 #include "ctWindow.h"
 #include "ctLog.h"
 #include "ctFadeToBlack.h"
-#include "Player.h"
 
 
 ctEntities::ctEntities()
@@ -49,6 +48,13 @@ bool ctEntities::PreUpdate()
 			entities.shrink_to_fit();
 		}
 	}
+
+	if (entities.size() != draw_priority_entities.size())
+	{
+		draw_priority_entities = entities;
+	}
+
+	OrderDrawEntities();
 
 	
 	return true;
@@ -98,18 +104,84 @@ bool ctEntities:: SpawnEntity(int x, int y, EntityType type)
 	// find room for the new entity
 	bool ret = false;
 
+
+
 	switch (type)
 	{
-	case EntityType::PLAYER: {
-		Player* ourPlayer = new Player(x, y, PLAYER);
-		entities.push_back(ourPlayer);
-		ret = true;
+	case EntityType::CLERIC: {
+		/*Cleric* cleric = new Cleric(x, y, CLERIC);
+		entities.push_back(cleric);
+		App->combat->turn_priority_entity.push_back(cleric);
+		ret = true;*/
 		break;
 	}
 	default:
 		break;
 	}
 
+
 	return ret;
+}
+
+void ctEntities::OrderDrawEntities()
+{
+	bool ordered = false;
+	
+	std::vector<Entity*> order_entity = draw_priority_entities;
+
+	while (!ordered)
+	{
+   		ordered = true;
+		std::vector<Entity*>::iterator itnext = order_entity.begin();
+		int count = 0;
+		for (std::vector<Entity*>::iterator it = order_entity.begin(); it != order_entity.end(); ++it)
+		{
+			itnext++;
+			count++;
+			if (count != order_entity.size())
+			{
+				if ((*it)->position.y > (*itnext)->position.y )
+				{
+					Entity* entity_tmp = (*it);
+
+					(*it) = (*itnext);
+					it++;
+					(*it) = entity_tmp;
+					it--;
+					ordered = false;
+
+				}
+				else if ((*it)->position.y == (*itnext)->position.y)
+				{
+
+					if (((*itnext)->type != CLERIC && (*itnext)->type != WARRIOR && (*itnext)->type != ELF && (*itnext)->type != DWARF) && ((*it)->type == CLERIC || (*it)->type == WARRIOR || (*it)->type == ELF || (*it)->type == DWARF))
+					{
+						Entity* entity_tmp = (*it);
+
+						(*it) = (*itnext);
+						it++;
+						(*it) = entity_tmp;
+						it--;
+						ordered = false;
+					}
+				}
+				
+			}
+			else {
+				break;
+			}
+
+		}
+
+	}
+	ordered = false;
+
+
+
+
+
+	draw_priority_entities = order_entity;
+
+	order_entity.clear();
 }
 

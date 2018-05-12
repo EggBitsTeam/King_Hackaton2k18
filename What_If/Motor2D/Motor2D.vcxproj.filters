@@ -99,12 +99,15 @@
       <Filter>Core\Scenes</Filter>
     </ClCompile>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClCompile Include="Player.cpp">
       <Filter>Core\Modules\Entities</Filter>
     </ClCompile>
 =======
 >>>>>>> 8de57acb5c37bc047277f4f07eb529139d4a5d7a
 >>>>>>> d6de81f1340dc9ed4e5b9b6c19af7b17fd1ac4a0
+=======
+>>>>>>> parent of 72013a5... Player created
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ctApp.h">
@@ -194,11 +197,14 @@
       <Filter>Core\Scenes</Filter>
     </ClInclude>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClInclude Include="Player.h">
       <Filter>Core\Modules\Entities</Filter>
     </ClInclude>
 =======
 >>>>>>> 8de57acb5c37bc047277f4f07eb529139d4a5d7a
 >>>>>>> d6de81f1340dc9ed4e5b9b6c19af7b17fd1ac4a0
+=======
+>>>>>>> parent of 72013a5... Player created
   </ItemGroup>
 </Project>
