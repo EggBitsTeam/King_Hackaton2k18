@@ -1,7 +1,7 @@
 #include "j1Printer.h"
-#include "j1Render.h"
+#include "ctRender.h"
 
-#include "Brofiler\Brofiler.h"
+//#include "Brofiler\Brofiler.h"
 
 bool j1Printer::Awake(pugi::xml_node&)
 {
@@ -21,8 +21,6 @@ bool j1Printer::Update(float dt)
 }
 bool j1Printer::PostUpdate()
 {
-	BROFILER_CATEGORY("Printer Blit", Profiler::Color::Azure);
-
 	while (!drawingQueue.empty())
 	{
 		DrawingElem* delem = drawingQueue.top();
