@@ -16,11 +16,13 @@ class Entity
 protected:
 	ctAnimation* anim = nullptr;
 	
-	fPoint pos = { 0.0f,0.0f };
+	fPoint pos = { 0,0 };
 
 	EntityType type = EntityType::NO_TYPE;
 
 	int layerToBlit = 0;
+
+	bool flipSprite = false;
 
 public:
 	bool to_destroy = false;
@@ -32,6 +34,8 @@ public:
 
 	virtual void Update(float dt) {};
 	virtual void Draw();
+
+	fPoint GetPos();
 
 };
 

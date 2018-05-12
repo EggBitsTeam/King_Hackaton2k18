@@ -6,7 +6,7 @@
 
 class Player : public Entity
 {
-private:
+protected:
 	enum Animations
 	{
 		Idle,
@@ -14,21 +14,14 @@ private:
 		Max_anim,
 	};
 
-	enum WhoIAm
-	{
-		No_type,
-		White,
-		Black,
-		Homeless,
-		Girl,
-	} playerIs = No_type;
-
 	enum PlayerStates
 	{
 		No_state,
 		Idle_state,
 		Move_state,
-		Cinematic_state
+		Go_out_state,
+		Enter_state,
+		Stop_state
 	} statesPlayer = No_state;
 
 	ctAnimation anims[Max_anim];
@@ -40,9 +33,8 @@ public:
 	Player(int x, int y, EntityType type);
 	virtual ~Player();
 	void Update(float dt);
-	void SetPlayerForCinematic(bool enableCinematic);
+	void StopPlayer(bool enableCinematic);
 	void SetAnimation(Animations animToSet);
-	int GetWhoIAm();
 };
 
 #endif

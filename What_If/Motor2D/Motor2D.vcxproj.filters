@@ -23,9 +23,6 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="ctAudio.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -71,6 +68,21 @@
     <ClCompile Include="UITextBox.cpp">
       <Filter>UIElements</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Entities\MainCharacters</Filter>
+    </ClCompile>
+    <ClCompile Include="Homeless.cpp">
+      <Filter>Entities\MainCharacters</Filter>
+    </ClCompile>
+    <ClCompile Include="Black.cpp">
+      <Filter>Entities\MainCharacters</Filter>
+    </ClCompile>
+    <ClCompile Include="Girl.cpp">
+      <Filter>Entities\MainCharacters</Filter>
+    </ClCompile>
+    <ClCompile Include="White.cpp">
+      <Filter>Entities\MainCharacters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ctApp.h" />
@@ -104,9 +116,6 @@
       <Filter>Tools</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="ctAudio.h">
@@ -160,6 +169,21 @@
     <ClInclude Include="UITextBox.h">
       <Filter>UIElements</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Entities\MainCharacters</Filter>
+    </ClInclude>
+    <ClInclude Include="Homeless.h">
+      <Filter>Entities\MainCharacters</Filter>
+    </ClInclude>
+    <ClInclude Include="Black.h">
+      <Filter>Entities\MainCharacters</Filter>
+    </ClInclude>
+    <ClInclude Include="Girl.h">
+      <Filter>Entities\MainCharacters</Filter>
+    </ClInclude>
+    <ClInclude Include="White.h">
+      <Filter>Entities\MainCharacters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Tools">
@@ -173,6 +197,9 @@
     </Filter>
     <Filter Include="UIElements">
       <UniqueIdentifier>{c94753ee-f8bf-43d7-8e3a-53a19c60bd7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\MainCharacters">
+      <UniqueIdentifier>{bec4b5df-9491-478f-bd60-98c8d207ac83}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

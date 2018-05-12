@@ -4,6 +4,10 @@
 #include "Entity.h"
 #include "ctLog.h"
 #include "Player.h"
+#include "Black.h"
+#include "White.h"
+#include "Girl.h"
+#include "Homeless.h"
 
 ctEntities::ctEntities()
 {
@@ -81,23 +85,37 @@ bool ctEntities::CleanUp()
 }
 
 
-bool ctEntities:: SpawnEntity(int x, int y, EntityType type)
+Entity* ctEntities:: SpawnEntity(int x, int y, EntityType type)
 {
 	// find room for the new entity
 	bool ret = true;
-
+	Entity* toSpawn = nullptr;
 	switch (type)
 	{
-	case EntityType::PLAYER: {
-		Player* ourPlayer = new Player(x, y, PLAYER);
-		entities.push_back(ourPlayer);
+	case EntityType::HOMELESS:
+		toSpawn = new Homeless(x, y, HOMELESS);
+		entities.push_back(toSpawn);
 		break;
-	}
+
+	case EntityType::BLACK:
+		toSpawn = new Black(x, y, BLACK);
+		entities.push_back(toSpawn);
+		break;
+
+	case EntityType::GIRL:
+		toSpawn = new Girl(x, y, GIRL);
+		entities.push_back(toSpawn);
+		break;
+
+	case EntityType::WHITE:
+		toSpawn = new White(x, y, WHITE);
+		entities.push_back(toSpawn);
+		break;
 	default:
 		break;
 	}
 
-	return ret;
+	return toSpawn;
 }
 
 const SDL_Texture* ctEntities::GetAtlas() const

@@ -48,12 +48,12 @@ public:
 	double degAngle = 0.0f;
 	int distToFeet = 0;
 	SDL_Color color = { 255,255,255,255 };
-
+	bool flip = false;
 	int layer = 0;
 
 public:
 
-	Sprite(iPoint& pos, SDL_Texture* texture, SDL_Rect& squareToBlit, int layer, double degAngle, SDL_Color color) : DrawingElem(DrawingElem::DElemType::SPRITE), pos(pos), texture(texture), squareToBlit(squareToBlit), distToFeet(distToFeet), layer(layer), degAngle(degAngle), color(color) {}
+	Sprite(iPoint& pos, SDL_Texture* texture, SDL_Rect& squareToBlit, int layer, bool flip, double degAngle, SDL_Color color) : DrawingElem(DrawingElem::DElemType::SPRITE), pos(pos), texture(texture), squareToBlit(squareToBlit), distToFeet(distToFeet), layer(layer), flip(flip), degAngle(degAngle), color(color) {}
 };
 
 class Quad : public DrawingElem
@@ -293,7 +293,7 @@ public:
 public:
 
 	// Note: angle required is in degrees, in clockwise direction
-	bool PrintSprite(iPoint pos, SDL_Texture* texture, SDL_Rect SquaretoBlit, int layer = 0, float degangle = 0, SDL_Color color = { 255,255,255,255 });
+	bool PrintSprite(iPoint pos, SDL_Texture* texture, SDL_Rect SquaretoBlit, int layer = 0, bool flip = false, float degangle = 0, SDL_Color color = { 255,255,255,255 });
 	bool PrintQuad(SDL_Rect rect, SDL_Color color, bool filled = false, bool useCamera = true, int layer = 0);
 	bool PrintCircle(iPoint pos, int radius, SDL_Color color, bool useCamera = true, int layer = 0);
 	bool PrintLine(iPoint pointA, iPoint pointB, SDL_Color color, bool useCamera = true, int layer = 0);

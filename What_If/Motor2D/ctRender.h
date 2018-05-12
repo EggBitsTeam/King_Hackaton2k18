@@ -35,7 +35,7 @@ public:
 	// Blit
 	void SetViewPort(const SDL_Rect& rect);
 	void ResetViewPort();
-	bool Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section = NULL, float speed = 1.0f, double angle = 0, int alpha = 255, SDL_RendererFlip flip = SDL_FLIP_NONE, int pivot_x = INT_MAX, int pivot_y = INT_MAX) const;
+	bool Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section = NULL, float speed = 1.0f, double angle = 0, SDL_RendererFlip flip = SDL_FLIP_NONE, int alpha = 255, int pivot_x = INT_MAX, int pivot_y = INT_MAX) const;
 	bool MapBlit(SDL_Texture* texture, int x, int y, const SDL_Rect* section = NULL, float speed = 1.0f, double angle = 0, int pivot_x = INT_MAX, int pivot_y = INT_MAX) const;
 	bool BlitParticle(SDL_Texture* texture, int x, int y, const SDL_Rect* section = NULL, const SDL_Rect* rectSize = NULL, SDL_Color color = { 0, 0, 0, 0 }, SDL_BlendMode blendMode = SDL_BLENDMODE_NONE, float speed = 1.0f, double angle = 0, int pivot_x = INT_MAX, int pivot_y = INT_MAX) const;
 	bool UIBlit(SDL_Texture* texture, int x, int y, const SDL_Rect* section = NULL, float speed = 1.0f, double angle = 0, int alpha = 255, SDL_RendererFlip flip = SDL_FLIP_NONE, int pivot_x = INT_MAX, int pivot_y = INT_MAX) const;
@@ -50,6 +50,8 @@ public:
 	iPoint ScreenToWorld(int x, int y) const;
 	bool IsInScreen(const SDL_Rect& item) const;
 
+	void SetCameraToPlayer();
+
 public:
 
 	double          scale_factor = 1;
@@ -59,6 +61,8 @@ public:
 	SDL_Rect		viewport = { 0, 0, 0, 0 };
 	SDL_Color		background = { 0, 0, 0, 0 };
 	bool			vsync_state = false;
+
+	bool SetCameraPlayer = true;
 };
 
 #endif // __j1RENDER_H__
