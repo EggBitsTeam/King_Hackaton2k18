@@ -56,6 +56,7 @@ bool ctRender::Awake(pugi::xml_node& config)
 		camera.h = App->win->screen_surface->h;
 		camera.x = 0;
 		camera.y = 0;
+
 	}
 	scale_factor = App->win->GetScale();
 	return ret;
@@ -87,6 +88,8 @@ bool ctRender::Update(float dt)
 
 	if (SetCameraPlayer)
 		SetCameraToPlayer();
+
+	SDL_RenderSetLogicalSize(renderer, camera.w, camera.h) == 0;
 
 	return true;
 }
@@ -442,6 +445,7 @@ void ctRender::SetCameraToPlayer()
 	
 	uint widht, height;
 	App->win->GetWindowSize(widht, height);
-	camera.x = ((int)-playerPos.x * App->win->GetScale()) + (widht * App->win->GetScale()) / 2;
+	camera.x = (((int)-playerPos.x * App->win->GetScale()) + (widht * App->win->GetScale()) / 2) ;
 	camera.y = (int)playerPos.y + (height * App->win->GetScale()) / 2;
+
 }
