@@ -90,21 +90,12 @@
     <ClCompile Include="UITextBox.cpp">
       <Filter>Core\Modules\GUI</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Goal.cpp" />
-    <ClCompile Include="j1Printer.cpp" />
-    <ClCompile Include="j1Collision.cpp" />
-=======
     <ClCompile Include="SceneCity.cpp">
       <Filter>Core\Scenes</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="Player.cpp">
       <Filter>Core\Modules\Entities</Filter>
     </ClCompile>
-=======
->>>>>>> 8de57acb5c37bc047277f4f07eb529139d4a5d7a
->>>>>>> d6de81f1340dc9ed4e5b9b6c19af7b17fd1ac4a0
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ctApp.h">
@@ -185,20 +176,11 @@
     <ClInclude Include="UITextBox.h">
       <Filter>Core\Modules\GUI</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Goal.h" />
-    <ClInclude Include="j1Printer.h" />
-    <ClInclude Include="j1Collision.h" />
-=======
     <ClInclude Include="SceneCity.h">
       <Filter>Core\Scenes</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="Player.h">
       <Filter>Core\Modules\Entities</Filter>
     </ClInclude>
-=======
->>>>>>> 8de57acb5c37bc047277f4f07eb529139d4a5d7a
->>>>>>> d6de81f1340dc9ed4e5b9b6c19af7b17fd1ac4a0
   </ItemGroup>
 </Project>
