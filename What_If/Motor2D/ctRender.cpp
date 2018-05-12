@@ -3,19 +3,14 @@
 #include "ctApp.h"
 #include "ctWindow.h"
 #include "ctRender.h"
+#include "Player.h"
 #include "ctEntities.h"
 #include "ctInput.h"
-#include "SceneCity.h"
-#include "Player.h"
-#include "Homeless.h"
-#include "Black.h"
-#include "White.h"
-#include "Girl.h"
 
 #define VSYNC true
 
 ctRender::ctRender() : ctModule()
-{ 
+{
 	name = "renderer";
 	background.r = 0;
 	background.g = 0;
@@ -56,9 +51,8 @@ bool ctRender::Awake(pugi::xml_node& config)
 		camera.h = App->win->screen_surface->h;
 		camera.x = 0;
 		camera.y = 0;
-
 	}
-	scale_factor = App->win->GetScale();
+
 	return ret;
 }
 
@@ -68,7 +62,6 @@ bool ctRender::Start()
 	LOG("render start");
 	// back background
 	SDL_RenderGetViewport(renderer, &viewport);
-	
 	return true;
 }
 
@@ -81,12 +74,27 @@ bool ctRender::PreUpdate()
 
 bool ctRender::Update(float dt)
 {
+
 	uint winWidth, winHeight;
 
 	App->win->GetWindowSize(winWidth, winHeight);
 
-	if (SetCameraPlayer)
-		SetCameraToPlayer();
+	/*
+	int speed = 3;
+
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	camera.y += speed;
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	camera.y -= speed;
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	camera.x += speed;
+
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	camera.x -= speed;*/
+
+	//LOG("Camera pos x: %i pos y: %i", camera.x, camera.y);
 
 	return true;
 }
@@ -133,8 +141,6 @@ void ctRender::ResetViewPort()
 {
 	SDL_RenderSetViewport(renderer, &viewport);
 }
-
-// Blit to screen
 bool ctRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, SDL_RendererFlip flip, int alpha , int pivot_x, int pivot_y) const
 {
 	bool ret = true;
@@ -179,167 +185,10 @@ bool ctRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 	return ret;
 }
 
-// Blit particle to screen
-bool ctRender::BlitParticle(SDL_Texture* texture, int x, int y, const SDL_Rect* section, const SDL_Rect* rectSize, SDL_Color color, SDL_BlendMode blendMode, float speed, double angle, int pivot_x, int pivot_y) const
-{
-	bool ret = true;
-	uint scale = App->win->GetScale();
-	float w_scalade = App->win->GetWScalade();
-	float h_scalade = App->win->GetHScalade();
-
-	SDL_Rect rect;
-	rect.x = (int)((camera.x * speed) + (x  * (scale_factor*w_scalade)));
-	rect.y = (int)((camera.y * speed) + (y  * (scale_factor*h_scalade)));
-
-	if (rectSize != NULL)
-	{
-		rect.w = rectSize->w*(scale_factor*w_scalade);
-		rect.h = rectSize->h*(scale_factor*h_scalade);
-	}
-	else if (section != NULL)
-	{
-		rect.w = section->w*(scale_factor*w_scalade);
-		rect.h = section->h*(scale_factor*h_scalade);
-	}
-	else
-		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
-
-	int px = rect.w / 2;
-	int py = rect.h / 2;
-
-	//rect.w *= scale;
-	//rect.h *= scale;
-
-	SDL_Point* p = NULL;
-	SDL_Point pivot;
-	pivot.x = px;
-	pivot.y = py;
-	p = &pivot;
-
-	/* TODO 4.2 - Adapt de blit particle method to take color as an argument
-	- Use SDL_SetTextureColorMod() and SDL_SetTextureAlphaMod() to setup the color.
-	- This has to be done just before calling SDL_RenderCopyEx().
-	*/
-
-	/* TODO 4.3 - Adapt de blit particle method to take blending mode as an argument:
-	- Use SDL_SetTextureBlendMode.
-	- As before call it before we the actual render.
-	- Use pState.pLive.blendMode variable.
-	*/
-
-	if (SDL_SetTextureColorMod(texture, color.r, color.g, color.b) != 0)
-		LOG("Cannot set texture color mode. SDL_SetTextureColorMod error: %s", SDL_GetError());
-
-	if (SDL_SetTextureAlphaMod(texture, 255) != 0)
-		LOG("Cannot set texture alpha mode. SDL_SetTextureAlphaMod error: %s", SDL_GetError());
-
-	if (SDL_SetTextureBlendMode(texture, blendMode) != 0)
-		LOG("Cannot set texture blend mode. SDL_SetTextureBlendMode error: %s", SDL_GetError());
-
-
-	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, NULL, SDL_FLIP_NONE) != 0)
-	{
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
-		ret = false;
-	}
-
-	return ret;
-}
-
-bool ctRender::MapBlit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y) const
-{
-	bool ret = true;
-
-	uint scale = App->win->GetScale();
-	float w_scalade = App->win->GetWScalade();
-	float h_scalade = App->win->GetHScalade();
-
-	SDL_Rect rect;
-
-	if (section != NULL)
-	{
-		rect.w = section->w*(scale_factor*w_scalade);
-		rect.h = section->h*(scale_factor*h_scalade);
-	}
-
-	rect.x = (int)((camera.x * speed) + ((x / section->w) * rect.w));
-	rect.y = (int)((camera.y * speed) + ((y / section->h) * rect.h));
-
-
-
-	if (section == nullptr)
-	{
-		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
-	}
-
-	SDL_Point* p = NULL;
-	SDL_Point pivot;
-
-	if (pivot_x != INT_MAX && pivot_y != INT_MAX)
-	{
-		pivot.x = pivot_x;
-		pivot.y = pivot_y;
-		p = &pivot;
-	}
-
-	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
-	{
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
-		ret = false;
-	}
-
-	return ret;
-}
-
-bool ctRender::UIBlit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int alpha, SDL_RendererFlip flip, int pivot_x, int pivot_y) const
-{
-	bool ret = true;
-	float w_scalade = App->win->GetWScalade();
-	float h_scalade = App->win->GetHScalade();
-
-	SDL_Rect rect;
-
-	if (section != NULL)
-	{
-		rect.w = section->w*w_scalade;
-		rect.h = section->h*h_scalade;
-	}
-	else
-	{
-		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
-	}
-
-	rect.x = (int)((camera.x * speed) + (x  * (scale_factor*w_scalade)));
-	rect.y = (int)((camera.y * speed) + (y  * (scale_factor*h_scalade)));
-
-
-	SDL_Point* p = NULL;
-	SDL_Point pivot;
-
-	if (pivot_x != INT_MAX && pivot_y != INT_MAX)
-	{
-		pivot.x = pivot_x;
-		pivot.y = pivot_y;
-		p = &pivot;
-	}
-
-	SDL_SetTextureAlphaMod(texture, alpha);
-
-	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
-	{
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
-		ret = false;
-	}
-
-	return ret;
-}
-
 bool ctRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
 {
 	bool ret = true;
 	uint scale = App->win->GetScale();
-	float w_scalade = App->win->GetWScalade();
-	float h_scalade = App->win->GetHScalade();
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
@@ -347,10 +196,10 @@ bool ctRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a
 	SDL_Rect rec(rect);
 	if (use_camera)
 	{
-		rec.x = (int)(camera.x + rect.x * scale*w_scalade);
-		rec.y = (int)(camera.y + rect.y * scale*h_scalade);
-		rec.w *= (scale*w_scalade);
-		rec.h *= (scale *h_scalade);
+		rec.x = (int)(camera.x + rect.x * scale);
+		rec.y = (int)(camera.y + rect.y * scale);
+		rec.w *= scale;
+		rec.h *= scale;
 	}
 
 	int result = (filled) ? SDL_RenderFillRect(renderer, &rec) : SDL_RenderDrawRect(renderer, &rec);
@@ -428,40 +277,4 @@ iPoint ctRender::ScreenToWorld(int x, int y) const
 	ret.y = (y - camera.y / scale);
 
 	return ret;
-}
-
-bool ctRender::IsInScreen(const SDL_Rect& item) const
-{
-	SDL_Rect cameraRect{ -camera.x, -camera.y, camera.w, camera.h };
-	return SDL_HasIntersection(&item, &cameraRect);
-}
-
-void ctRender::SetCameraToPlayer()
-{
-	fPoint playerPos = { 0,0 };
-
-	switch (App->city->currentPlayer)
-	{
-	case SceneCity::Current_Player::HOMELESS_ACTUAL:
-		playerPos = App->city->homelessEntity->GetPos();
-		break;
-	case SceneCity::Current_Player::BLACK_ACTUAL:
-		playerPos = App->city->blackEntity->GetPos();
-		break;
-	case SceneCity::Current_Player::WHITE_ACTUAL:
-		playerPos = App->city->whiteEntity->GetPos();
-		break;
-	case SceneCity::Current_Player::GIRL_ACTUAL:
-		playerPos = App->city->girlEntity->GetPos();
-		break;
-	case SceneCity::Current_Player::NO_FOLLOW:
-		return;
-		break;
-	}
-
-	uint widht, height;
-	App->win->GetWindowSize(widht, height);
-	camera.x = (((int)-playerPos.x * App->win->GetScale()) + (widht * App->win->GetScale()) / 2) ;
-	camera.y = (((int)-playerPos.y * App->win->GetScale()) + (height * App->win->GetScale()) / 2);
-
 }
