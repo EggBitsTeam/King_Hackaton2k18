@@ -17,6 +17,7 @@ enum EntityType
 	WHITE,
 	GIRL,
 	HOMELESS,
+	NPC,
 	NO_TYPE
 };
 
