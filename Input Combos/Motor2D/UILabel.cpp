@@ -29,7 +29,6 @@ UILabel::UILabel(int x, int y, UI_Type type, std::string text, SDL_Color color, 
 
 void UILabel::Update()
 {
-
 }
 
 

@@ -229,8 +229,7 @@ GoalStatus Goal_PressStart::Process(float dt)
 	ActivateIfInactive();
 	// -----
 
-	float speed = 200.0f;
-	alpha -= speed * dt;
+	alpha -= 200.0f * dt;
 	if (alpha <= 0)
 		alpha = 255;
 

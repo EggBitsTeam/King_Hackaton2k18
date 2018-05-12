@@ -6,13 +6,11 @@
 
 #include "ctFonts.h"
 
-
-
 class UILabel : public UIElement
 {
 private:
 	std::string text;
-	bool blitUI = false;
+	bool blitUI = true;
 public:
 	UILabel(int x, int y, UI_Type type, std::string text, SDL_Color color, int size = DEFAULT_FONT_SIZE, ctModule* callback = nullptr, const char* path = DEFAULT_FONT, UIElement* parent = nullptr,bool UIBlit = false);
 
