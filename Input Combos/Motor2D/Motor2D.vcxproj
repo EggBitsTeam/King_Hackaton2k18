@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bandaDelPatio.cpp" />
     <ClCompile Include="Black.cpp" />
     <ClCompile Include="ctApp.cpp" />
     <ClCompile Include="ctAudio.cpp" />
@@ -47,6 +48,7 @@
     <ClCompile Include="White.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bandaDelPatio.h" />
     <ClInclude Include="Black.h" />
     <ClInclude Include="ctAnimation.h" />
     <ClInclude Include="ctApp.h" />
