@@ -44,11 +44,11 @@ ctApp::ctApp(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(city);
 
 	AddModule(entities);
-	AddModule(gui);
 	AddModule(fonts);
 	AddModule(fadeToBlack);
 	AddModule(printer);
 	AddModule(collision);
+	AddModule(gui);
 
 	// render last to swap buffer
 	AddModule(render);
