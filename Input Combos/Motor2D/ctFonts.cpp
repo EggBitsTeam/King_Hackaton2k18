@@ -3,10 +3,10 @@
 #include "ctApp.h"
 #include "ctTextures.h"
 #include "ctFonts.h"
-
 #include "SDL\include\SDL.h"
 #include "SDL_TTF\include\SDL_ttf.h"
 #pragma comment( lib, "SDL_ttf/libx86/SDL2_ttf.lib" )
+
 
 ctFonts::ctFonts() : ctModule()
 {
@@ -30,8 +30,8 @@ bool ctFonts::Awake(pugi::xml_node& conf)
 	}
 	else
 	{
-		const char* path = conf.child("default_font").attribute("file").as_string(DEFAULT_FONT);
-		int size = conf.child("default_font").attribute("size").as_int(DEFAULT_FONT_SIZE);
+		path = conf.child("default_font").attribute("file").as_string(DEFAULT_FONT);
+		size = conf.child("default_font").attribute("size").as_int(DEFAULT_FONT_SIZE);
 		default = Load(path, size);
 	}
 
@@ -46,7 +46,7 @@ bool ctFonts::CleanUp()
 
 	for (item = fonts.front(); item != NULL; item = std::next(item,1))
 	{
-		TTF_CloseFont(item);
+	TTF_CloseFont(item);
 	}*/
 
 	fonts.clear();
@@ -66,10 +66,24 @@ TTF_Font* const ctFonts::Load(const char* path, int size)
 	else
 	{
 		LOG("Successfully loaded font %s size %d", path, size);
-		fonts.push_front(font);
+		//	fonts.push_front(font);
 	}
 
+
 	return font;
+}
+
+// calculate size of a text
+bool ctFonts::CalcSize(const char* text, int& width, int& height, _TTF_Font* font) const
+{
+	bool ret = false;
+
+	if (TTF_SizeText((font) ? font : default, text, &width, &height) != 0)
+		LOG("Unable to calc size of text surface! SDL_ttf Error: %s\n", TTF_GetError());
+	else
+		ret = true;
+
+	return ret;
 }
 
 // Print text using font
@@ -90,16 +104,38 @@ SDL_Texture* ctFonts::Print(const char* text, SDL_Color color, TTF_Font* font)
 
 	return ret;
 }
-
-// calculate size of a text
-bool ctFonts::CalcSize(const char* text, int& width, int& height, _TTF_Font* font) const
+// prints text that will have multiple lines if the width of the text is larger than box_width
+SDL_Texture* ctFonts::PrintTextBox(const char* text, SDL_Color color, _TTF_Font* font, Uint32 box_width, int size)
 {
-	bool ret = false;
 
-	if (TTF_SizeText((font) ? font : default, text, &width, &height) != 0)
-		LOG("Unable to calc size of text surface! SDL_ttf Error: %s\n", TTF_GetError());
+	SDL_Texture* ret = NULL;
+	default = Load(path, size);
+
+	SDL_Surface* surface = TTF_RenderText_Blended_Wrapped((font) ? font : default, text, color, box_width);
+
+	App->fonts->Unload(default);
+	default = nullptr;
+
+	SDL_SetSurfaceAlphaMod(surface, color.a);
+
+	if (surface == NULL)
+	{
+		LOG("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
+	}
 	else
-		ret = true;
+	{
+		ret = App->tex->LoadSurface(surface);
+		SDL_FreeSurface(surface);
+	}
 
 	return ret;
+
+
+}
+
+
+void ctFonts::Unload(_TTF_Font* font)
+{
+	TTF_CloseFont(font);
+
 }

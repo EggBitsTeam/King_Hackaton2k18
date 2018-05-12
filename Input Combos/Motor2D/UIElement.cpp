@@ -4,7 +4,7 @@
 #include "ctGui.h"
 #include "ctInput.h"
 #include "UIButton.h"
-
+#include "ctTextures.h"
 
 UIElement::UIElement(int x, int y, UI_Type type, UIElement* parent) : screen_position(x,y), type(type), parent(parent)
 {
@@ -21,6 +21,7 @@ UIElement::UIElement(int x, int y, UI_Type type, UIElement* parent) : screen_pos
 
 UIElement::~UIElement()
 {
+	App->tex->UnLoad(texture);
 }
 
 void UIElement::Update()
@@ -29,68 +30,12 @@ void UIElement::Update()
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
 		debug_draw = !debug_draw;
 
-	int mouse_x = 0, mouse_y = 0;
-	App->input->GetMousePosition(mouse_x, mouse_y);
-
-	UIElement* element_to_trigger = nullptr;
-	element_to_trigger = App->gui->GetElementUnderMouse(mouse_x, mouse_y);
+	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || App->input->gamepad.A == GAMEPAD_STATE::PAD_BUTTON_DOWN)
+	{
+		current_state = STATE_EXECUTED;
+	}
 	
-	if (element_to_trigger != nullptr && this == element_to_trigger) 
-	{
-		if (current_state == STATE_LEFT_MOUSE_RELEASED)
-			current_state = STATE_NORMAL;
-
-		if (current_state != STATE_MOUSE_ENTER && current_state != STATE_LEFT_MOUSE_PRESSED) 
-		{
-			current_state = UI_State::STATE_MOUSE_ENTER;
-			if (this->type == BUTTON)
-				((UIButton*)this)->UpdateButtonWithSelfRect(((UIButton*)this)->btn_focused);
-			this->callback->OnUITrigger(this, current_state);
-		}
-
-		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT && current_state == STATE_MOUSE_ENTER) 
-		{
-			current_state = STATE_LEFT_MOUSE_PRESSED;
-			if (this->type == BUTTON)
-				((UIButton*)this)->UpdateButtonWithSelfRect(((UIButton*)this)->btn_pressed);
-			this->callback->OnUITrigger(this, current_state);
-		}
-		else if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP && current_state == STATE_LEFT_MOUSE_PRESSED) 
-		{
-			current_state = STATE_LEFT_MOUSE_RELEASED;
-			if (this->type == BUTTON)
-				((UIButton*)this)->UpdateButtonWithSelfRect(((UIButton*)this)->btn_normal);
-			this->callback->OnUITrigger(this, current_state);
-		}
-
-		if (current_state == STATE_LEFT_MOUSE_PRESSED && this->draggable) 
-		{
-			App->input->GetMouseMotion(mouse_motion_x, mouse_motion_y);
-
-			if (mouse_x != tmp_mouse_x || mouse_y != tmp_mouse_y)
-			{
-				screen_position.x += mouse_motion_x;
-				screen_position.y += mouse_motion_y;
-				local_position.x += mouse_motion_x;
-				local_position.y += mouse_motion_y;
-				tmp_mouse_x = mouse_x;
-				tmp_mouse_y = mouse_y;
-			}
-		}
-	}
-	else 
-	{
-		if (current_state == UI_State::STATE_MOUSE_ENTER || current_state == STATE_LEFT_MOUSE_PRESSED) 
-		{
-			current_state = UI_State::STATE_MOUSE_LEAVE;
-			if (this->type == BUTTON)
-				((UIButton*)this)->UpdateButtonWithSelfRect(((UIButton*)this)->btn_normal);
-			this->callback->OnUITrigger(this, current_state);
-		}
-		else if (current_state == STATE_MOUSE_LEAVE)
-			current_state = STATE_NORMAL;
-	}
-
+	
 	if (parent == nullptr)
 		local_position = screen_position;
 	else
@@ -99,6 +44,9 @@ void UIElement::Update()
 		screen_position.y = parent->screen_position.y + local_position.y;
 	}
 	
+	if(callback != nullptr)
+		callback->OnUITrigger(this, current_state);
+
 }
 
 void UIElement::Draw(SDL_Texture* sprites)
@@ -109,10 +57,13 @@ void UIElement::Draw(SDL_Texture* sprites)
 		{
 		case IMAGE:
 		case BUTTON:
-			App->render->Blit(sprites, screen_position.x, screen_position.y, &current_rect);
+			App->render->Blit(sprites, screen_position.x, screen_position.y, &current_rect, 2.0f, 0.0, SDL_FLIP_NONE, this->alpha);
 				break;
 		case LABEL:
-			App->render->Blit(texture, screen_position.x, screen_position.y, &current_rect);
+			App->render->Blit(texture, screen_position.x, screen_position.y, &current_rect, 2.0f, 0.0, SDL_FLIP_NONE, this->alpha);
+			break;
+		case TEXTBOX:
+			App->render->Blit(texture, screen_position.x, screen_position.y, &current_rect, 2.0f, 0.0, SDL_FLIP_NONE, this->alpha);
 			break;
 		default:
 			break;
