@@ -116,7 +116,8 @@ bool SceneCity::Start()
 	girlBrain->RemoveAllSubgoals();
 
 	// Intro cinematic
-	//blackBrain->AddGoal_IntroCinematic(title, pressStart);
+	//
+	blackBrain->AddGoal_IntroCinematic(title, pressStart);
 
 	currentPlayer = NO_FOLLOW;
 
