@@ -7,6 +7,9 @@
 #include "ctEntities.h"
 #include "ctInput.h"
 #include "Homeless.h"
+#include "Girl.h"
+#include "White.h"
+#include "Black.h"
 #include "SceneCity.h"
 
 #define VSYNC true
@@ -80,12 +83,14 @@ bool ctRender::Update(float dt)
 
 	App->win->GetWindowSize(winWidth, winHeight);
 
-	if (App->city->currentPlayer != SceneCity::Current_Player::NO_FOLLOW)
-	{
-		camera.x = -((int)App->city->homelessEntity->GetPos().x * (int)App->win->GetScale()) + 240;
-		camera.y = -((int)App->city->homelessEntity->GetPos().y * (int)App->win->GetScale()) + 240;
-	}
+	// (App->city->currentPlayer != SceneCity::Current_Player::NO_FOLLOW)
+//	{
+	//	camera.x = -((int)App->city->homelessEntity->GetPos().x * (int)App->win->GetScale()) + 240;
+	//	camera.y = -((int)App->city->homelessEntity->GetPos().y * (int)App->win->GetScale()) + 240;
+	//}
 
+
+	SetCameraToPlayer();
 //	camera.x = -App->entities->GetPlayer()->position.x - 40;
 	return true;
 }
@@ -134,7 +139,7 @@ void ctRender::ResetViewPort()
 }
 
 // Blit to screen
-bool ctRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y) const
+bool ctRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, SDL_RendererFlip flip, double angle, int pivot_x, int pivot_y) const
 {
 	bool ret = true;
 	uint scale = App->win->GetScale();
@@ -166,7 +171,7 @@ bool ctRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 		p = &pivot;
 	}
 
-	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
+	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
@@ -267,4 +272,32 @@ iPoint ctRender::ScreenToWorld(int x, int y) const
 	ret.y = (y - camera.y / scale);
 
 	return ret;
+}
+
+void ctRender::SetCameraToPlayer()
+{
+	fPoint playerPos = { 0,0 };
+
+	switch (App->city->currentPlayer)
+	{
+	case SceneCity::Current_Player::HOMELESS_ACTUAL:
+		playerPos = App->city->homelessEntity->GetPos();
+		break;
+	case SceneCity::Current_Player::BLACK_ACTUAL:
+		playerPos = App->city->blackEntity->GetPos();
+		break;
+	case SceneCity::Current_Player::WHITE_ACTUAL:
+		playerPos = App->city->whiteEntity->GetPos();
+		break;
+	case SceneCity::Current_Player::GIRL_ACTUAL:
+		playerPos = App->city->girlEntity->GetPos();
+		break;
+	case SceneCity::Current_Player::NO_FOLLOW:
+		return;
+		break;
+	}
+
+	camera.x = -((int)playerPos.x * (int)App->win->GetScale()) + 300;
+	camera.y = -((int)playerPos.y * (int)App->win->GetScale()) + 480;
+
 }

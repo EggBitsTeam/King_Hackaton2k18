@@ -57,13 +57,13 @@ void UIElement::Draw(SDL_Texture* sprites)
 		{
 		case IMAGE:
 		case BUTTON:
-			App->render->Blit(sprites, screen_position.x, screen_position.y, &current_rect, 2.0f, 0.0, SDL_FLIP_NONE, this->alpha);
+			App->render->Blit(sprites, screen_position.x, screen_position.y, &current_rect, 2.0f, SDL_FLIP_NONE, 0.0, this->alpha);
 				break;
 		case LABEL:
-			App->render->Blit(texture, screen_position.x, screen_position.y, &current_rect, 2.0f, 0.0, SDL_FLIP_NONE, this->alpha);
+			App->render->Blit(texture, screen_position.x, screen_position.y, &current_rect, 2.0f, SDL_FLIP_NONE, 0.0, this->alpha);
 			break;
 		case TEXTBOX:
-			App->render->Blit(texture, screen_position.x, screen_position.y, &current_rect, 2.0f, 0.0, SDL_FLIP_NONE, this->alpha);
+			App->render->Blit(texture, screen_position.x, screen_position.y, &current_rect, 2.0f, SDL_FLIP_NONE, 0.0, this->alpha);
 			break;
 		default:
 			break;

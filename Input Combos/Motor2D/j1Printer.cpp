@@ -32,9 +32,9 @@ bool j1Printer::PostUpdate()
 			Sprite* sprite = (Sprite*)delem;
 			//SDL_SetTextureColorMod(sprite->texture, sprite->color.r, sprite->color.g, sprite->color.b);
 			if (!sprite->flip)
-			App->render->Blit(sprite->texture, sprite->pos.x, sprite->pos.y, &sprite->squareToBlit, 1.0f, sprite->degAngle);
+			App->render->Blit(sprite->texture, sprite->pos.x, sprite->pos.y, &sprite->squareToBlit, 1.0f, SDL_FLIP_NONE, sprite->degAngle);
 			else
-				App->render->Blit(sprite->texture, sprite->pos.x, sprite->pos.y, &sprite->squareToBlit, 1.0f, sprite->degAngle, SDL_FLIP_HORIZONTAL);
+				App->render->Blit(sprite->texture, sprite->pos.x, sprite->pos.y, &sprite->squareToBlit, 1.0f, SDL_FLIP_HORIZONTAL, sprite->degAngle);
 
 			//SDL_SetTextureColorMod(sprite->texture, 255, 255, 255);
 			break;

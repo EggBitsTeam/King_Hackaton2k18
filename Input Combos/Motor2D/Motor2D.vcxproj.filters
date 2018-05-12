@@ -99,9 +99,6 @@
     <ClCompile Include="Homeless.cpp">
       <Filter>Core\Modules\Entities\Characters</Filter>
     </ClCompile>
-    <ClCompile Include="White.cpp">
-      <Filter>Core\Modules\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="j1Printer.cpp">
       <Filter>Core\Modules</Filter>
     </ClCompile>
@@ -118,6 +115,9 @@
       <Filter>Core\Modules\GUI</Filter>
     </ClCompile>
     <ClCompile Include="j1Collision.cpp" />
+    <ClCompile Include="White.cpp">
+      <Filter>Core\Modules\Entities\Characters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ctApp.h">
@@ -204,9 +204,6 @@
     <ClInclude Include="Homeless.h">
       <Filter>Core\Modules\Entities\Characters</Filter>
     </ClInclude>
-    <ClInclude Include="White.h">
-      <Filter>Core\Modules\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="j1Printer.h">
       <Filter>Core\Modules</Filter>
     </ClInclude>
@@ -223,5 +220,8 @@
       <Filter>Core\Modules\GUI</Filter>
     </ClInclude>
     <ClInclude Include="j1Collision.h" />
+    <ClInclude Include="White.h">
+      <Filter>Core\Modules\Entities\Characters</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
