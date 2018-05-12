@@ -43,7 +43,6 @@ public:
 	bool to_destroy = false;
 	bool non_drawable = false;
 	SDL_Texture* texture = nullptr;
-	ctAnimation current_animation;
 	SDL_Rect current_rect = { 0,0,0,0 };
 	UIElement* parent = nullptr;
 	UI_Type type = UI_NOT_DEF;

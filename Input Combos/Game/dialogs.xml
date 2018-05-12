@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <dialogs>
   <animations>
-    <animation name="tom_01" speed="0.15" loop="false">
+    <animation name="tom_01" speed="1.0" loop="false">
       <frame x="0" y="0" w="100" h="28"/>
       <frame x="100" y="0" w="100" h="28"/>
       <frame x="200" y="0" w="100" h="28"/>
