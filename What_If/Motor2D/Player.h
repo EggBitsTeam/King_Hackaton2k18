@@ -33,6 +33,7 @@ private:
 	ctAnimation anims[Max_anim];
 
 	float speed = 0.0f;
+	float speedFactor = 10.0f;
 
 public:
 	Player(int x, int y, EntityType type);

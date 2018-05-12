@@ -16,7 +16,7 @@ class Entity
 protected:
 	ctAnimation* anim = nullptr;
 	
-	iPoint pos = { 0,0 };
+	fPoint pos = { 0.0f,0.0f };
 
 	EntityType type = EntityType::NO_TYPE;
 

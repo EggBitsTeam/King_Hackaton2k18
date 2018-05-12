@@ -22,16 +22,27 @@ void Player::Update(float dt)
 {
 	switch (statesPlayer)
 	{
-	case Idle:
-		if (App->input->GetAxis(LEFT) == KEY_DOWN || App->input->GetAxis(RIGHT) == KEY_DOWN)
+	case Idle_state:
+
+		if (App->input->GetAxis(LEFT) == KEY_DOWN)
 		{
 			statesPlayer = PlayerStates::Move_state;
 			anim = &anims[Animations::Move];
+			speed = -speedFactor;
+			break;
+		}
+
+		else if (App->input->GetAxis(RIGHT) == KEY_DOWN)
+		{
+			statesPlayer = PlayerStates::Move_state;
+			anim = &anims[Animations::Move];
+			speed = speedFactor;
 			break;
 		}
 		break;
 
-	case Move:
+	case Move_state:
+		pos.x += speed * dt;
 		if (App->input->GetAxis(LEFT) == KEY_UP || App->input->GetAxis(RIGHT) == KEY_UP)
 		{
 			statesPlayer = PlayerStates::Idle_state;
