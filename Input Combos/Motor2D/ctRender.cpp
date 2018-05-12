@@ -6,6 +6,8 @@
 #include "Player.h"
 #include "ctEntities.h"
 #include "ctInput.h"
+#include "Homeless.h"
+#include "SceneCity.h"
 
 #define VSYNC true
 
@@ -74,28 +76,14 @@ bool ctRender::PreUpdate()
 
 bool ctRender::Update(float dt)
 {
-
 	uint winWidth, winHeight;
 
 	App->win->GetWindowSize(winWidth, winHeight);
 
-	/*
-	int speed = 3;
+	if (App->city->currentPlayer != SceneCity::Current_Player::NO_FOLLOW)
+		camera.x = -(int)App->city->homelessEntity->GetPos().x + 40;
 
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		camera.y += speed;
-
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		camera.y -= speed;
-
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		camera.x += speed;
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		camera.x -= speed;*/
-
-	//LOG("Camera pos x: %i pos y: %i", camera.x, camera.y);
-	camera.x = -App->entities->GetPlayer()->position.x - 40;
+//	camera.x = -App->entities->GetPlayer()->position.x - 40;
 	return true;
 }
 

@@ -5,21 +5,20 @@
 #include "ctAnimation.h"
 #include <vector>
 #include <string>
+#include <queue>
 
-enum ComboType;
+class Entity;
+
+struct SDL_Texture;
 
 enum EntityType
 {
-	PLAYER,
-	OIL_DRUM,
-
+	BLACK,
+	WHITE,
+	GIRL,
+	HOMELESS,
 	NO_TYPE
 };
-
-class Entity;
-class Player;
-
-struct SDL_Texture;
 
 class ctEntities : public ctModule
 {
@@ -38,18 +37,18 @@ public:
 
 	bool CleanUp();
 
-	Player* GetPlayer()const;
+	Entity* SpawnEntity(int x, int y, EntityType type);
 
-	bool SpawnEntity(int x, int y, EntityType type);
+	const SDL_Texture* GetAtlas() const;
 
-private:
+	//getters
 
 	std::vector<Entity*> entities;
 
-	SDL_Texture* entity_sprites = nullptr;
-
-	std::string spritesheetName;
+	SDL_Texture* atlasEntities = nullptr;
 
 };
 
 #endif // __ctEnemies_H__
+
+

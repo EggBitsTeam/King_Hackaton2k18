@@ -1,8 +1,10 @@
 #include "ctApp.h"
 #include "Entity.h"
-#include "ctRender.h"
+#include "ctEntities.h"
 
-Entity::Entity(int x, int y, EntityType type) : position(x, y), type(type)
+#include "j1Printer.h"
+
+Entity::Entity(int x, int y, EntityType type) : pos(x, y), type(type)
 {
 }
 
@@ -10,10 +12,12 @@ Entity::~Entity()
 {
 }
 
-void Entity::Draw(SDL_Texture* sprites)
+void Entity::Draw()
 {
-	SDL_Rect r = animation->GetCurrentFrame();
-	
-	if (animation != nullptr)
-		App->render->Blit(sprites, position.x, position.y - r.h, &(animation->GetCurrentFrame()));
+	App->printer->PrintSprite({ (int)pos.x,(int)pos.y }, (SDL_Texture*)App->entities->GetAtlas(), anim->GetCurrentFrame(), layerToBlit, flipSprite);
+}
+
+fPoint Entity::GetPos()
+{
+	return pos;
 }

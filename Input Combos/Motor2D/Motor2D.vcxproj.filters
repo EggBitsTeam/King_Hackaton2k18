@@ -25,6 +25,9 @@
     <Filter Include="Core\Modules\GUI">
       <UniqueIdentifier>{14b4087a-3bea-4a5e-b99f-8a814653b210}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Modules\Entities\Characters">
+      <UniqueIdentifier>{df766413-8001-456c-bb42-4390ed7427ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ctApp.cpp">
@@ -84,14 +87,29 @@
     <ClCompile Include="UILabel.cpp">
       <Filter>Core\Modules\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Core\Modules\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="ctKenStageScene.cpp">
-      <Filter>Core\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="ctFonts.cpp">
       <Filter>Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Core\Modules\Entities\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Girl.cpp">
+      <Filter>Core\Modules\Entities\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Homeless.cpp">
+      <Filter>Core\Modules\Entities\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="White.cpp">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Printer.cpp">
+      <Filter>Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneCity.cpp">
+      <Filter>Core\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Black.cpp">
+      <Filter>Core\Modules\Entities\Characters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,14 +185,29 @@
     <ClInclude Include="UILabel.h">
       <Filter>Core\Modules\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Core\Modules\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="ctKenStageScene.h">
-      <Filter>Core\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="ctFonts.h">
       <Filter>Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Core\Modules\Entities\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Girl.h">
+      <Filter>Core\Modules\Entities\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Homeless.h">
+      <Filter>Core\Modules\Entities\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="White.h">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Printer.h">
+      <Filter>Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneCity.h">
+      <Filter>Core\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Black.h">
+      <Filter>Core\Modules\Entities\Characters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

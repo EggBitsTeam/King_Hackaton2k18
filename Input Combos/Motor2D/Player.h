@@ -1,59 +1,40 @@
-#ifndef __j1Player_H__
-#define __j1Player_H__
+#ifndef __PLAYER_H__
+#define __PLAYER_H__
 
-#include "ctAnimation.h"
-#include "ctPoint.h"
 #include "Entity.h"
+#include "ctAnimation.h"
 
 class Player : public Entity
 {
-	enum PlayerState
+protected:
+	enum Animations
 	{
-		ST_IDLE,
-		ST_FORWARD,
-		ST_BACKWARD,
-		ST_SHORYUKEN,
-		ST_TATSUMAKI,
-
-		ST_UNKNOWN
+		Idle,
+		Move,
+		Max_anim,
 	};
 
-public:
+	enum PlayerStates
+	{
+		No_state,
+		Idle_state,
+		Move_state,
+		Go_out_state,
+		Enter_state,
+		Stop_state
+	} statesPlayer = No_state;
 
-	//player's current frame (entity)
-	SDL_Rect current_frame = { 0,0,0,0 };
+	ctAnimation anims[Max_anim];
 
-private:
-
-	//player state
-	PlayerState current_state = PlayerState::ST_IDLE;
-
-	//animations
-	ctAnimation idle = ctAnimation();
-	ctAnimation forward = ctAnimation();
-	ctAnimation backward = ctAnimation();
-	ctAnimation shoryuken = ctAnimation();
-	ctAnimation tatsumaki = ctAnimation();
-
-	//animations velocity
-	uint idle_vel = 0u, forward_vel = 0u, backward_vel = 0u, shoryuken_vel = 0u, tatsumaki_vel = 0u;
-
-	//action examples helpers
-	bool performing_shoryuken = false;
-	bool performing_tatsumaki = false;
-
-private:
-
-	void SetPlayerAnimationsSpeed(float dt);
-	void SetEntitiesSpeed(float dt);
-	void LoadAnimation(pugi::xml_node animation_node, ctAnimation* animation);
+	float speed = 0.0f;
+	float speedFactor = 10.0f;
 
 public:
-
 	Player(int x, int y, EntityType type);
-	~Player();
-
+	virtual ~Player();
 	void Update(float dt);
+	void StopPlayer(bool enableCinematic);
+	void SetAnimation(Animations animToSet);
 };
 
 #endif
