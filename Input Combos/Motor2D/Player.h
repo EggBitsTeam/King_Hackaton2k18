@@ -6,7 +6,7 @@
 
 class Player : public Entity
 {
-protected:
+public:
 	enum Animations
 	{
 		Idle,

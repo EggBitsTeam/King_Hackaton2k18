@@ -12,6 +12,12 @@
 #include "ctRender.h"
 #include "SceneCity.h"
 #include "ctWindow.h"
+#include "Entity.h"
+#include "White.h"
+#include "Black.h"
+#include "Girl.h"
+#include "Homeless.h"
+#include "Player.h"
 
 //#include "Brofiler\Brofiler.h"
 
@@ -175,11 +181,6 @@ void Goal_Think::AddGoal_IntroCinematic(UIImage* title, UILabel* pressStart)
 	AddSubgoal(new Goal_IntroCinematic(owner, title, pressStart));
 }
 
-void Goal_Think::AddGoal_Goal_MoveCameraDownAndStartGame(UIImage* title, UILabel* pressStart)
-{
-	AddSubgoal(new Goal_MoveCameraDownAndStartGame(owner, title, pressStart));
-}
-
 // Goal_WalkingIntro ---------------------------------------------------------------------
 
 Goal_IntroCinematic::Goal_IntroCinematic(Player* owner, UIImage* title, UILabel* pressStart) :CompositeGoal(owner, GoalType_IntroCinematic), title(title), pressStart(pressStart) {}
@@ -191,6 +192,7 @@ void Goal_IntroCinematic::Activate()
 	RemoveAllSubgoals();
 	// -----
 
+	AddSubgoal(new Goal_InemDialogs(owner));
 	AddSubgoal(new Goal_MoveCameraDownAndStartGame(owner, title, pressStart));
 	AddSubgoal(new Goal_PressStart(owner, title, pressStart));
 }
@@ -233,7 +235,7 @@ GoalStatus Goal_PressStart::Process(float dt)
 	if (alpha <= 0)
 		alpha = 255;
 
-	if (App->input->gamepad.A == GAMEPAD_STATE::PAD_BUTTON_DOWN) {
+	if (App->input->gamepad.A == GAMEPAD_STATE::PAD_BUTTON_DOWN || App->input->GetKey(SDL_SCANCODE_A)) {
 
 		alpha = 255;
 		goalStatus = GoalStatus_Completed;
@@ -270,11 +272,13 @@ GoalStatus Goal_MoveCameraDownAndStartGame::Process(float dt)
 
 	if (pressStartAlpha > 0) {
 
-		float pressStartAlphaSpeed = 100.0f;
+		float pressStartAlphaSpeed = 150.0f;
 		pressStartAlpha -= pressStartAlphaSpeed * dt;
 		if (pressStartAlpha <= 0)
 			pressStartAlpha = 0;
 		pressStart->alpha = pressStartAlpha;
+
+		return goalStatus;
 	}
 
 	float titleAlphaSpeed = 50.0f;
@@ -284,7 +288,7 @@ GoalStatus Goal_MoveCameraDownAndStartGame::Process(float dt)
 	title->alpha = titleAlpha;
 
 	// Move camera down
-	float cameraSpeed = 100.0f;
+	float cameraSpeed = 130.0f;
 	uint width, height;
 	App->win->GetWindowSize(width, height);
 
@@ -305,4 +309,194 @@ void Goal_MoveCameraDownAndStartGame::Terminate()
 	App->gui->DeleteUIElement(*(UIElement*)title);
 
 	title = nullptr;
+}
+
+// Goal_InemDialogs ---------------------------------------------------------------------
+
+Goal_InemDialogs::Goal_InemDialogs(Player* owner) :AtomicGoal(owner, GoalType_InemDialogs) {}
+
+void Goal_InemDialogs::Activate()
+{
+	goalStatus = GoalStatus_Active;
+	// -----
+
+	alpha = 255;
+	isWhiteWalk = true;
+	isWhiteStart = true;
+	walkTimer.Start();
+}
+
+GoalStatus Goal_InemDialogs::Process(float dt)
+{
+	ActivateIfInactive();
+	// -----
+
+	float alphaSpeed = 100.0f;
+
+	float whiteWalkSpeed = 15.0f;
+	float girlWalkSpeed = 25.0f;
+	float blackWalkSpeed = 20.0f;
+	float homelessWalkSpeed = 5.0f;
+
+	if (isWhiteWalk) {
+		
+		if (!isWhiteStart) {
+		
+			walkTimer.Start();
+			isWhiteStart = true;
+		}
+
+		if (App->city->whiteEntity->pos.x >= 337) {
+			App->city->whiteEntity->SetAnimation(Player::Animations::Idle);
+			App->city->girlEntity->SetAnimation(Player::Animations::Idle);
+			App->city->blackEntity->SetAnimation(Player::Animations::Idle);
+			App->city->homelessEntity->SetAnimation(Player::Animations::Idle);
+
+			alpha -= alphaSpeed * dt;
+			if (alpha <= 0) {
+				alpha = 0;
+				isWhiteWalk = false;
+				isGirlWalk = true;
+				isGirlStart = true;
+			}
+			App->city->whiteEntity->SetPrintAlpha(alpha);
+
+			if (!isWhiteWalk)
+				alpha = 255;
+		}
+		else {
+			App->city->whiteEntity->SetAnimation(Player::Animations::Move);
+			App->city->whiteEntity->pos.x += whiteWalkSpeed * dt;
+
+			if (walkTimer.ReadSec() >= 2.0f) {
+			
+				App->city->girlEntity->SetAnimation(Player::Animations::Move);
+				App->city->girlEntity->pos.x += girlWalkSpeed * dt;
+
+				App->city->blackEntity->SetAnimation(Player::Animations::Move);
+				App->city->blackEntity->pos.x += blackWalkSpeed * dt;
+
+				App->city->homelessEntity->SetAnimation(Player::Animations::Move);
+				App->city->homelessEntity->pos.x += homelessWalkSpeed * dt;
+			}
+		}
+	}
+
+	if (isGirlWalk) {
+
+		if (!isGirlStart) {
+		
+			walkTimer.Start();
+			isGirlStart = false;
+		}
+
+		if (App->city->girlEntity->pos.x >= 337) {
+			App->city->girlEntity->SetAnimation(Player::Animations::Idle);
+			App->city->whiteEntity->SetAnimation(Player::Animations::Idle);
+			App->city->blackEntity->SetAnimation(Player::Animations::Idle);
+			App->city->homelessEntity->SetAnimation(Player::Animations::Idle);
+
+			alpha -= alphaSpeed * dt;
+			if (alpha <= 0) {
+				alpha = 0;
+				isGirlWalk = false;
+				isBlackWalk = true;
+				isFirstBlackWalk = true;		
+			}
+			App->city->girlEntity->SetPrintAlpha(alpha);
+
+			if (!isGirlWalk)
+				alpha = 255;
+		}
+		else {
+
+			App->city->girlEntity->SetAnimation(Player::Animations::Move);
+			App->city->girlEntity->pos.x += girlWalkSpeed * dt;
+
+			if (walkTimer.ReadSec() >= 2.0f) {
+
+				App->city->whiteEntity->SetAnimation(Player::Animations::Move);
+				App->city->whiteEntity->pos.x += whiteWalkSpeed * dt;
+
+				App->city->blackEntity->SetAnimation(Player::Animations::Move);
+				App->city->blackEntity->pos.x += blackWalkSpeed * dt;
+
+				App->city->homelessEntity->SetAnimation(Player::Animations::Move);
+				App->city->homelessEntity->pos.x += homelessWalkSpeed * dt;
+			}
+		}
+	}
+
+	if (isBlackWalk) {
+
+		if (isFirstBlackWalk) {
+		
+			if (App->city->blackEntity->pos.x >= 210) {
+
+				App->city->blackEntity->SetAnimation(Player::Animations::Idle);
+				isHomelessWalk = true;
+				isBlackWalk = false;
+				isFirstBlackWalk = false;
+				App->city->blackEntity->flipSprite = true;
+			}
+			else {
+				App->city->blackEntity->SetAnimation(Player::Animations::Move);
+				App->city->blackEntity->pos.x += blackWalkSpeed * dt;
+			}		
+		}
+		else if (timer.ReadSec() >= 2.0f) {
+		
+			App->city->blackEntity->flipSprite = false;
+
+			if (App->city->blackEntity->pos.x >= 337) {
+				App->city->blackEntity->SetAnimation(Player::Animations::Idle);
+				alpha -= alphaSpeed * dt;
+				if (alpha <= 0)
+					alpha = 0;
+				App->city->blackEntity->SetPrintAlpha(alpha);
+			}
+			else {
+				App->city->blackEntity->SetAnimation(Player::Animations::Move);
+				App->city->blackEntity->pos.x += blackWalkSpeed * dt;
+			}		
+		}		
+	}
+
+	if (isHomelessWalk) {
+
+		if (App->city->homelessEntity->pos.x >= 80) {
+
+			App->city->homelessEntity->SetAnimation(Player::Animations::Idle);
+
+			// Play dialog
+			isHomelessWalk = false;
+			isBlackWalk = true;
+			timer.Start();
+		}
+		else {
+
+			App->city->homelessEntity->SetAnimation(Player::Animations::Move);
+			App->city->homelessEntity->pos.x += homelessWalkSpeed * dt;
+		}
+	}
+
+	// Move camera right
+	/*
+	float cameraSpeed = 150.0f;
+	uint width, height;
+	App->win->GetWindowSize(width, height);
+
+	if (abs(App->render->camera.y) <= (App->city->mapHeight * (int)App->win->GetScale() - (int)App->render->camera.h + App->city->barHeight))
+		App->render->camera.y -= cameraSpeed * dt;
+	else {
+		App->render->camera.y = -(App->city->mapHeight * (int)App->win->GetScale() - (int)App->render->camera.h + App->city->barHeight);
+		goalStatus = GoalStatus_Completed;
+	}
+	*/
+
+	return goalStatus;
+}
+
+void Goal_InemDialogs::Terminate()
+{
 }

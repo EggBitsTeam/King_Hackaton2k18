@@ -60,7 +60,7 @@ bool SceneCity::Start()
 
 	// UI
 	title = (UIImage*)App->gui->AddUIImage(120, 50, { 80,1,103,31 });
-	pressStart = (UILabel*)App->gui->AddUILabel(100, 150, "Press A to start", ColorWhite, 12);
+	pressStart = (UILabel*)App->gui->AddUILabel(130, 150, "Press A to start", ColorWhite, 12);
 
 	// Map
 	mapTexture = App->tex->Load("textures/map.png");
@@ -98,10 +98,10 @@ bool SceneCity::Start()
 	SDL_Rect endRect = { 3941,151,253,147 };
 	App->collision->CreateCollider(ColliderType_End, endRect, this);
 
-	homelessEntity = (Homeless*)App->entities->SpawnEntity(0, 260, EntityType::HOMELESS);
-	girlEntity = (Girl*)App->entities->SpawnEntity(0, 260, EntityType::GIRL);
-	blackEntity = (Black*)App->entities->SpawnEntity(0, 260, EntityType::BLACK);
-	whiteEntity = (White*)App->entities->SpawnEntity(0, 260, EntityType::WHITE);
+	whiteEntity = (White*)App->entities->SpawnEntity(270, 260, EntityType::WHITE);
+	girlEntity = (Girl*)App->entities->SpawnEntity(200, 260, EntityType::GIRL);
+	blackEntity = (Black*)App->entities->SpawnEntity(120, 260, EntityType::BLACK);
+	homelessEntity = (Homeless*)App->entities->SpawnEntity(60, 260, EntityType::HOMELESS);
 
 	// Player's brain
 	blackBrain = new Goal_Think(blackEntity);
@@ -125,6 +125,10 @@ bool SceneCity::Start()
 
 	barHeight = 150;
 
+	// Black bars
+	App->gui->AddUIImage( 0, -120, { 99, 96, 680, 150 }, this);
+	App->gui->AddUIImage(0, App->render->camera.h - (barHeight * App->win->GetScale()) + 100, { 99, 96, 680, 150 }, this);
+
 	return ret;
 }
 
@@ -147,14 +151,6 @@ bool SceneCity::Update(float dt)
 
 	// Blit map
 	App->printer->PrintSprite({ 0,0 }, mapTexture, { 0,0,mapWidth, mapHeight }, Layers_Map);
-
-	// Blit 2 quads
-	uint width, height;
-	App->win->GetWindowSize(width, height);
-	SDL_Rect cameraQuadTop = { 0,0, width * App->win->GetScale(), barHeight };
-	App->printer->PrintQuad(cameraQuadTop, ColorBlack, true, false, Layers_BlackBars);
-	SDL_Rect cameraQuadBottom = { App->render->camera.x, App->render->camera.h - barHeight, width * App->win->GetScale(), barHeight };
-	App->printer->PrintQuad(cameraQuadBottom, ColorBlack, true, false, Layers_BlackBars);
 
 	// Debug camera
 	float cameraSpeed = 1000.0f;

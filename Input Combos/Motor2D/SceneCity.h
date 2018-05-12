@@ -85,6 +85,9 @@ private:
 	// UI
 	UIImage* title = nullptr;
 	UILabel* pressStart = nullptr;
+
+	UIImage* topBar = nullptr;
+	UIImage* bottomBar = nullptr;
 };
 
 

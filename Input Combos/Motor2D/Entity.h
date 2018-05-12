@@ -15,17 +15,17 @@ class Entity
 {
 protected:
 	ctAnimation* anim = nullptr;
-	
-	fPoint pos = { 0,0 };
 
 	EntityType type = EntityType::NO_TYPE;
 
 	int layerToBlit = 0;
-
-	bool flipSprite = false;
+	int alpha = 255;
 
 public:
+
 	bool to_destroy = false;
+	bool flipSprite = false;
+	fPoint pos = { 0,0 };
 
 public:
 
@@ -34,9 +34,9 @@ public:
 
 	virtual void Update(float dt) {};
 	virtual void Draw();
+	void SetPrintAlpha(int alpha);
 
 	fPoint GetPos();
-
 };
 
 #endif // __ENTITY_H__
