@@ -55,6 +55,8 @@ bool SceneCity::Start()
 	bool ret = true;
 
 	int scale = App->win->GetScale();
+	uint width, height;
+	App->win->GetWindowSize(width, height);
 
 	homelessEntity = (Homeless*)App->entities->SpawnEntity(0, 260, EntityType::HOMELESS);
 	girlEntity = (Girl*)App->entities->SpawnEntity(0, 260, EntityType::GIRL);
@@ -62,8 +64,9 @@ bool SceneCity::Start()
 	whiteEntity = (White*)App->entities->SpawnEntity(0, 260, EntityType::WHITE);
 
 	// UI
-	title = (UIImage*)App->gui->AddUIImage(0, 0, { 80,1,103,31 });
-	pressStart = (UILabel*)App->gui->AddUILabel(100, 100, "Press A to start", ColorWhite, 12);
+	title = (UIImage*)App->gui->AddUIImage(120, 50, { 80,1,103,31 });
+
+	pressStart = (UILabel*)App->gui->AddUILabel(100, 150, "Press A to start", ColorWhite, 12);
 
 	// Map
 	mapTexture = App->tex->Load("textures/map.png");
@@ -126,8 +129,6 @@ bool SceneCity::Start()
 	whiteEntity->StopPlayer(true);
 	blackEntity->StopPlayer(true);
 
-	uint width, height;
-	App->win->GetWindowSize(width, height);
 	barHeight = 150;
 
 	return ret;
