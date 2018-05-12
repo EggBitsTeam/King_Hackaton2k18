@@ -8,10 +8,7 @@
 UIDialog::UIDialog(int x, int y, UI_Type type, ctAnimation dialog_animation, ctModule* callback, UIElement* parent) : UIElement(x, y, type, parent)
 {
 	this->callback = callback;
-	current_animation = &dialog_animation;
-}
-
-void UIDialog::Draw(SDL_Texture* sprites)
-{
-	App->printer->PrintSprite({ (int)this->screen_position.x,(int)this->screen_position.y }, sprites, current_animation->GetCurrentFrame(), 1);
+	current_animation = dialog_animation;
+	current_rect.w = dialog_animation.GetCurrentFrame().w;
+	current_rect.h = dialog_animation.GetCurrentFrame().h;
 }

@@ -4,6 +4,7 @@
 
 #include "ctInput.h"
 #include "ctApp.h"
+#include "ctTextures.h"
 
 #include "SDL/include/SDL.h"
 
@@ -35,6 +36,13 @@ bool Dialogs::Awake(pugi::xml_node& config)
 
 	}
 	return ret;
+}
+
+bool Dialogs::Start()
+{
+	atlas = App->tex->Load("dialogs/atlas.png");
+
+	return true;
 }
 
 
