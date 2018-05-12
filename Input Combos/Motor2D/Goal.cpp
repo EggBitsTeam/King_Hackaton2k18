@@ -18,6 +18,8 @@
 #include "Girl.h"
 #include "Homeless.h"
 #include "Player.h"
+#include "Dialogs.h"
+#include "UIDialog.h"
 
 //#include "Brofiler\Brofiler.h"
 
@@ -360,6 +362,15 @@ GoalStatus Goal_InemDialogs::Process(float dt)
 
 	if (isWhiteWalk) {
 		
+		if (isWhiteDialog) {
+		
+			whiteDialog = (UIDialog*)App->gui->AddUIDialog(0, 0, App->dialogs->tom_01);
+			//UIDialog* blackDialog = nullptr;
+			//UIDialog* girlDialog = nullptr;
+			//UIDialog* homelessDialog = nullptr;
+			
+			isWhiteDialog = false;
+		}
 		if (!isWhiteStart) {
 		
 			walkTimer.Start();
