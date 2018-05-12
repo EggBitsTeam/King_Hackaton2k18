@@ -11,16 +11,7 @@
 using namespace std;
 
 class Entity;
-class DynamicEntity;
-class GoldMine;
-class Runestone;
-class Alleria;
-class Turalyon;
-
-struct TargetInfo;
-struct Particle;
-
-enum UnitDirection;
+class Player;
 
 enum GoalType {
 
@@ -30,6 +21,7 @@ enum GoalType {
 	GoalType_Think,
 
 	GoalType_WalkingIntro,
+	GoalType_MoveToPos,
 
 	// Atomic Goals
 
@@ -48,7 +40,7 @@ class Goal
 {
 public:
 
-	Goal(DynamicEntity* owner, GoalType goalType);
+	Goal(Player* owner, GoalType goalType);
 	~Goal();
 
 	// Contains initialization logic (planning phase of the goal)
@@ -77,7 +69,7 @@ public:
 
 protected:
 
-	DynamicEntity* owner = nullptr;
+	Player* owner = nullptr;
 	GoalStatus goalStatus = GoalStatus_Inactive;
 	GoalType goalType = GoalType_NoType;
 };
@@ -89,7 +81,7 @@ class AtomicGoal :public Goal
 {
 public:
 
-	AtomicGoal(DynamicEntity* owner, GoalType goalType);
+	AtomicGoal(Player* owner, GoalType goalType);
 
 	virtual void Activate();
 	virtual GoalStatus Process(float dt);
@@ -100,7 +92,7 @@ class CompositeGoal :public Goal
 {
 public:
 
-	CompositeGoal(DynamicEntity* owner, GoalType goalType);
+	CompositeGoal(Player* owner, GoalType goalType);
 
 	virtual void Activate();
 	virtual GoalStatus Process(float dt);
@@ -135,7 +127,7 @@ class Goal_Think :public CompositeGoal
 {
 public:
 
-	Goal_Think(DynamicEntity* owner);
+	Goal_Think(Player* owner);
 
 	void Activate();
 	GoalStatus Process(float dt);
@@ -147,11 +139,26 @@ public:
 	void AddGoal_WalkingIntro();
 };
 
-class Goal_WalkingIntro :public AtomicGoal
+class Goal_WalkingIntro :public CompositeGoal
 {
 public:
 
-	Goal_WalkingIntro(DynamicEntity* owner);
+	Goal_WalkingIntro(Player* owner);
+
+	void Activate();
+	GoalStatus Process(float dt);
+	void Terminate();
+
+private:
+
+};
+
+
+class Goal_MoveToPos :public AtomicGoal
+{
+public:
+
+	Goal_MoveToPos(Player* owner);
 
 	void Activate();
 	GoalStatus Process(float dt);

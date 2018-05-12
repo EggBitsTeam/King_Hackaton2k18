@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 
+class Goal_Think;
 
 class SceneCity : public ctModule
 {
@@ -40,9 +41,11 @@ public:
 
 	void OnUITrigger(UIElement* elementTriggered, UI_State ui_state);
 
+	void OnCollision(Collider* c1, Collider* c2, CollisionState collisionState);
+
 private:
 
-
+	Goal_Think* brain = nullptr;
 
 };
 

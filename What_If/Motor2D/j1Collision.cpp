@@ -16,12 +16,12 @@ j1Collision::j1Collision()
 	// COLLIDERS
 	/// Player
 	matrix[ColliderType_Player][ColliderType_Player] = false;
-	matrix[ColliderType_Player][ColliderType_Inem] = false;
-	matrix[ColliderType_Player][ColliderType_Enterprise] = false;
-	matrix[ColliderType_Player][ColliderType_XXX] = false;
-	matrix[ColliderType_Player][ColliderType_Barrio] = false;
-	matrix[ColliderType_Player][ColliderType_University] = false;
-	matrix[ColliderType_Player][ColliderType_DiningRoom] = false;
+	matrix[ColliderType_Player][ColliderType_Inem] = true;
+	matrix[ColliderType_Player][ColliderType_Enterprise] = true;
+	matrix[ColliderType_Player][ColliderType_XXX] = true;
+	matrix[ColliderType_Player][ColliderType_Barrio] = true;
+	matrix[ColliderType_Player][ColliderType_University] = true;
+	matrix[ColliderType_Player][ColliderType_DiningRoom] = true;
 
 	/// Inem
 	matrix[ColliderType_Inem][ColliderType_Inem] = false;
@@ -78,13 +78,13 @@ j1Collision::j1Collision()
 	matrix[ColliderType_DiningRoom][ColliderType_University] = false;
 	
 	// DEBUG COLORS
-	debugColors[ColliderType_Player] = ColorDarkBlue;
-	debugColors[ColliderType_Inem] = ColorDarkRed;
+	debugColors[ColliderType_Player] = ColorRed;
+	debugColors[ColliderType_Inem] = ColorWhite;
 	debugColors[ColliderType_Enterprise] = ColorWhite;
-	debugColors[ColliderType_XXX] = ColorDarkBlue;
-	debugColors[ColliderType_Barrio] = ColorDarkRed;
+	debugColors[ColliderType_XXX] = ColorWhite;
+	debugColors[ColliderType_Barrio] = ColorWhite;
 	debugColors[ColliderType_University] = ColorWhite;
-	debugColors[ColliderType_DiningRoom] = ColorLightBlue;
+	debugColors[ColliderType_DiningRoom] = ColorWhite;
 }
 
 // Destructor
