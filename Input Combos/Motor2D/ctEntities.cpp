@@ -8,6 +8,7 @@
 #include "White.h"
 #include "Girl.h"
 #include "Homeless.h"
+#include "Npc.h"
 
 ctEntities::ctEntities()
 {
@@ -109,6 +110,10 @@ Entity* ctEntities:: SpawnEntity(int x, int y, EntityType type)
 
 	case EntityType::WHITE:
 		toSpawn = new White(x, y, WHITE);
+		entities.push_back(toSpawn);
+		break;
+	case EntityType::NPC:
+		toSpawn = new Npc(x, y, NPC);
 		entities.push_back(toSpawn);
 		break;
 	default:

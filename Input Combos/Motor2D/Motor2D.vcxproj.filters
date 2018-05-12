@@ -25,7 +25,7 @@
     <Filter Include="Core\Modules\GUI">
       <UniqueIdentifier>{14b4087a-3bea-4a5e-b99f-8a814653b210}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Modules\Entities\Characters">
+    <Filter Include="Core\Modules\Characters">
       <UniqueIdentifier>{df766413-8001-456c-bb42-4390ed7427ef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -91,13 +91,13 @@
       <Filter>Core\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Core\Modules\Entities\Characters</Filter>
+      <Filter>Core\Modules\Characters</Filter>
     </ClCompile>
     <ClCompile Include="Girl.cpp">
-      <Filter>Core\Modules\Entities\Characters</Filter>
+      <Filter>Core\Modules\Characters</Filter>
     </ClCompile>
     <ClCompile Include="Homeless.cpp">
-      <Filter>Core\Modules\Entities\Characters</Filter>
+      <Filter>Core\Modules\Characters</Filter>
     </ClCompile>
     <ClCompile Include="j1Printer.cpp">
       <Filter>Core\Modules</Filter>
@@ -106,7 +106,7 @@
       <Filter>Core\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Black.cpp">
-      <Filter>Core\Modules\Entities\Characters</Filter>
+      <Filter>Core\Modules\Characters</Filter>
     </ClCompile>
     <ClCompile Include="Goal.cpp">
       <Filter>Core</Filter>
@@ -116,13 +116,16 @@
     </ClCompile>
     <ClCompile Include="j1Collision.cpp" />
     <ClCompile Include="White.cpp">
-      <Filter>Core\Modules\Entities\Characters</Filter>
+      <Filter>Core\Modules\Characters</Filter>
     </ClCompile>
     <ClCompile Include="Dialogs.cpp">
       <Filter>Core\Modules</Filter>
     </ClCompile>
     <ClCompile Include="UIDialog.cpp">
       <Filter>Core\Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>Core\Modules\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -202,13 +205,13 @@
       <Filter>Core\Modules</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Core\Modules\Entities\Characters</Filter>
+      <Filter>Core\Modules\Characters</Filter>
     </ClInclude>
     <ClInclude Include="Girl.h">
-      <Filter>Core\Modules\Entities\Characters</Filter>
+      <Filter>Core\Modules\Characters</Filter>
     </ClInclude>
     <ClInclude Include="Homeless.h">
-      <Filter>Core\Modules\Entities\Characters</Filter>
+      <Filter>Core\Modules\Characters</Filter>
     </ClInclude>
     <ClInclude Include="j1Printer.h">
       <Filter>Core\Modules</Filter>
@@ -217,7 +220,7 @@
       <Filter>Core\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Black.h">
-      <Filter>Core\Modules\Entities\Characters</Filter>
+      <Filter>Core\Modules\Characters</Filter>
     </ClInclude>
     <ClInclude Include="Goal.h">
       <Filter>Core</Filter>
@@ -227,13 +230,16 @@
     </ClInclude>
     <ClInclude Include="j1Collision.h" />
     <ClInclude Include="White.h">
-      <Filter>Core\Modules\Entities\Characters</Filter>
+      <Filter>Core\Modules\Characters</Filter>
     </ClInclude>
     <ClInclude Include="Dialogs.h">
       <Filter>Core\Modules</Filter>
     </ClInclude>
     <ClInclude Include="UIDialog.h">
       <Filter>Core\Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>Core\Modules\Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
