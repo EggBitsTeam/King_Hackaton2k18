@@ -13,10 +13,7 @@ struct SDL_Texture;
 
 enum EntityType
 {
-	CLERIC,
-	DWARF,
-	ELF,
-	WARRIOR,
+	PLAYER,
 
 	NO_TYPE
 };
@@ -39,20 +36,15 @@ public:
 	bool CleanUp();
 
 	bool SpawnEntity(int x, int y, EntityType type);
-	
-	void OrderDrawEntities();
+
+	const SDL_Texture* GetAtlas() const;
 
 	//getters
 
 	std::vector<Entity*> entities;
 	std::vector<Entity*> draw_priority_entities;
 
-private:
-
-	
-
-public:
-
+	SDL_Texture* atlasEntities = nullptr;
 
 };
 

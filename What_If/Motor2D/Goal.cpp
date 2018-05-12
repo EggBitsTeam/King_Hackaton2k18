@@ -4,10 +4,11 @@
 #include "ctApp.h"
 #include "Goal.h"
 #include "Entity.h"
+#include "Player.h"
 
 //#include "Brofiler\Brofiler.h"
 
-Goal::Goal(DynamicEntity* owner, GoalType goalType) :owner(owner), goalType(goalType) {}
+Goal::Goal(Player* owner, GoalType goalType) :owner(owner), goalType(goalType) {}
 
 Goal::~Goal() {}
 
@@ -52,7 +53,7 @@ GoalType Goal::GetType() const
 
 // AtomicGoal ---------------------------------------------------------------------
 
-AtomicGoal::AtomicGoal(DynamicEntity* owner, GoalType goalType) :Goal(owner, goalType) {}
+AtomicGoal::AtomicGoal(Player* owner, GoalType goalType) :Goal(owner, goalType) {}
 
 void AtomicGoal::Activate() {}
 
@@ -62,7 +63,7 @@ void AtomicGoal::Terminate() {}
 
 // CompositeGoal ---------------------------------------------------------------------
 
-CompositeGoal::CompositeGoal(DynamicEntity* owner, GoalType goalType) : Goal(owner, goalType) {}
+CompositeGoal::CompositeGoal(Player* owner, GoalType goalType) : Goal(owner, goalType) {}
 
 void CompositeGoal::Activate() {}
 
@@ -131,7 +132,7 @@ void CompositeGoal::RemoveAllSubgoals()
 // COMPOSITE GOALS
 // Goal_Think ---------------------------------------------------------------------
 
-Goal_Think::Goal_Think(DynamicEntity* owner) :CompositeGoal(owner, GoalType_Think) {}
+Goal_Think::Goal_Think(Player* owner) :CompositeGoal(owner, GoalType_Think) {}
 
 void Goal_Think::Activate()
 {
@@ -162,29 +163,61 @@ void Goal_Think::Terminate()
 	// TODO: Add some code here
 }
 
-void Goal_Think::AddGoal_WalkingIntro()
+void Goal_Think::AddGoal_IntroCinematic()
 {
-	AddSubgoal(new Goal_WalkingIntro(owner));
+	AddSubgoal(new Goal_IntroCinematic(owner));
 }
 
 // Goal_WalkingIntro ---------------------------------------------------------------------
 
-Goal_WalkingIntro::Goal_WalkingIntro(DynamicEntity* owner) :AtomicGoal(owner, GoalType_WalkingIntro) {}
+Goal_IntroCinematic::Goal_IntroCinematic(Player* owner) :CompositeGoal(owner, GoalType_IntroCinematic) {}
 
-void Goal_WalkingIntro::Activate()
+void Goal_IntroCinematic::Activate()
 {
+	// This happens once (when this goal is started)
 	goalStatus = GoalStatus_Active;
+	// -----
+
+	AddSubgoal(new Goal_MoveToPos(owner));
 }
 
-GoalStatus Goal_WalkingIntro::Process(float dt)
+GoalStatus Goal_IntroCinematic::Process(float dt)
 {
 	ActivateIfInactive();
+	goalStatus = ProcessSubgoals(dt);
+	// -----
 
+	return goalStatus;
+}
+
+void Goal_IntroCinematic::Terminate()
+{
+	// This happens once (when this goal is completed)
+}
+
+// Goal_MoveToPos ---------------------------------------------------------------------
+
+Goal_MoveToPos::Goal_MoveToPos(Player* owner) :AtomicGoal(owner, GoalType_MoveToPos) {}
+
+void Goal_MoveToPos::Activate()
+{
+	// This happens once (when this goal is started)
+	goalStatus = GoalStatus_Active;
+	// -----
+}
+
+GoalStatus Goal_MoveToPos::Process(float dt)
+{
+	ActivateIfInactive();
+	// -----
+
+	// if (myGoalIsCompleted)
 	goalStatus = GoalStatus_Completed;
 
 	return goalStatus;
 }
 
-void Goal_WalkingIntro::Terminate()
+void Goal_MoveToPos::Terminate()
 {
+	// This happens once (when this goal is completed)
 }

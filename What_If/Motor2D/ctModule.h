@@ -10,11 +10,12 @@
 #include "PugiXml\src\pugixml.hpp"
 
 class ctApp;
+
 struct Collider;
+enum CollisionState;
+
 class UIElement;
 enum UI_State;
-enum ComboType;
-enum CollisionState;
 
 class ctModule
 {
