@@ -22,9 +22,18 @@ enum ColliderType {
 	ColliderType_Inem,
 	ColliderType_Enterprise,
 	ColliderType_XXX,
-	ColliderType_Barrio,
+	ColliderType_Street,
 	ColliderType_University,
 	ColliderType_DiningRoom,
+
+	/// Change between characters
+	ColliderType_ChangeStreet,
+	ColliderType_ChangeUniversity,
+	ColliderType_ChangeDiningRoom,
+
+	/// End
+	ColliderType_End,
+
 	ColliderType_MaxColliders
 };
 
