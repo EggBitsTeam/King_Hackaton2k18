@@ -234,6 +234,10 @@ void Goal_IntroCinematic::Terminate()
 	App->city->whiteEntity->SetPrintAlpha(255);
 	App->city->blackEntity->SetPrintAlpha(255);
 	App->city->homelessEntity->SetPrintAlpha(255);
+
+	App->city->girlEntity->pos.x = App->city->homelessEntity->pos.x - 100;
+	App->city->whiteEntity->pos.x = App->city->homelessEntity->pos.x - 100;
+	App->city->blackEntity->pos.x = App->city->homelessEntity->pos.x - 100;
 }
 
 // Goal_PressStart ---------------------------------------------------------------------
@@ -362,12 +366,13 @@ GoalStatus Goal_InemDialogs::Process(float dt)
 
 	if (isWhiteWalk) {
 		
+		/*
 		if (isWhiteDialog) {
 		
 			whiteDialog = (UIDialog*)App->gui->AddUIDialog(0, 0, App->dialogs->tom_01);			
 			isWhiteDialog = false;
-		}
-		if (!isWhiteStart && whiteDialog->current_animation.Finished()) {
+		}*/
+		if (!isWhiteStart) {
 		
 			walkTimer.Start();
 			isWhiteStart = true;
