@@ -61,8 +61,9 @@ void Player::Update(float dt)
 			App->city->nextPlayer = SceneCity::Current_Player::NO_FOLLOW;
 			StopPlayer(true);
 			anim = &anims[Animations::Idle];
+			flipSprite = false;
 		}
-			pos.x -= 20.0f * dt;
+			pos.x -= 50.0f * dt;
 
 		break;
 
