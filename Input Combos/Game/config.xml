@@ -7,15 +7,15 @@
 	<renderer>
 		<vsync value="true" />
 	</renderer>
-	<ui>
-		<atlas file="textures/ui/ui_atlas.png" />
-	</ui>
+	<gui>
+		<atlas file="textures/ui_spritesheet.png" />
+	</gui>
 	<window>
 		<resolution width="640" height="360" scale="5" />
 		<fullscreen value="false" />
 		<borderless value="false" />
 		<resizable value="false" />
-		<fullscreen_window value="true" />
+		<fullscreen_window value="false" />
 	</window>
 	<music fx="100" music="100"></music>
 	<entities>

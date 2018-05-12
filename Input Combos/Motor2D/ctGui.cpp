@@ -12,7 +12,6 @@
 #include "UIButton.h"
 #include "UITextBox.h"
 
-
 #include "UIElement.h"
 
 ctGui::ctGui() : ctModule()
