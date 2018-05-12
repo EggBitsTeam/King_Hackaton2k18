@@ -14,26 +14,16 @@ struct SDL_Texture;
 class Entity
 {
 protected:
+	ctAnimation* anim = nullptr;
 	
-	bool key_entities_speed = false;
-
-public:
-
-public:
-	ctAnimation* animation = nullptr;
-
-	ctAnimation idle = ctAnimation();
-	
-	iPoint position = iPoint(0, 0);
+	fPoint pos = { 0.0f,0.0f };
 
 	EntityType type = EntityType::NO_TYPE;
-	bool to_destroy = false;
-	bool flip_texture = false;
-	
-	SDL_Texture* texture = nullptr;
 
-	//Priority Draw Order
-	uint priority_draw_order = 0u;
+	int layerToBlit = 0;
+
+public:
+	bool to_destroy = false;
 
 public:
 
@@ -42,10 +32,6 @@ public:
 
 	virtual void Update(float dt) {};
 	virtual void Draw();
-	virtual void SetEntitiesSpeed(float dt) {};
-
-	virtual void LoadAnimation(pugi::xml_node animation_node, ctAnimation* animation) {};
-	bool LoadProperties(pugi::xml_node properties);
 
 };
 
