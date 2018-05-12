@@ -14,7 +14,6 @@ struct Collider;
 class UIElement;
 enum UI_State;
 enum ComboType;
-enum CollisionState;
 
 class ctModule
 {
@@ -75,7 +74,7 @@ public:
 	}
 
 	// Callbacks ---
-	virtual void OnCollision(Collider* c1, Collider* c2, CollisionState collisionState) {}
+	virtual void OnCollision(Collider*, Collider*) {}
 
 	virtual void OnUITrigger(UIElement* elementTriggered, UI_State ui_state) {}
 
