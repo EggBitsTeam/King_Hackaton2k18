@@ -29,7 +29,7 @@ enum ctKeyState
 	KEY_UP
 };
 
-enum class Axis
+enum Axis
 {
 	UP,
 	DOWN,
