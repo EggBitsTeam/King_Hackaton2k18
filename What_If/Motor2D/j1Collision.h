@@ -35,10 +35,7 @@ enum CollisionState {
 	CollisionState_OnExit
 };
 
-class Entity;
-
 struct Collider;
-struct ColliderGroup;
 
 class j1Collision : public ctModule
 {

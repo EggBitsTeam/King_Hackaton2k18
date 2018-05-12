@@ -9,8 +9,6 @@
 #include "Entity.h"
 #include "j1Printer.h"
 
-#include "Brofiler\Brofiler.h"
-
 j1Collision::j1Collision()
 {
 	name.assign("collision");
@@ -95,8 +93,6 @@ j1Collision::~j1Collision()
 
 bool j1Collision::PreUpdate()
 {
-	BROFILER_CATEGORY(__FUNCTION__, Profiler::Color::Orchid);
-
 	bool ret = true;
 
 	// Remove all colliders scheduled for deletion
@@ -121,8 +117,6 @@ bool j1Collision::PreUpdate()
 // Called before render is available
 bool j1Collision::Update(float dt)
 {
-	BROFILER_CATEGORY(__FUNCTION__, Profiler::Color::Orchid);
-
 	bool ret = true;
 
 	list<Collider*>::const_iterator I = colliders.begin();
@@ -217,8 +211,6 @@ bool j1Collision::Update(float dt)
 
 void j1Collision::HandleTriggers()
 {
-	BROFILER_CATEGORY(__FUNCTION__, Profiler::Color::Orchid);
-
 	list<Collider*>::const_iterator groups = colliders.begin();
 
 	while (groups != colliders.end()) {
@@ -266,8 +258,6 @@ bool j1Collision::CleanUp()
 
 void j1Collision::DebugDraw()
 {
-	BROFILER_CATEGORY(__FUNCTION__, Profiler::Color::Orchid);
-
 	Uint8 alpha = 60;
 	SDL_Color color;
 

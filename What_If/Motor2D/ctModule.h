@@ -14,6 +14,7 @@ struct Collider;
 class UIElement;
 enum UI_State;
 enum ComboType;
+enum CollisionState;
 
 class ctModule
 {

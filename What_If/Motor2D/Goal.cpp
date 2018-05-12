@@ -5,7 +5,7 @@
 #include "Goal.h"
 #include "Entity.h"
 
-#include "Brofiler\Brofiler.h"
+//#include "Brofiler\Brofiler.h"
 
 Goal::Goal(DynamicEntity* owner, GoalType goalType) :owner(owner), goalType(goalType) {}
 
