@@ -21,7 +21,7 @@
 		<resolution width="640" height="360" scale="2" />
 		<fullscreen value="false" />
 		<borderless value="false" />
-		<resizable value="true" />
+		<resizable value="false" />
 		<fullscreen_window value="true" />
 	</window>
 	<audio fx="25" music="50">

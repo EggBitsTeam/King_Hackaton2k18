@@ -16,7 +16,7 @@ class Entity
 protected:
 	ctAnimation* anim = nullptr;
 	
-	fPoint pos = { 0.0f,0.0f };
+	fPoint pos = { 0,0 };
 
 	EntityType type = EntityType::NO_TYPE;
 
@@ -32,6 +32,8 @@ public:
 
 	virtual void Update(float dt) {};
 	virtual void Draw();
+
+	fPoint GetPos();
 
 };
 

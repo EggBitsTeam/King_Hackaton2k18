@@ -81,23 +81,23 @@ bool ctEntities::CleanUp()
 }
 
 
-bool ctEntities:: SpawnEntity(int x, int y, EntityType type)
+Entity* ctEntities:: SpawnEntity(int x, int y, EntityType type)
 {
 	// find room for the new entity
 	bool ret = true;
-
+	Entity* toSpawn = nullptr;
 	switch (type)
 	{
 	case EntityType::PLAYER: {
-		Player* ourPlayer = new Player(x, y, PLAYER);
-		entities.push_back(ourPlayer);
+		toSpawn = new Player(x, y, PLAYER);
+		entities.push_back(toSpawn);
 		break;
 	}
 	default:
 		break;
 	}
 
-	return ret;
+	return toSpawn;
 }
 
 const SDL_Texture* ctEntities::GetAtlas() const

@@ -14,5 +14,9 @@ Entity::~Entity()
 
 void Entity::Draw()
 {
-	App->printer->PrintSprite({(int)pos.x, (int)pos.y}, (SDL_Texture*)App->entities->GetAtlas(), anim->GetCurrentFrame(), layerToBlit);
+	App->printer->PrintSprite({ (int)pos.x,(int)pos.y }, (SDL_Texture*)App->entities->GetAtlas(), anim->GetCurrentFrame(), layerToBlit);
+}
+fPoint Entity::GetPos()
+{
+	return pos;
 }

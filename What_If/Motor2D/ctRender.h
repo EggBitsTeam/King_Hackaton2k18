@@ -50,6 +50,8 @@ public:
 	iPoint ScreenToWorld(int x, int y) const;
 	bool IsInScreen(const SDL_Rect& item) const;
 
+	void SetCameraToPlayer();
+
 public:
 
 	double          scale_factor = 1;
@@ -59,6 +61,8 @@ public:
 	SDL_Rect		viewport = { 0, 0, 0, 0 };
 	SDL_Color		background = { 0, 0, 0, 0 };
 	bool			vsync_state = false;
+
+	bool SetCameraPlayer = true;
 };
 
 #endif // __j1RENDER_H__

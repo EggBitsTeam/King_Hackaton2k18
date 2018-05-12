@@ -35,14 +35,13 @@ public:
 
 	bool CleanUp();
 
-	bool SpawnEntity(int x, int y, EntityType type);
+	Entity* SpawnEntity(int x, int y, EntityType type);
 
 	const SDL_Texture* GetAtlas() const;
 
 	//getters
 
 	std::vector<Entity*> entities;
-	std::vector<Entity*> draw_priority_entities;
 
 	SDL_Texture* atlasEntities = nullptr;
 

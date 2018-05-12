@@ -73,7 +73,7 @@ bool SceneCity::Start()
 
 	// Intro cinematic
 	brain->AddGoal_IntroCinematic();
-	App->entities->SpawnEntity(0, 0, EntityType::PLAYER);
+	player = (Player*)App->entities->SpawnEntity(0, 0, EntityType::PLAYER);
 
 	return ret;
 }

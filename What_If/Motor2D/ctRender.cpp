@@ -5,6 +5,8 @@
 #include "ctRender.h"
 #include "ctEntities.h"
 #include "ctInput.h"
+#include "SceneCity.h"
+#include "Player.h"
 
 #define VSYNC true
 
@@ -79,25 +81,8 @@ bool ctRender::Update(float dt)
 
 	App->win->GetWindowSize(winWidth, winHeight);
 
-	/*
-
-	int speed = 3;
-
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		camera.y += speed;
-
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		camera.y -= speed;
-
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		camera.x += speed;
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		camera.x -= speed;
-		
-		*/
-
-	//LOG("Camera pos x: %i pos y: %i", camera.x, camera.y);
+	if (SetCameraPlayer)
+		SetCameraToPlayer();
 
 	return true;
 }
@@ -445,4 +430,14 @@ bool ctRender::IsInScreen(const SDL_Rect& item) const
 {
 	SDL_Rect cameraRect{ -camera.x, -camera.y, camera.w, camera.h };
 	return SDL_HasIntersection(&item, &cameraRect);
+}
+
+void ctRender::SetCameraToPlayer()
+{
+	fPoint playerPos = App->city->player->GetPos();
+	
+	uint widht, height;
+	App->win->GetWindowSize(widht, height);
+	camera.x = ((int)-playerPos.x * App->win->GetScale()) + (widht * App->win->GetScale()) / 2;
+	camera.y = (int)playerPos.y + (height * App->win->GetScale()) / 2;
 }

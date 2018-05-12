@@ -13,8 +13,6 @@ class Goal_Think;
 class SceneCity : public ctModule
 {
 
-
-
 public:
 
 	SceneCity();
@@ -44,10 +42,11 @@ public:
 
 	void OnCollision(Collider* c1, Collider* c2, CollisionState collisionState);
 
-private:
-
+public:
 	// Player
 	Player* player = nullptr;
+
+private:
 	Goal_Think* brain = nullptr;
 
 	// Map
