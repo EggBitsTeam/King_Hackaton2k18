@@ -20,6 +20,7 @@ enum UI_Type
 	BUTTON,
 	IMAGE,
 	TEXTBOX,
+	DIALOG,
 
 	UI_NOT_DEF
 };
@@ -56,6 +57,8 @@ public:
 
 	bool DeleteUIElement(UIElement &element);
 	bool DeleteAllUIElements();
+
+	UIElement* AddUIDialog(int position_x, int position_y, ctAnimation dialog_animation, ctModule* callback = nullptr, UIElement* parent = nullptr);
 
 	UIElement* AddUIImage(int position_x, int position_y, SDL_Rect rect, ctModule* callback = nullptr, UIElement* parent = nullptr);
 	UIElement* AddUIButton(int position_x, int position_y, SDL_Rect normal_rect, SDL_Rect focused_rect, SDL_Rect pressed_rect, ctModule* callback = nullptr, UIElement* parent = nullptr);

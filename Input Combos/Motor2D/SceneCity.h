@@ -62,7 +62,7 @@ public:
 		BLACK_ACTUAL,
 		HOMELESS_ACTUAL,
 		GIRL_ACTUAL,
-	} currentPlayer = NO_FOLLOW;
+	} currentPlayer = NO_FOLLOW, nextPlayer = NO_FOLLOW;
 
 	// Map
 	int mapWidth = 0;

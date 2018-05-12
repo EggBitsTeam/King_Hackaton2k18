@@ -26,6 +26,7 @@
     <ClCompile Include="ctTextures.cpp" />
     <ClCompile Include="ctTimer.cpp" />
     <ClCompile Include="ctWindow.cpp" />
+    <ClCompile Include="Dialogs.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Girl.cpp" />
     <ClCompile Include="Goal.cpp" />
@@ -36,6 +37,7 @@
     <ClCompile Include="pugixml.cpp" />
     <ClCompile Include="SceneCity.cpp" />
     <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="UIDialog.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="UILabel.cpp" />
@@ -61,6 +63,7 @@
     <ClInclude Include="ctTextures.h" />
     <ClInclude Include="ctTimer.h" />
     <ClInclude Include="ctWindow.h" />
+    <ClInclude Include="Dialogs.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Girl.h" />
     <ClInclude Include="Goal.h" />
@@ -73,6 +76,7 @@
     <ClInclude Include="pugixml.hpp" />
     <ClInclude Include="SceneCity.h" />
     <ClInclude Include="UIButton.h" />
+    <ClInclude Include="UIDialog.h" />
     <ClInclude Include="UIElement.h" />
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="UILabel.h" />

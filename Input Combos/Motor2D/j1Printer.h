@@ -15,9 +15,10 @@ class SDL_Texture;
 enum Layers
 {
 	Layers_Map = -1,
-	Layers_Entities = 0,
-	Layers_DebugDraw = 1,
-	Layers_BlackBars = 2
+	Layers_Entities,
+	Layers_UI,
+	Layers_DebugDraw,
+	Layers_BlackBars 
 };
 
 class DrawingElem
