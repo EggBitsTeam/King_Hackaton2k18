@@ -7,6 +7,8 @@
 
 //#define NUM_KEYS 352
 #define NUM_MOUSE_BUTTONS 5
+#define MAX_JAXIS_VALUE 32767.0f
+#define J_DEAD_ZONE 12000
 //#define LAST_KEYS_PRESSED_BUFFER 50
 
 struct SDL_Rect;
@@ -25,6 +27,15 @@ enum ctKeyState
 	KEY_DOWN,
 	KEY_REPEAT,
 	KEY_UP
+};
+
+enum class Axis
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	MAX
 };
 
 enum GAMEPAD_STATE
@@ -84,7 +95,28 @@ public:
 	{
 		return mouse_buttons[id - 1];
 	}
+	float GetXAxis() const
+	{
+		return xAxis;
+	}
 
+	float GetYAxis() const
+	{
+		return yAxis;
+	}
+
+	ctKeyState GetAxis(int id) const
+	{
+		return axis[id];
+	}
+
+	bool InsideDeadZone() const
+	{
+		return xDeadZone && yDeadZone;
+	}
+
+	float GetPercentageFromAxis() const;
+	float GetAngleFromAxis() const;
 	// Get mouse / axis position
 	void GetMousePosition(int &x, int &y);
 	void GetWorldMousePosition(int &x, int &y);
@@ -97,12 +129,20 @@ private:
 	bool		windowEvents[WE_COUNT];
 	ctKeyState*	keyboard = nullptr;
 	ctKeyState	mouse_buttons[NUM_MOUSE_BUTTONS];
+	ctKeyState    axis[(int)Axis::MAX];
 	int			mouse_motion_x = 0;
 	int			mouse_motion_y = 0;
 	int			mouse_x = 0;
 	int			mouse_y = 0;
 
 	SDL_GameController *controller;
+	SDL_Joystick* joystick = NULL;
+
+
+	float xAxis = 0.0f;
+	float yAxis = 0.0f;
+	bool xDeadZone = false;
+	bool yDeadZone = false;
 
 };
 
