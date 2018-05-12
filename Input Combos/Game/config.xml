@@ -11,28 +11,15 @@
 		<atlas file="textures/ui/ui_atlas.png" />
 	</ui>
 	<window>
-		<resolution width="300" height="500" scale="1" />
+		<resolution width="640" height="360" scale="1" />
 		<fullscreen value="false" />
 		<borderless value="false" />
 		<resizable value="false" />
 		<fullscreen_window value="true" />
 	</window>
 	<music fx="100" music="100"></music>
-	<input_combo>
-		<combo type="SHORYUKEN">
-			<input_event type="RIGHT" time_limit="1000"/>
-			<input_event type="DOWN" time_limit="1000"/>
-			<input_event type="RIGHT" time_limit="1000"/>
-			<input_event type="PUNCH" time_limit="1000"/>
-		</combo>
-		<combo type="TATSUMAKI">
-			<input_event type="DOWN" time_limit="1000"/>
-			<input_event type="LEFT" time_limit="1000"/>
-			<input_event type="KICK" time_limit="1000"/>
-		</combo>
-	</input_combo>
 	<entities>
-		<spritesheetSource name="textures/ryu.png" />
+		<spritesheetSource name="textures/characters_spritesheets.png" />
 		<player>
 			<fxPlayerJump name="audio/fx/jump_fx.wav" />
 			<animations>
