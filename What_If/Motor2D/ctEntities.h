@@ -13,8 +13,10 @@ struct SDL_Texture;
 
 enum EntityType
 {
-	PLAYER,
-
+	BLACK,
+	WHITE,
+	GIRL,
+	HOMELESS,
 	NO_TYPE
 };
 

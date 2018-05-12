@@ -7,6 +7,10 @@
 #include "ctInput.h"
 #include "SceneCity.h"
 #include "Player.h"
+#include "Homeless.h"
+#include "Black.h"
+#include "White.h"
+#include "Girl.h"
 
 #define VSYNC true
 
@@ -434,7 +438,7 @@ bool ctRender::IsInScreen(const SDL_Rect& item) const
 
 void ctRender::SetCameraToPlayer()
 {
-	fPoint playerPos = App->city->player->GetPos();
+	fPoint playerPos = App->city->homelessEntity->GetPos();
 	
 	uint widht, height;
 	App->win->GetWindowSize(widht, height);

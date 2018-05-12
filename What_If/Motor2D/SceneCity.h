@@ -7,8 +7,11 @@
 #include <string>
 #include <vector>
 
-class Player;
 class Goal_Think;
+class Homeless;
+class Black;
+class White;
+class Girl;
 
 class SceneCity : public ctModule
 {
@@ -44,7 +47,12 @@ public:
 
 public:
 	// Player
-	Player* player = nullptr;
+	Homeless* homelessEntity = nullptr;
+	Girl* girlEntity = nullptr;
+	Black* blackEntity = nullptr;
+	White* whiteEntity = nullptr;
+
+	bool swapPlayers = false;
 
 private:
 	Goal_Think* brain = nullptr;

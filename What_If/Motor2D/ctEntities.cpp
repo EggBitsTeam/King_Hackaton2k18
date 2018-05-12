@@ -4,6 +4,10 @@
 #include "Entity.h"
 #include "ctLog.h"
 #include "Player.h"
+#include "Black.h"
+#include "White.h"
+#include "Girl.h"
+#include "Homeless.h"
 
 ctEntities::ctEntities()
 {
@@ -88,11 +92,25 @@ Entity* ctEntities:: SpawnEntity(int x, int y, EntityType type)
 	Entity* toSpawn = nullptr;
 	switch (type)
 	{
-	case EntityType::PLAYER: {
-		toSpawn = new Player(x, y, PLAYER);
+	case EntityType::HOMELESS:
+		toSpawn = new Homeless(x, y, HOMELESS);
 		entities.push_back(toSpawn);
 		break;
-	}
+
+	case EntityType::BLACK:
+		toSpawn = new Black(x, y, BLACK);
+		entities.push_back(toSpawn);
+		break;
+
+	case EntityType::GIRL:
+		toSpawn = new Girl(x, y, GIRL);
+		entities.push_back(toSpawn);
+		break;
+
+	case EntityType::WHITE:
+		toSpawn = new White(x, y, WHITE);
+		entities.push_back(toSpawn);
+		break;
 	default:
 		break;
 	}

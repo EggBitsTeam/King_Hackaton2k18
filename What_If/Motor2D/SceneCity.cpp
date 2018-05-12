@@ -12,6 +12,10 @@
 #include "Goal.h"
 #include "ctRender.h"
 #include "j1Printer.h"
+#include "Homeless.h"
+#include "Black.h"
+#include "White.h"
+#include "Girl.h"
 
 #include "UIElement.h"
 
@@ -68,12 +72,12 @@ bool SceneCity::Start()
 	App->collision->CreateCollider(ColliderType_Barrio, diningRoomRect, this);
 
 	// Player's brain
-	brain = new Goal_Think(player);
+	brain = new Goal_Think(homelessEntity);
 	brain->RemoveAllSubgoals();
 
 	// Intro cinematic
 	brain->AddGoal_IntroCinematic();
-	player = (Player*)App->entities->SpawnEntity(0, 0, EntityType::PLAYER);
+	homelessEntity = (Homeless*)App->entities->SpawnEntity(0, 0, EntityType::HOMELESS);
 
 	return ret;
 }
