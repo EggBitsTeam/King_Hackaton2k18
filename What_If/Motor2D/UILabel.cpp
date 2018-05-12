@@ -41,7 +41,7 @@ void UILabel::Draw(SDL_Texture* sprites)
 		if(blitUI == true)
 			App->render->UIBlit(texture, screen_position.x, screen_position.y, &current_rect, 2.0f, 0.0, this->alpha);
 		else
-			App->render->Blit(texture, screen_position.x, screen_position.y, &current_rect, 2.0f, 0.0, this->alpha);
+			App->render->Blit(texture, screen_position.x, screen_position.y, &current_rect, 2.0f, 0.0, SDL_FLIP_NONE, this->alpha);
 	}
 
 }

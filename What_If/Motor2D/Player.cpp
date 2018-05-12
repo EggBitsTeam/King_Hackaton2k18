@@ -25,26 +25,28 @@ void Player::Update(float dt)
 	{
 	case Idle_state:
 
-		if (App->input->GetAxis(LEFT) == KEY_DOWN)
+		if (App->input->GetAxis(LEFT) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 		{
 			statesPlayer = PlayerStates::Move_state;
 			anim = &anims[Animations::Move];
 			speed = -speedFactor;
+			flipSprite = true;
 			break;
 		}
 
-		else if (App->input->GetAxis(RIGHT) == KEY_DOWN)
+		else if (App->input->GetAxis(RIGHT) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 		{
 			statesPlayer = PlayerStates::Move_state;
 			anim = &anims[Animations::Move];
 			speed = speedFactor;
+			flipSprite = false;
 			break;
 		}
 		break;
 
 	case Move_state:
 		pos.x += speed * dt;
-		if (App->input->GetAxis(LEFT) == KEY_UP || App->input->GetAxis(RIGHT) == KEY_UP)
+		if (App->input->GetAxis(LEFT) == KEY_UP || App->input->GetAxis(RIGHT) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
 		{
 			statesPlayer = PlayerStates::Idle_state;
 			anim = &anims[Animations::Idle];

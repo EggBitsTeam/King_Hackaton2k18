@@ -22,6 +22,8 @@ protected:
 
 	int layerToBlit = 0;
 
+	bool flipSprite = false;
+
 public:
 	bool to_destroy = false;
 

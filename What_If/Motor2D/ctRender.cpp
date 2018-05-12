@@ -131,7 +131,7 @@ void ctRender::ResetViewPort()
 }
 
 // Blit to screen
-bool ctRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int alpha ,SDL_RendererFlip flip, int pivot_x, int pivot_y) const
+bool ctRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, SDL_RendererFlip flip, int alpha , int pivot_x, int pivot_y) const
 {
 	bool ret = true;
 	uint scale = App->win->GetScale();

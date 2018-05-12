@@ -31,7 +31,11 @@ bool j1Printer::PostUpdate()
 		{
 			Sprite* sprite = (Sprite*)delem;
 			//SDL_SetTextureColorMod(sprite->texture, sprite->color.r, sprite->color.g, sprite->color.b);
+			if (!sprite->flip)
 			App->render->Blit(sprite->texture, sprite->pos.x, sprite->pos.y, &sprite->squareToBlit, 1.0f, sprite->degAngle);
+			else
+				App->render->Blit(sprite->texture, sprite->pos.x, sprite->pos.y, &sprite->squareToBlit, 1.0f, sprite->degAngle, SDL_FLIP_HORIZONTAL);
+
 			//SDL_SetTextureColorMod(sprite->texture, 255, 255, 255);
 			break;
 		}
@@ -74,9 +78,9 @@ bool j1Printer::CleanUp()
 	return drawingQueue.empty();
 }
 
-bool j1Printer::PrintSprite(iPoint pos, SDL_Texture* texture, SDL_Rect squareToBlit, int layer, float degAngle, SDL_Color color)
+bool j1Printer::PrintSprite(iPoint pos, SDL_Texture* texture, SDL_Rect squareToBlit, int layer, bool flip, float degAngle, SDL_Color color)
 {
-	Sprite* sprite = new Sprite(pos, texture, squareToBlit, layer, degAngle, color);
+	Sprite* sprite = new Sprite(pos, texture, squareToBlit, layer, flip, degAngle, color);
 	drawingQueue.push(sprite);
 
 	return true;
