@@ -121,6 +121,10 @@ bool SceneCity::Start()
 	whiteEntity->StopPlayer(true);
 	blackEntity->StopPlayer(true);
 
+	uint width, height;
+	App->win->GetWindowSize(width, height);
+	barHeight = 150;
+
 	return ret;
 }
 
@@ -143,6 +147,14 @@ bool SceneCity::Update(float dt)
 
 	// Blit map
 	App->printer->PrintSprite({ 0,0 }, mapTexture, { 0,0,mapWidth, mapHeight }, Layers_Map);
+
+	// Blit 2 quads
+	uint width, height;
+	App->win->GetWindowSize(width, height);
+	SDL_Rect cameraQuadTop = { 0,0, width * App->win->GetScale(), barHeight };
+	App->printer->PrintQuad(cameraQuadTop, ColorBlack, true, false, Layers_BlackBars);
+	SDL_Rect cameraQuadBottom = { App->render->camera.x, App->render->camera.h - barHeight, width * App->win->GetScale(), barHeight };
+	App->printer->PrintQuad(cameraQuadBottom, ColorBlack, true, false, Layers_BlackBars);
 
 	// Debug camera
 	float cameraSpeed = 1000.0f;

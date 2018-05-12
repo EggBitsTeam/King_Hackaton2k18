@@ -285,12 +285,14 @@ GoalStatus Goal_MoveCameraDownAndStartGame::Process(float dt)
 	title->alpha = titleAlpha;
 
 	// Move camera down
-	float cameraSpeed = 1.0f;
-	if (App->render->camera.y <= -(App->city->mapHeight - App->render->camera.h * (int)App->win->GetScale()))
-		App->render->camera.y -= cameraSpeed;
+	float cameraSpeed = 100.0f;
+	uint width, height;
+	App->win->GetWindowSize(width, height);
+
+	if (abs(App->render->camera.y) <= (App->city->mapHeight * (int)App->win->GetScale() - (int)App->render->camera.h + App->city->barHeight))
+		App->render->camera.y -= cameraSpeed * dt;
 	else {
-	
-		App->render->camera.y = -(App->city->mapHeight - App->render->camera.h * (int)App->win->GetScale());
+		App->render->camera.y = -(App->city->mapHeight * (int)App->win->GetScale() - (int)App->render->camera.h + App->city->barHeight);
 		goalStatus = GoalStatus_Completed;
 	}
 
