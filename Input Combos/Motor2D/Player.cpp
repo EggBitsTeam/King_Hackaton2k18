@@ -56,7 +56,7 @@ void Player::Update(float dt)
 
 	case Go_out_state:
 
-		if (pos.x <= abs(App->render->camera.x)  * App->win->GetScale())
+		if (pos.x <= -App->render->camera.x / App->win->GetScale() - 50)
 		{
 			App->city->nextPlayer = SceneCity::Current_Player::NO_FOLLOW;
 			StopPlayer(true);
@@ -68,8 +68,9 @@ void Player::Update(float dt)
 
 	case Enter_state:
 	
-		if (pos.x >= abs(App->render->camera.x)  * App->win->GetScale() + 100)
+		if (pos.x >= -App->render->camera.x / App->win->GetScale() + 300 / App->win->GetScale())
 		{
+			App->city->currentPlayer = App->city->nextPlayer;
 			statesPlayer = Idle_state;
 			anim = &anims[Animations::Idle];
 		}
@@ -102,7 +103,7 @@ void Player::EnterScene(bool enter)
 {
 	if (enter)
 	{
-		pos.x = App->render->camera.x * App->win->GetScale();
+		pos.x = -App->render->camera.x / App->win->GetScale();
 		statesPlayer = Enter_state;
 	}
 	else
