@@ -11,11 +11,11 @@
 		<atlas file="textures/ui_spritesheet.png" />
 	</gui>
 	<window>
-		<resolution width="640" height="360" scale="4" />
+		<resolution width="1300" height="600" scale="4" />
 		<fullscreen value="false" />
 		<borderless value="false" />
 		<resizable value="false" />
-		<fullscreen_window value="true" />
+		<fullscreen_window value="false" />
 	</window>
 	<music fx="100" music="100"></music>
 	<entities>
