@@ -18,6 +18,7 @@ enum EntityType
 	GIRL,
 	HOMELESS,
 	NPC,
+	NPCBADBOY,
 	NO_TYPE
 };
 
