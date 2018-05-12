@@ -1,27 +1,24 @@
-#ifndef __ctFinalScene_H__
-#define __ctFinalScene_H__
+#ifndef __SceneCity_H__
+#define __SceneCity_H__
 
 #include "ctModule.h"
+#include "Entity.h"
 
 #include <string>
 #include <vector>
 
-class Entity;
-//class MiniHeroes;
-class UIDecision;
 
-
-class ctFinalScene: public ctModule
+class SceneCity : public ctModule
 {
 
 
 
 public:
 
-	ctFinalScene();
+	SceneCity();
 
 	// Destructor
-	virtual ~ctFinalScene();
+	virtual ~SceneCity();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node& config);
@@ -38,29 +35,16 @@ public:
 	// Called before all Updates
 	bool PostUpdate();
 
-	//Entity* avatar;
-
 	// Called before quitting
 	bool CleanUp();
 
-	bool Load(pugi::xml_node&);
-
-	bool Save(pugi::xml_node&) const;
-
 	void OnUITrigger(UIElement* elementTriggered, UI_State ui_state);
-
-
 
 private:
 
-	UIElement* Dialog_Box = nullptr;
-	UIElement* Text_continue = nullptr;
-	UIElement* Background = nullptr;
-	int times_x_pressed = 0;
 
 
 };
 
 
-#endif // __ctWorldMap_H__
-
+#endif // __SceneCity_H__
