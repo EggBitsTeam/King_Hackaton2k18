@@ -27,7 +27,7 @@ protected:
 	ctAnimation anims[Max_anim];
 
 	float speed = 0.0f;
-	float speedFactor = 10.0f;
+	float speedFactor = 30.0f;
 
 public:
 	Player(int x, int y, EntityType type);
@@ -35,6 +35,8 @@ public:
 	void Update(float dt);
 	void StopPlayer(bool enableCinematic);
 	void SetAnimation(Animations animToSet);
+
+	void EnterScene(bool enter);
 };
 
 #endif
