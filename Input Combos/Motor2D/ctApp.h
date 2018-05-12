@@ -15,11 +15,12 @@ class ctRender;
 class ctTextures;
 class ctAudio;
 class ctInputCombo;
-class ctKenStageScene;
 class ctEntities;
 class ctGui;
 class ctFonts;
 class ctFadeToBlack;
+class j1Printer;
+class SceneCity;
 
 class ctApp
 {
@@ -81,11 +82,12 @@ public:
 	ctTextures*			tex = nullptr;
 	ctAudio*			audio = nullptr;
 	ctInputCombo*		input_combo = nullptr;
-	ctKenStageScene*	ken_stage_scene = nullptr;
 	ctEntities*			entities = nullptr;
 	ctGui*				gui = nullptr;
 	ctFonts*			fonts = nullptr;
 	ctFadeToBlack*		fadeToBlack = nullptr;
+	j1Printer*			printer = nullptr;
+	SceneCity*			city = nullptr;
 
 	bool				cap_state = false;
 

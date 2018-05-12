@@ -9,11 +9,12 @@
 #include "ctRender.h"
 #include "ctTextures.h"
 #include "ctAudio.h"
-#include "ctKenStageScene.h"
+#include "SceneCity.h"
 #include "ctEntities.h"
 #include "ctGui.h"
 #include "ctFonts.h"
 #include "ctFadeToBlack.h"
+#include "j1Printer.h"
 
 // Constructor
 ctApp::ctApp(int argc, char* args[]) : argc(argc), args(args)
@@ -25,11 +26,12 @@ ctApp::ctApp(int argc, char* args[]) : argc(argc), args(args)
 	render = new ctRender();
 	tex = new ctTextures();
 	audio = new ctAudio();
-	ken_stage_scene = new ctKenStageScene();
+	city = new SceneCity();
 	entities = new ctEntities();
 	gui = new ctGui();
 	fonts = new ctFonts();
 	fadeToBlack = new ctFadeToBlack();
+	printer = new j1Printer();
 	
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -37,12 +39,12 @@ ctApp::ctApp(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(ken_stage_scene);
+	AddModule(city);
 	AddModule(entities);
-	AddModule(gui);
 	AddModule(fonts);
 	AddModule(fadeToBlack);
-
+	AddModule(printer);
+	AddModule(gui);
 	// render last to swap buffer
 	AddModule(render);
 

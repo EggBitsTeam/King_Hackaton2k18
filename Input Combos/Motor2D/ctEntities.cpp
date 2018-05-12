@@ -1,15 +1,13 @@
 #include "ctApp.h"
-#include "ctRender.h"
 #include "ctEntities.h"
 #include "ctTextures.h"
 #include "Entity.h"
-#include "ctAudio.h"
-#include "ctWindow.h"
 #include "ctLog.h"
-#include "ctFadeToBlack.h"
-
 #include "Player.h"
-
+#include "Black.h"
+#include "White.h"
+#include "Girl.h"
+#include "Homeless.h"
 
 ctEntities::ctEntities()
 {
@@ -20,39 +18,26 @@ ctEntities::ctEntities()
 ctEntities::~ctEntities()
 {
 	LOG("Unloading entities spritesheet");
-	App->tex->UnLoad(entity_sprites);
 }
 
 bool ctEntities::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Entities from config file");
 	bool ret = true;
-
-	spritesheetName = config.child("spritesheetSource").attribute("name").as_string();
 	
 	return ret;
 }
 
 bool ctEntities::Start()
 {
-	bool ret = true;
+	atlasEntities = App->tex->Load("textures/player.png");
 
-	entity_sprites = App->tex->Load(spritesheetName.data());
-
-	if (entity_sprites == NULL) {
-		LOG("Error loading entities spritesheet!!");
-		ret = false;
-	}
-
-	if (!ret)
-		return false;
-
-	return ret;
+	return true;
 }
 
 bool ctEntities::PreUpdate()
 {
-	for (int i = 0; i < entities.capacity(); i++) {
+	for (int i = 0; i < entities.size(); i++) {
 		if (entities[i]->to_destroy) {
 			delete(entities[i]);
 			entities[i] = nullptr;
@@ -60,18 +45,18 @@ bool ctEntities::PreUpdate()
 			entities.shrink_to_fit();
 		}
 	}
+
 	return true;
 }
 
 // Called before render is available
 bool ctEntities::Update(float dt)
 {
-
-	for (int i = 0; i < entities.capacity(); i++)
+	for (int i = 0; i < entities.size(); i++)
 		if (entities.at(i) != nullptr) entities[i]->Update(dt);
 
-	for (int i = 0; i < entities.capacity(); i++)
-		if (entities.at(i) != nullptr) entities[i]->Draw(entity_sprites);
+	for (int i = 0; i <  entities.size(); i++)
+		if (entities.at(i) != nullptr) entities[i]->Draw();
 
 	return true;
 }
@@ -79,47 +64,61 @@ bool ctEntities::Update(float dt)
 // Called before quitting
 bool ctEntities::CleanUp()
 {
-	LOG("Freeing all enemies");
+	LOG("Freeing all entities");
 
-	App->tex->UnLoad(entity_sprites);
+	for (uint i = 0; i < entities.size(); ++i)
+	{
+		if (entities[i] != nullptr)
+		{
+			delete entities[i];
+			entities[i] = nullptr;
+			entities.erase(entities.cbegin() + i);
+			entities.shrink_to_fit();
+		}
+	}
 
+	entities.clear();
 
+	App->tex->UnLoad(atlasEntities);
 
 	return true;
 }
 
-bool ctEntities::SpawnEntity(int x, int y, EntityType type)
+
+Entity* ctEntities:: SpawnEntity(int x, int y, EntityType type)
 {
 	// find room for the new entity
-	bool ret = false;
-
+	bool ret = true;
+	Entity* toSpawn = nullptr;
 	switch (type)
 	{
-	case EntityType::PLAYER: {
-		Player* player = new Player(x, y, PLAYER);
-		entities.push_back(player);
-		ret = true;
+	case EntityType::HOMELESS:
+		toSpawn = new Homeless(x, y, HOMELESS);
+		entities.push_back(toSpawn);
 		break;
-	}
+
+	case EntityType::BLACK:
+		toSpawn = new Black(x, y, BLACK);
+		entities.push_back(toSpawn);
+		break;
+
+	case EntityType::GIRL:
+		toSpawn = new Girl(x, y, GIRL);
+		entities.push_back(toSpawn);
+		break;
+
+	case EntityType::WHITE:
+		toSpawn = new White(x, y, WHITE);
+		entities.push_back(toSpawn);
+		break;
 	default:
 		break;
 	}
 
-
-	return ret;
+	return toSpawn;
 }
 
-Player* ctEntities::GetPlayer() const {
-
-	for (uint i = 0; i < entities.capacity(); ++i)
-	{
-		if (entities.at(i) != nullptr)
-		{
-			if (entities[i]->type == PLAYER)
-				return (Player*)entities[i];
-		}
-	}
-
-	return nullptr;
-
+const SDL_Texture* ctEntities::GetAtlas() const
+{
+	return atlasEntities;
 }
