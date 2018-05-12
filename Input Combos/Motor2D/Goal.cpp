@@ -470,7 +470,7 @@ GoalStatus Goal_InemDialogs::Process(float dt)
 
 	if (isHomelessWalk) {
 
-		if (App->city->homelessEntity->pos.x >= 80) {
+		if (App->city->homelessEntity->pos.x >= App->render->camera.x + 300) {
 
 			App->city->homelessEntity->SetAnimation(Player::Animations::Idle);
 
