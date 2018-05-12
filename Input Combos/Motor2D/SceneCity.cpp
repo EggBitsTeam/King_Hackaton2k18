@@ -123,13 +123,10 @@ bool SceneCity::Start()
 	whiteEntity->StopPlayer(true);
 	blackEntity->StopPlayer(true);
 
-<<<<<<< HEAD
-	uint width, height;
 	App->win->GetWindowSize(width, height);
 	barHeight = 100;
-=======
+
 	barHeight = 150;
->>>>>>> 58709bfe128f86b3e92d9ef20becbdfffc070ed7
 
 	return ret;
 }
