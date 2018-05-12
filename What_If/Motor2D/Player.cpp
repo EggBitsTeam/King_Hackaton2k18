@@ -12,6 +12,7 @@ Player::Player(int x, int y, EntityType type) : Entity(x,y,type)
 
 	statesPlayer = Idle_state;
 	anim = &anims[Animations::Idle];
+	playerIs = Homeless;
 }
 
 Player::~Player()
@@ -49,7 +50,33 @@ void Player::Update(float dt)
 			anim = &anims[Animations::Idle];
 		}
 		break;
+
+	case Cinematic_state:
+
+
+		break;
 	}
 
 	anim->speed = anim->speedFactor * dt;
+}
+
+void Player::SetPlayerForCinematic(bool enableCinematic)
+{
+	if (enableCinematic)
+		statesPlayer = Cinematic_state;
+	else
+	{
+		statesPlayer = Idle_state;
+		anim = &anims[Animations::Idle];
+	}
+}
+
+int Player::GetWhoIAm()
+{
+	return (int)playerIs;
+}
+
+void  Player::SetAnimation(Animations animToSet)
+{
+	anim = &anims[animToSet];
 }
