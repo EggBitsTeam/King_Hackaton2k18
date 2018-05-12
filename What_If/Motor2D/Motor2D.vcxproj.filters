@@ -93,6 +93,9 @@
     <ClCompile Include="SceneCity.cpp">
       <Filter>Core\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ctApp.h">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="SceneCity.h">
       <Filter>Core\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Core\Modules\Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

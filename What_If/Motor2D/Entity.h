@@ -42,10 +42,6 @@ public:
 
 	virtual void Update(float dt) {};
 	virtual void Draw();
-	virtual void SetEntitiesSpeed(float dt) {};
-
-	virtual void LoadAnimation(pugi::xml_node animation_node, ctAnimation* animation) {};
-	bool LoadProperties(pugi::xml_node properties);
 
 };
 
