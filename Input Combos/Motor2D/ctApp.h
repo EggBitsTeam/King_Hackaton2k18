@@ -21,6 +21,7 @@ class ctFonts;
 class ctFadeToBlack;
 class j1Printer;
 class SceneCity;
+class j1Collision;
 
 class ctApp
 {
@@ -88,6 +89,7 @@ public:
 	ctFadeToBlack*		fadeToBlack = nullptr;
 	j1Printer*			printer = nullptr;
 	SceneCity*			city = nullptr;
+	j1Collision*		collision = nullptr;
 
 	bool				cap_state = false;
 

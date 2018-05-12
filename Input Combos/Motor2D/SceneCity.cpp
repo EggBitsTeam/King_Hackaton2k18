@@ -7,15 +7,17 @@
 #include "ctEntities.h"
 #include "ctFadeToBlack.h"
 #include "ctGui.h"
-//#include "j1Collision.h"
+#include "j1Collision.h"
 #include "Player.h"
-//#include "Goal.h"
+#include "Goal.h"
 #include "ctRender.h"
 #include "j1Printer.h"
 #include "Homeless.h"
 #include "Black.h"
 #include "White.h"
 #include "Girl.h"
+#include "UIImage.h"
+#include "UILabel.h"
 
 #include "UIElement.h"
 
@@ -53,11 +55,20 @@ bool SceneCity::Start()
 	bool ret = true;
 
 	int scale = App->win->GetScale();
-/*
-	App->gui->AddUILabel(0, 0, "Hello", ColorWhite, 20, this);
+
+	homelessEntity = (Homeless*)App->entities->SpawnEntity(0, 260, EntityType::HOMELESS);
+	girlEntity = (Girl*)App->entities->SpawnEntity(0, 260, EntityType::GIRL);
+	blackEntity = (Black*)App->entities->SpawnEntity(0, 260, EntityType::BLACK);
+	whiteEntity = (White*)App->entities->SpawnEntity(0, 260, EntityType::WHITE);
+
+	// UI
+	title = (UIImage*)App->gui->AddUIImage(0, 0, { 80,1,103,31 });
+	pressStart = (UILabel*)App->gui->AddUILabel(100, 100, "Press A to start", ColorWhite, 12);
 
 	// Map
 	mapTexture = App->tex->Load("textures/map.png");
+	mapWidth = 4194;
+	mapHeight = 316;
 
 	// Colliders
 	SDL_Rect inemRect = { 280,184,160,107 };
@@ -90,17 +101,23 @@ bool SceneCity::Start()
 	SDL_Rect endRect = { 3941,151,253,147 };
 	App->collision->CreateCollider(ColliderType_End, endRect, this);
 
-	// Player's brain
-	brain = new Goal_Think(homelessEntity);
-	brain->RemoveAllSubgoals();
-
-	// Intro cinematic
-	brain->AddGoal_IntroCinematic();
-	*/
 	homelessEntity = (Homeless*)App->entities->SpawnEntity(0, 260, EntityType::HOMELESS);
 	girlEntity = (Girl*)App->entities->SpawnEntity(0, 260, EntityType::GIRL);
 	blackEntity = (Black*)App->entities->SpawnEntity(0, 260, EntityType::BLACK);
 	whiteEntity = (White*)App->entities->SpawnEntity(0, 260, EntityType::WHITE);
+
+	// Player's brain
+	blackBrain = new Goal_Think(blackEntity);
+	blackBrain->RemoveAllSubgoals();
+	whiteBrain = new Goal_Think(whiteEntity);
+	whiteBrain->RemoveAllSubgoals();
+	homelessBrain = new Goal_Think(homelessEntity);
+	homelessBrain->RemoveAllSubgoals();
+	girlBrain = new Goal_Think(girlEntity);
+	girlBrain->RemoveAllSubgoals();
+
+	// Intro cinematic
+	blackBrain->AddGoal_IntroCinematic(title, pressStart);
 
 	currentPlayer = NO_FOLLOW;
 
@@ -123,9 +140,13 @@ bool SceneCity::Update(float dt)
 {
 	int scale = App->win->GetScale();
 
+	// Update brains
+	blackBrain->ProcessSubgoals(dt);
+	whiteBrain->ProcessSubgoals(dt);
+	homelessBrain->ProcessSubgoals(dt);
+	girlBrain->ProcessSubgoals(dt);
+
 	// Blit map
-	int mapWidth = 4194;
-	int mapHeight = 316;
 	App->printer->PrintSprite({ 0,0 }, mapTexture, { 0,0,mapWidth, mapHeight }, Layers_Map);
 
 	// Debug camera
@@ -184,8 +205,8 @@ bool SceneCity::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 		isDebugCollision = !isDebugCollision;
 
-	//if (isDebugCollision)
-		//App->collision->DebugDraw();
+	if (isDebugCollision)
+		App->collision->DebugDraw();
 
 	return true;
 }
@@ -215,17 +236,17 @@ void SceneCity::OnUITrigger(UIElement* elementTriggered, UI_State ui_state)
 {
 
 }
-/*
+
 void SceneCity::OnCollision(Collider* c1, Collider* c2, CollisionState collisionState)
 {
 	// c1 is always ColliderType_Player
 
 	switch (collisionState) {
-	
+
 	case CollisionState_OnEnter:
 
 		switch (c2->colliderType) {
-		
+
 		case ColliderType_Inem:
 
 			break;
@@ -250,7 +271,7 @@ void SceneCity::OnCollision(Collider* c1, Collider* c2, CollisionState collision
 
 			break;
 
-		case ColliderType_ChangeStreet:	
+		case ColliderType_ChangeStreet:
 
 			break;
 
@@ -274,9 +295,8 @@ void SceneCity::OnCollision(Collider* c1, Collider* c2, CollisionState collision
 	case CollisionState_OnExit:
 
 		break;
-	
+
 	default:
 		break;
 	}
 }
-*/

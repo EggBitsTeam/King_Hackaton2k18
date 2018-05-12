@@ -12,6 +12,8 @@ class Homeless;
 class Black;
 class White;
 class Girl;
+class UIImage;
+class UILabel;
 
 class SceneCity : public ctModule
 {
@@ -43,7 +45,7 @@ public:
 
 	void OnUITrigger(UIElement* elementTriggered, UI_State ui_state);
 
-	//void OnCollision(Collider* c1, Collider* c2, CollisionState collisionState);
+	void OnCollision(Collider* c1, Collider* c2, CollisionState collisionState);
 
 public:
 	// Player
@@ -61,8 +63,16 @@ public:
 		GIRL_ACTUAL,
 	} currentPlayer = NO_FOLLOW;
 
+	// Map
+	int mapWidth = 0;
+	int mapHeight = 0;
+
 private:
-	Goal_Think* brain = nullptr;
+
+	Goal_Think* homelessBrain = nullptr;
+	Goal_Think* girlBrain = nullptr;
+	Goal_Think* blackBrain = nullptr;
+	Goal_Think* whiteBrain = nullptr;
 
 	// Map
 	SDL_Texture* mapTexture = nullptr;
@@ -70,6 +80,9 @@ private:
 	// Debug
 	bool isDebugCollision = false;
 
+	// UI
+	UIImage* title = nullptr;
+	UILabel* pressStart = nullptr;
 };
 
 
