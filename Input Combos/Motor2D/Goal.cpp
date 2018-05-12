@@ -192,7 +192,15 @@ void Goal_IntroCinematic::Activate()
 	RemoveAllSubgoals();
 	// -----
 
-	AddSubgoal(new Goal_MoveCameraRightAndControlBlackCharacter(owner));
+	App->city->homelessEntity->StopPlayer(true);
+	App->city->girlEntity->StopPlayer(true);
+	App->city->whiteEntity->StopPlayer(true);
+	App->city->blackEntity->StopPlayer(true);
+
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+
+	//AddSubgoal(new Goal_MoveCameraRightAndControlBlackCharacter(owner));
 	AddSubgoal(new Goal_InemDialogs(owner));
 	AddSubgoal(new Goal_MoveCameraDownAndStartGame(owner, title, pressStart));
 	AddSubgoal(new Goal_PressStart(owner, title, pressStart));
@@ -213,6 +221,12 @@ GoalStatus Goal_IntroCinematic::Process(float dt)
 void Goal_IntroCinematic::Terminate()
 {
 	// This happens once (when this goal is completed)
+	App->city->homelessEntity->StopPlayer(false);
+	App->city->currentPlayer = SceneCity::Current_Player::HOMELESS_ACTUAL;
+
+	App->city->girlEntity->StopPlayer(true);
+	App->city->whiteEntity->StopPlayer(true);
+	App->city->blackEntity->StopPlayer(true);
 }
 
 // Goal_PressStart ---------------------------------------------------------------------
@@ -224,8 +238,6 @@ void Goal_PressStart::Activate()
 	goalStatus = GoalStatus_Active;
 	// -----
 
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
 	alpha = 255;
 }
 
@@ -455,11 +467,12 @@ GoalStatus Goal_InemDialogs::Process(float dt)
 			if (App->city->blackEntity->pos.x >= 337) {
 				App->city->blackEntity->SetAnimation(Player::Animations::Idle);
 				alpha -= alphaSpeed * dt;
-				if (alpha <= 0)
+				if (alpha <= 0) {
 					alpha = 0;
+					goalStatus = GoalStatus_Completed;
+					return goalStatus;
+				}
 				App->city->blackEntity->SetPrintAlpha(alpha);
-
-				goalStatus = GoalStatus_Completed;
 			}
 			else {
 				App->city->blackEntity->SetAnimation(Player::Animations::Move);
@@ -470,7 +483,7 @@ GoalStatus Goal_InemDialogs::Process(float dt)
 
 	if (isHomelessWalk) {
 
-		if (App->city->homelessEntity->pos.x >= App->render->camera.x + 300) {
+		if (App->city->homelessEntity->pos.x >= App->render->camera.x + 300 / App->win->GetScale()) {
 
 			App->city->homelessEntity->SetAnimation(Player::Animations::Idle);
 

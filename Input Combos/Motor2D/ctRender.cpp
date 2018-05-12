@@ -300,5 +300,5 @@ void ctRender::SetCameraToPlayer()
 	}
 
 	camera.x = -((int)playerPos.x * (int)App->win->GetScale()) + 300;
-	camera.y = -((int)playerPos.y * (int)App->win->GetScale()) + 480;
+	//camera.y = -((int)playerPos.y * (int)App->win->GetScale()) + 480;
 }

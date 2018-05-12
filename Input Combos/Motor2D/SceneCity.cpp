@@ -120,7 +120,7 @@ bool SceneCity::Start()
 
 	currentPlayer = NO_FOLLOW;
 
-	homelessEntity->StopPlayer(false);
+	homelessEntity->StopPlayer(true);
 	girlEntity->StopPlayer(true);
 	whiteEntity->StopPlayer(true);
 	blackEntity->StopPlayer(true);
