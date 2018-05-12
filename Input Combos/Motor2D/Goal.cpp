@@ -364,14 +364,10 @@ GoalStatus Goal_InemDialogs::Process(float dt)
 		
 		if (isWhiteDialog) {
 		
-			whiteDialog = (UIDialog*)App->gui->AddUIDialog(0, 0, App->dialogs->tom_01);
-			//UIDialog* blackDialog = nullptr;
-			//UIDialog* girlDialog = nullptr;
-			//UIDialog* homelessDialog = nullptr;
-			
+			whiteDialog = (UIDialog*)App->gui->AddUIDialog(0, 0, App->dialogs->tom_01);			
 			isWhiteDialog = false;
 		}
-		if (!isWhiteStart) {
+		if (!isWhiteStart && whiteDialog->current_animation.Finished()) {
 		
 			walkTimer.Start();
 			isWhiteStart = true;
