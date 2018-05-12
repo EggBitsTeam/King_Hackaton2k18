@@ -227,4 +227,18 @@ private:
 	ctTimer timer;
 };
 
+class Goal_MoveCameraRightAndControlBlackCharacter :public AtomicGoal
+{
+public:
+
+	Goal_MoveCameraRightAndControlBlackCharacter(Player* owner);
+
+	void Activate();
+	GoalStatus Process(float dt);
+	void Terminate();
+
+private:
+
+};
+
 #endif //__GOAL_H__

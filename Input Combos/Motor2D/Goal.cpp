@@ -192,6 +192,7 @@ void Goal_IntroCinematic::Activate()
 	RemoveAllSubgoals();
 	// -----
 
+	AddSubgoal(new Goal_MoveCameraRightAndControlBlackCharacter(owner));
 	AddSubgoal(new Goal_InemDialogs(owner));
 	AddSubgoal(new Goal_MoveCameraDownAndStartGame(owner, title, pressStart));
 	AddSubgoal(new Goal_PressStart(owner, title, pressStart));
@@ -448,6 +449,7 @@ GoalStatus Goal_InemDialogs::Process(float dt)
 		}
 		else if (timer.ReadSec() >= 2.0f) {
 		
+			// The black man has entered the hiring building!
 			App->city->blackEntity->flipSprite = false;
 
 			if (App->city->blackEntity->pos.x >= 337) {
@@ -456,6 +458,8 @@ GoalStatus Goal_InemDialogs::Process(float dt)
 				if (alpha <= 0)
 					alpha = 0;
 				App->city->blackEntity->SetPrintAlpha(alpha);
+
+				goalStatus = GoalStatus_Completed;
 			}
 			else {
 				App->city->blackEntity->SetAnimation(Player::Animations::Move);
@@ -482,23 +486,43 @@ GoalStatus Goal_InemDialogs::Process(float dt)
 		}
 	}
 
-	// Move camera right
-	/*
-	float cameraSpeed = 150.0f;
-	uint width, height;
-	App->win->GetWindowSize(width, height);
-
-	if (abs(App->render->camera.y) <= (App->city->mapHeight * (int)App->win->GetScale() - (int)App->render->camera.h + App->city->barHeight))
-		App->render->camera.y -= cameraSpeed * dt;
-	else {
-		App->render->camera.y = -(App->city->mapHeight * (int)App->win->GetScale() - (int)App->render->camera.h + App->city->barHeight);
-		goalStatus = GoalStatus_Completed;
-	}
-	*/
-
 	return goalStatus;
 }
 
 void Goal_InemDialogs::Terminate()
+{
+}
+
+// Goal_MoveCameraRightAndControlBlackCharacter ---------------------------------------------------------------------
+
+Goal_MoveCameraRightAndControlBlackCharacter::Goal_MoveCameraRightAndControlBlackCharacter(Player* owner) :AtomicGoal(owner, GoalType_MoveToPos) {}
+
+void Goal_MoveCameraRightAndControlBlackCharacter::Activate()
+{
+	goalStatus = GoalStatus_Active;
+	// -----
+}
+
+GoalStatus Goal_MoveCameraRightAndControlBlackCharacter::Process(float dt)
+{
+	ActivateIfInactive();
+	// -----
+
+	// Move camera right
+	float cameraSpeed = 150.0f;
+	uint width, height;
+	App->win->GetWindowSize(width, height);
+	/*
+	if (abs(App->render->camera.x) <= )
+	App->render->camera.x -= cameraSpeed * dt;
+	else {
+		App->render->camera.x = ;
+		goalStatus = GoalStatus_Completed;
+	}
+	*/
+	return goalStatus;
+}
+
+void Goal_MoveCameraRightAndControlBlackCharacter::Terminate()
 {
 }
