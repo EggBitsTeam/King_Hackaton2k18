@@ -2,6 +2,9 @@
 #include "Player.h"
 #include "ctInput.h"
 #include "j1Printer.h"
+#include "ctRender.h"
+#include "ctWindow.h"
+#include "SceneCity.h"
 
 Player::Player(int x, int y, EntityType type) : Entity(x,y,type)
 {
@@ -48,19 +51,30 @@ void Player::Update(float dt)
 		break;
 
 	case Stop_state:
-
-
+		
 		break;
 
 	case Go_out_state:
 
-		pos.x -= 10.0f * dt;
+		if (pos.x <= abs(App->render->camera.x)  * App->win->GetScale())
+		{
+			App->city->nextPlayer = SceneCity::Current_Player::NO_FOLLOW;
+			StopPlayer(true);
+			anim = &anims[Animations::Idle];
+		}
+			pos.x -= 20.0f * dt;
 
 		break;
 
 	case Enter_state:
+	
+		if (pos.x >= abs(App->render->camera.x)  * App->win->GetScale() + 100)
+		{
+			statesPlayer = Idle_state;
+			anim = &anims[Animations::Idle];
+		}
 
-		pos.x += 10.0f * dt;
+		pos.x += 40.0f * dt;
 
 		break;
 	}
@@ -82,4 +96,20 @@ void Player::StopPlayer(bool enableCinematic)
 void  Player::SetAnimation(Animations animToSet)
 {
 	anim = &anims[animToSet];
+}
+
+void Player::EnterScene(bool enter)
+{
+	if (enter)
+	{
+		pos.x = App->render->camera.x * App->win->GetScale();
+		statesPlayer = Enter_state;
+	}
+	else
+	{
+		flipSprite = true;
+		statesPlayer = Go_out_state;
+	}
+
+	anim = &anims[Animations::Move];
 }

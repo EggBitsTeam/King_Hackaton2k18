@@ -11,6 +11,7 @@
 #include "UIImage.h"
 #include "UIButton.h"
 #include "UITextBox.h"
+#include "UIDialog.h"
 
 #include "UIElement.h"
 
@@ -141,6 +142,16 @@ bool ctGui::DeleteAllUIElements() {
 	}
 
 	return ret;
+}
+
+UIElement* ctGui::AddUIDialog(int position_x, int position_y, ctAnimation dialog_animation, ctModule* callback, UIElement* parent) {
+
+	UIElement* tmp_img = new UIDialog(position_x, position_y, DIALOG, dialog_animation, callback, parent);
+	ui_elements.push_back(tmp_img);
+	return tmp_img;
+
+	LOG("Error: Cant add the UIImage");
+	return nullptr;
 }
 
 UIElement* ctGui::AddUIImage(int position_x, int position_y, SDL_Rect rect, ctModule* callback, UIElement* parent) {

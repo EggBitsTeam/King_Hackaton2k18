@@ -25,6 +25,7 @@ enum GoalType {
 
 	GoalType_IntroCinematic,
 	GoalType_MoveToPos,
+	GoalType_InemDialogs,
 
 	// Atomic Goals
 
@@ -140,7 +141,6 @@ public:
 	// to be pursued. Calculate the desirability of the strategies
 	//void Arbitrate();
 	void AddGoal_IntroCinematic(UIImage* title, UILabel* pressStart);
-	void AddGoal_Goal_MoveCameraDownAndStartGame(UIImage* title, UILabel* pressStart);
 };
 
 class Goal_IntroCinematic :public CompositeGoal
@@ -195,6 +195,36 @@ private:
 
 	int titleAlpha = 0;
 	int pressStartAlpha = 0;
+};
+
+class Goal_InemDialogs :public AtomicGoal
+{
+public:
+
+	Goal_InemDialogs(Player* owner);
+
+	void Activate();
+	GoalStatus Process(float dt);
+	void Terminate();
+
+private:
+
+	int alpha = 0;
+	bool isWhiteWalk = false;
+	bool isWhiteStart = false;
+
+	bool isGirlWalk = false;
+	bool isGirlStart = false;
+
+	bool isBlackWalk = false;
+	bool isBlackStart = false;
+
+	bool isFirstBlackWalk = false;
+	bool isHomelessWalk = false;
+	bool isHomelessStart = false;
+
+	ctTimer walkTimer;
+	ctTimer timer;
 };
 
 #endif //__GOAL_H__

@@ -23,12 +23,9 @@
 
 #include "SceneCity.h"
 
-
 //randomize libs
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
-
-
 
 SceneCity::SceneCity() : ctModule()
 {
@@ -60,7 +57,7 @@ bool SceneCity::Start()
 
 	// UI
 	title = (UIImage*)App->gui->AddUIImage(120, 50, { 80,1,103,31 });
-	pressStart = (UILabel*)App->gui->AddUILabel(100, 150, "Press A to start", ColorWhite, 12);
+	pressStart = (UILabel*)App->gui->AddUILabel(130, 150, "Press A to start", ColorWhite, 12);
 
 	// Map
 	mapTexture = App->tex->Load("textures/map.png");
@@ -98,10 +95,10 @@ bool SceneCity::Start()
 	SDL_Rect endRect = { 3941,151,253,147 };
 	App->collision->CreateCollider(ColliderType_End, endRect, this);
 
-	homelessEntity = (Homeless*)App->entities->SpawnEntity(0, 260, EntityType::HOMELESS);
-	girlEntity = (Girl*)App->entities->SpawnEntity(0, 260, EntityType::GIRL);
-	blackEntity = (Black*)App->entities->SpawnEntity(0, 260, EntityType::BLACK);
-	whiteEntity = (White*)App->entities->SpawnEntity(0, 260, EntityType::WHITE);
+	whiteEntity = (White*)App->entities->SpawnEntity(270, 260, EntityType::WHITE);
+	girlEntity = (Girl*)App->entities->SpawnEntity(200, 260, EntityType::GIRL);
+	blackEntity = (Black*)App->entities->SpawnEntity(120, 260, EntityType::BLACK);
+	homelessEntity = (Homeless*)App->entities->SpawnEntity(60, 260, EntityType::HOMELESS);
 
 	// Player's brain
 	blackBrain = new Goal_Think(blackEntity);
@@ -116,14 +113,21 @@ bool SceneCity::Start()
 	// Intro cinematic
 	blackBrain->AddGoal_IntroCinematic(title, pressStart);
 
-	currentPlayer = NO_FOLLOW;
+	currentPlayer = HOMELESS_ACTUAL;
 
-	homelessEntity->StopPlayer(true);
+	homelessEntity->StopPlayer(false);
 	girlEntity->StopPlayer(true);
 	whiteEntity->StopPlayer(true);
 	blackEntity->StopPlayer(true);
 
+	App->win->GetWindowSize(width, height);
+	barHeight = 100;
+
 	barHeight = 150;
+
+	// Black bars
+	App->gui->AddUIImage( 0, -120, { 99, 96, 680, 150 }, this);
+	App->gui->AddUIImage(0, App->render->camera.h - (barHeight * App->win->GetScale()) + 100, { 99, 96, 680, 150 }, this);
 
 	return ret;
 }
@@ -148,14 +152,6 @@ bool SceneCity::Update(float dt)
 	// Blit map
 	App->printer->PrintSprite({ 0,0 }, mapTexture, { 0,0,mapWidth, mapHeight }, Layers_Map);
 
-	// Blit 2 quads
-	uint width, height;
-	App->win->GetWindowSize(width, height);
-	SDL_Rect cameraQuadTop = { 0,0, width * App->win->GetScale(), barHeight };
-	App->printer->PrintQuad(cameraQuadTop, ColorBlack, true, false, Layers_BlackBars);
-	SDL_Rect cameraQuadBottom = { App->render->camera.x, App->render->camera.h - barHeight, width * App->win->GetScale(), barHeight };
-	App->printer->PrintQuad(cameraQuadBottom, ColorBlack, true, false, Layers_BlackBars);
-
 	// Debug camera
 	float cameraSpeed = 1000.0f;
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
@@ -167,37 +163,57 @@ bool SceneCity::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		App->render->camera.y -= cameraSpeed * dt;
 
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && currentPlayer != HOMELESS_ACTUAL)
 	{
-		currentPlayer = Current_Player::HOMELESS_ACTUAL;
-		homelessEntity->StopPlayer(false);
-		girlEntity->StopPlayer(true);
-		whiteEntity->StopPlayer(true);
-		blackEntity->StopPlayer(true);
+		if (currentPlayer == GIRL_ACTUAL)
+			girlEntity->EnterScene(false);
+		else if (currentPlayer == BLACK_ACTUAL)
+			blackEntity->EnterScene(false);
+		else if (currentPlayer == WHITE_ACTUAL)
+			whiteEntity->EnterScene(false);
+
+		homelessEntity->EnterScene(true);
+		currentPlayer = NO_FOLLOW;
+		nextPlayer = Current_Player::HOMELESS_ACTUAL;
 	}
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && currentPlayer != GIRL_ACTUAL)
 	{
-		currentPlayer = Current_Player::GIRL_ACTUAL;
-		homelessEntity->StopPlayer(true);
-		girlEntity->StopPlayer(false);
-		whiteEntity->StopPlayer(true);
-		blackEntity->StopPlayer(true);
+		if (currentPlayer == HOMELESS_ACTUAL)
+			homelessEntity->EnterScene(false);
+		else if (currentPlayer == BLACK_ACTUAL)
+			blackEntity->EnterScene(false);
+		else if (currentPlayer == WHITE_ACTUAL)
+			whiteEntity->EnterScene(false);
+
+		girlEntity->EnterScene(true);
+		currentPlayer = NO_FOLLOW;
+		nextPlayer = Current_Player::GIRL_ACTUAL;
 	}
-	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN && currentPlayer != WHITE_ACTUAL)
 	{
-		currentPlayer = Current_Player::WHITE_ACTUAL;
-		homelessEntity->StopPlayer(true);
-		girlEntity->StopPlayer(true);
-		whiteEntity->StopPlayer(false);
-		blackEntity->StopPlayer(true);
+		if (currentPlayer == GIRL_ACTUAL)
+			girlEntity->EnterScene(false);
+		else if (currentPlayer == BLACK_ACTUAL)
+			blackEntity->EnterScene(false);
+		else if (currentPlayer == HOMELESS_ACTUAL)
+			homelessEntity->EnterScene(false);
+
+		whiteEntity->EnterScene(true);
+		currentPlayer = NO_FOLLOW;
+		nextPlayer = Current_Player::WHITE_ACTUAL;
 	}
-	if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN && currentPlayer != BLACK_ACTUAL)
 	{
-		currentPlayer = Current_Player::BLACK_ACTUAL;
-		homelessEntity->StopPlayer(true);
-		girlEntity->StopPlayer(true);
-		whiteEntity->StopPlayer(true);
-		blackEntity->StopPlayer(false);
+		if (currentPlayer == GIRL_ACTUAL)
+			girlEntity->EnterScene(false);
+		else if (currentPlayer == HOMELESS_ACTUAL)
+			homelessEntity->EnterScene(false);
+		else if (currentPlayer == WHITE_ACTUAL)
+			whiteEntity->EnterScene(false);
+
+		blackEntity->EnterScene(true);
+		currentPlayer = NO_FOLLOW;
+		nextPlayer = Current_Player::BLACK_ACTUAL;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
 	{

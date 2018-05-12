@@ -118,6 +118,12 @@
     <ClCompile Include="White.cpp">
       <Filter>Core\Modules\Entities\Characters</Filter>
     </ClCompile>
+    <ClCompile Include="Dialogs.cpp">
+      <Filter>Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="UIDialog.cpp">
+      <Filter>Core\Modules\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ctApp.h">
@@ -222,6 +228,12 @@
     <ClInclude Include="j1Collision.h" />
     <ClInclude Include="White.h">
       <Filter>Core\Modules\Entities\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs.h">
+      <Filter>Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="UIDialog.h">
+      <Filter>Core\Modules\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
