@@ -235,9 +235,9 @@ void Goal_IntroCinematic::Terminate()
 	App->city->blackEntity->SetPrintAlpha(255);
 	App->city->homelessEntity->SetPrintAlpha(255);
 
-	App->city->girlEntity->pos.x = App->city->homelessEntity->pos.x - 100 / App->win->GetScale();
-	App->city->whiteEntity->pos.x = App->city->homelessEntity->pos.x - 100 / App->win->GetScale();
-	App->city->blackEntity->pos.x = App->city->homelessEntity->pos.x - 100 / App->win->GetScale();
+	App->city->girlEntity->pos.x = App->city->homelessEntity->pos.x - 100;
+	App->city->whiteEntity->pos.x = App->city->homelessEntity->pos.x - 100;
+	App->city->blackEntity->pos.x = App->city->homelessEntity->pos.x - 100;
 }
 
 // Goal_PressStart ---------------------------------------------------------------------
