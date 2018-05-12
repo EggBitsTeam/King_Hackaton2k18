@@ -60,7 +60,6 @@ bool SceneCity::Start()
 
 	// UI
 	title = (UIImage*)App->gui->AddUIImage(120, 50, { 80,1,103,31 });
-
 	pressStart = (UILabel*)App->gui->AddUILabel(100, 150, "Press A to start", ColorWhite, 12);
 
 	// Map
