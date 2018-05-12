@@ -90,6 +90,9 @@
     <ClCompile Include="UITextBox.cpp">
       <Filter>Core\Modules\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="j1Printer.cpp" />
+    <ClCompile Include="j1Collision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ctApp.h">
@@ -170,5 +173,8 @@
     <ClInclude Include="UITextBox.h">
       <Filter>Core\Modules\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Goal.h" />
+    <ClInclude Include="j1Printer.h" />
+    <ClInclude Include="j1Collision.h" />
   </ItemGroup>
 </Project>
