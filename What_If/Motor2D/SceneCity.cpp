@@ -92,7 +92,7 @@ bool SceneCity::Update(float dt)
 	// Blit map
 	int mapWidth = 4194;
 	int mapHeight = 316;
-	App->printer->PrintSprite({ 0,0 }, mapTexture, { 0,0,mapWidth * scale, mapHeight * scale }, Layers_Map);
+	App->printer->PrintSprite({ 0,0 }, mapTexture, { 0,0,mapWidth, mapHeight }, Layers_Map);
 
 	// Debug camera
 	float cameraSpeed = 500.0f;
