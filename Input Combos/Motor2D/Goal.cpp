@@ -227,6 +227,11 @@ void Goal_IntroCinematic::Terminate()
 	App->city->girlEntity->StopPlayer(true);
 	App->city->whiteEntity->StopPlayer(true);
 	App->city->blackEntity->StopPlayer(true);
+
+	App->city->girlEntity->SetPrintAlpha(255);
+	App->city->whiteEntity->SetPrintAlpha(255);
+	App->city->blackEntity->SetPrintAlpha(255);
+	App->city->homelessEntity->SetPrintAlpha(255);
 }
 
 // Goal_PressStart ---------------------------------------------------------------------
