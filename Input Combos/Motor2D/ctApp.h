@@ -14,6 +14,7 @@ class ctInput;
 class ctRender;
 class ctTextures;
 class ctAudio;
+class Dialogs;
 class ctInputCombo;
 class ctEntities;
 class ctGui;
@@ -57,6 +58,8 @@ public:
 	// Load config file
 	pugi::xml_node LoadConfig(pugi::xml_document&) const;
 
+	pugi::xml_node LoadDialogs(pugi::xml_document&) const;
+
 private:
 
 	// Call modules before each loop iteration
@@ -82,6 +85,7 @@ public:
 	ctRender*			render = nullptr;
 	ctTextures*			tex = nullptr;
 	ctAudio*			audio = nullptr;
+	Dialogs*			dialogs = nullptr;
 	ctInputCombo*		input_combo = nullptr;
 	ctEntities*			entities = nullptr;
 	ctGui*				gui = nullptr;

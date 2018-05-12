@@ -1,0 +1,306 @@
+{ "frames": [
+   {
+    "filename": "minifesto (4) 0.gif",
+    "frame": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 80
+   },
+   {
+    "filename": "minifesto (4) 1.gif",
+    "frame": { "x": 100, "y": 0, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 120
+   },
+   {
+    "filename": "minifesto (4) 2.gif",
+    "frame": { "x": 200, "y": 0, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 110
+   },
+   {
+    "filename": "minifesto (4) 3.gif",
+    "frame": { "x": 300, "y": 0, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 150
+   },
+   {
+    "filename": "minifesto (4) 4.gif",
+    "frame": { "x": 0, "y": 28, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 70
+   },
+   {
+    "filename": "minifesto (4) 5.gif",
+    "frame": { "x": 100, "y": 28, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 150
+   },
+   {
+    "filename": "minifesto (4) 6.gif",
+    "frame": { "x": 200, "y": 28, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 90
+   },
+   {
+    "filename": "minifesto (4) 7.gif",
+    "frame": { "x": 300, "y": 28, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 60
+   },
+   {
+    "filename": "minifesto (4) 8.gif",
+    "frame": { "x": 0, "y": 56, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 140
+   },
+   {
+    "filename": "minifesto (4) 9.gif",
+    "frame": { "x": 100, "y": 56, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 140
+   },
+   {
+    "filename": "minifesto (4) 10.gif",
+    "frame": { "x": 200, "y": 56, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 100
+   },
+   {
+    "filename": "minifesto (4) 11.gif",
+    "frame": { "x": 300, "y": 56, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 220
+   },
+   {
+    "filename": "minifesto (4) 12.gif",
+    "frame": { "x": 0, "y": 84, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 140
+   },
+   {
+    "filename": "minifesto (4) 13.gif",
+    "frame": { "x": 100, "y": 84, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 110
+   },
+   {
+    "filename": "minifesto (4) 14.gif",
+    "frame": { "x": 200, "y": 84, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 110
+   },
+   {
+    "filename": "minifesto (4) 15.gif",
+    "frame": { "x": 300, "y": 84, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 220
+   },
+   {
+    "filename": "minifesto (4) 16.gif",
+    "frame": { "x": 0, "y": 112, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 60
+   },
+   {
+    "filename": "minifesto (4) 17.gif",
+    "frame": { "x": 100, "y": 112, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 250
+   },
+   {
+    "filename": "minifesto (4) 18.gif",
+    "frame": { "x": 200, "y": 112, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 100
+   },
+   {
+    "filename": "minifesto (4) 19.gif",
+    "frame": { "x": 300, "y": 112, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 120
+   },
+   {
+    "filename": "minifesto (4) 20.gif",
+    "frame": { "x": 0, "y": 140, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 90
+   },
+   {
+    "filename": "minifesto (4) 21.gif",
+    "frame": { "x": 100, "y": 140, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 150
+   },
+   {
+    "filename": "minifesto (4) 22.gif",
+    "frame": { "x": 200, "y": 140, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 150
+   },
+   {
+    "filename": "minifesto (4) 23.gif",
+    "frame": { "x": 300, "y": 140, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 140
+   },
+   {
+    "filename": "minifesto (4) 24.gif",
+    "frame": { "x": 0, "y": 168, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 70
+   },
+   {
+    "filename": "minifesto (4) 25.gif",
+    "frame": { "x": 100, "y": 168, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 130
+   },
+   {
+    "filename": "minifesto (4) 26.gif",
+    "frame": { "x": 200, "y": 168, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 70
+   },
+   {
+    "filename": "minifesto (4) 27.gif",
+    "frame": { "x": 300, "y": 168, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 80
+   },
+   {
+    "filename": "minifesto (4) 28.gif",
+    "frame": { "x": 0, "y": 196, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 130
+   },
+   {
+    "filename": "minifesto (4) 29.gif",
+    "frame": { "x": 100, "y": 196, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 80
+   },
+   {
+    "filename": "minifesto (4) 30.gif",
+    "frame": { "x": 200, "y": 196, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 110
+   },
+   {
+    "filename": "minifesto (4) 31.gif",
+    "frame": { "x": 300, "y": 196, "w": 100, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 28 },
+    "sourceSize": { "w": 100, "h": 28 },
+    "duration": 4010
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.8-x64",
+  "image": "C:\\Users\\Víctor Masó\\Documents\\GitHub\\King_Hackaton2k18\\Input Combos\\Game\\dialogs\\tom_01.png",
+  "format": "I8",
+  "size": { "w": 400, "h": 224 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Background", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

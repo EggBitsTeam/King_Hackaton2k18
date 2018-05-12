@@ -26,6 +26,7 @@
     <ClCompile Include="ctTextures.cpp" />
     <ClCompile Include="ctTimer.cpp" />
     <ClCompile Include="ctWindow.cpp" />
+    <ClCompile Include="Dialogs.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Girl.cpp" />
     <ClCompile Include="Goal.cpp" />
@@ -36,6 +37,7 @@
     <ClCompile Include="pugixml.cpp" />
     <ClCompile Include="SceneCity.cpp" />
     <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="UIDialog.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="UILabel.cpp" />
@@ -61,6 +63,7 @@
     <ClInclude Include="ctTextures.h" />
     <ClInclude Include="ctTimer.h" />
     <ClInclude Include="ctWindow.h" />
+    <ClInclude Include="Dialogs.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Girl.h" />
     <ClInclude Include="Goal.h" />
@@ -73,6 +76,7 @@
     <ClInclude Include="pugixml.hpp" />
     <ClInclude Include="SceneCity.h" />
     <ClInclude Include="UIButton.h" />
+    <ClInclude Include="UIDialog.h" />
     <ClInclude Include="UIElement.h" />
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="UILabel.h" />
@@ -83,7 +87,7 @@
     <ProjectGuid>{2AF9969B-F202-497B-AF30-7BEF9CE8005E}</ProjectGuid>
     <RootNamespace>what_if</RootNamespace>
     <ProjectName>WhatIf</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

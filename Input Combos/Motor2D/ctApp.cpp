@@ -16,6 +16,7 @@
 #include "ctFadeToBlack.h"
 #include "j1Printer.h"
 #include "j1Collision.h"
+#include "Dialogs.h"
 
 // Constructor
 ctApp::ctApp(int argc, char* args[]) : argc(argc), args(args)
@@ -27,6 +28,7 @@ ctApp::ctApp(int argc, char* args[]) : argc(argc), args(args)
 	render = new ctRender();
 	tex = new ctTextures();
 	audio = new ctAudio();
+	dialogs = new Dialogs();
 	city = new SceneCity();
 	entities = new ctEntities();
 	gui = new ctGui();
@@ -41,6 +43,7 @@ ctApp::ctApp(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
+	AddModule(dialogs);
 	AddModule(city);
 	AddModule(entities);
 	AddModule(collision);
@@ -179,6 +182,19 @@ pugi::xml_node ctApp::LoadConfig(pugi::xml_document& config_file) const
 		LOG("Could not load xml file config.xml. pugi error: %s", result.description());
 	else
 		ret = config_file.child("config");
+	return ret;
+}
+
+pugi::xml_node ctApp::LoadDialogs(pugi::xml_document & config_file) const
+{
+	pugi::xml_node ret;
+
+	pugi::xml_parse_result result = config_file.load_file("dialogs.xml");
+
+	if (result == NULL)
+		LOG("Could not load xml file dialog.xml. pugi error: %s", result.description());
+	else
+		ret = config_file.child("dialogs");
 	return ret;
 }
 
