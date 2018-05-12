@@ -16,6 +16,7 @@ enum Layers
 {
 	Layers_Map = -1,
 	Layers_Entities = 0,
+	Layers_DebugDraw = 1
 };
 
 class DrawingElem

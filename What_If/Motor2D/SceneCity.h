@@ -53,6 +53,9 @@ private:
 	// Map
 	SDL_Texture* mapTexture = nullptr;
 
+	// Debug
+	bool isDebugCollision = false;
+
 };
 
 
