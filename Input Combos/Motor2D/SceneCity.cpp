@@ -51,6 +51,8 @@ bool SceneCity::Start()
 {
 	bool ret = true;
 
+	App->entities->SpawnEntity(1500, 247, EntityType::BANDADELPATIO);
+
 	int scale = App->win->GetScale();
 	uint width, height;
 	App->win->GetWindowSize(width, height);
