@@ -29,6 +29,7 @@
     <ClCompile Include="Goal.cpp" />
     <ClCompile Include="j1Collision.cpp" />
     <ClCompile Include="j1Printer.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="pugixml.cpp" />
     <ClCompile Include="SceneCity.cpp" />
     <ClCompile Include="UIButton.cpp" />
@@ -60,6 +61,7 @@
     <ClInclude Include="j1Collision.h" />
     <ClInclude Include="j1Printer.h" />
     <ClInclude Include="MemLeaks.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="pugiconfig.hpp" />
     <ClInclude Include="pugixml.hpp" />
     <ClInclude Include="SceneCity.h" />
