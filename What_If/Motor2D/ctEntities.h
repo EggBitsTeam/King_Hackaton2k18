@@ -13,7 +13,10 @@ struct SDL_Texture;
 
 enum EntityType
 {
-	PLAYER,
+	CLERIC,
+	DWARF,
+	ELF,
+	WARRIOR,
 
 	NO_TYPE
 };
@@ -36,6 +39,8 @@ public:
 	bool CleanUp();
 
 	bool SpawnEntity(int x, int y, EntityType type);
+	
+	void OrderDrawEntities();
 
 	//getters
 

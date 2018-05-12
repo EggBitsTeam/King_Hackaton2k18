@@ -13,8 +13,6 @@
 #include "ctGui.h"
 #include "ctFonts.h"
 #include "ctFadeToBlack.h"
-#include "j1Printer.h"
-#include "j1Collision.h"
 
 // Constructor
 ctApp::ctApp(int argc, char* args[]) : argc(argc), args(args)
@@ -31,8 +29,6 @@ ctApp::ctApp(int argc, char* args[]) : argc(argc), args(args)
 	gui = new ctGui();
 	fonts = new ctFonts();
 	fadeToBlack = new ctFadeToBlack();
-	printer = new j1Printer();
-	collision = new j1Collision();
 	
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -47,8 +43,7 @@ ctApp::ctApp(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(gui);
 	AddModule(fonts);
 	AddModule(fadeToBlack);
-	AddModule(printer);
-	AddModule(collision);
+	
 
 	// render last to swap buffer
 	AddModule(render);
