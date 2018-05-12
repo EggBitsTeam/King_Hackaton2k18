@@ -46,12 +46,12 @@ public:
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);
 
-	//Utils
+	// Utils
 	iPoint ScreenToWorld(int x, int y) const;
-
-	bool Is_inScreen(int x, int y);
+	bool IsInScreen(const SDL_Rect& item) const;
 
 public:
+
 	double          scale_factor = 1;
 	SDL_Renderer*	renderer = nullptr;
 	SDL_Rect		camera = { 0, 0, 0, 0 };

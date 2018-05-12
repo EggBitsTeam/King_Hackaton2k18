@@ -13,78 +13,51 @@ j1Collision::j1Collision()
 {
 	name.assign("collision");
 
+	for (int i = 0; i < ColliderType_MaxColliders; ++i) {
+		for (int j = 0; j < ColliderType_MaxColliders; ++j) {
+			matrix[i][j] = false;
+		}
+	}
+
 	// COLLIDERS
 	/// Player
-	matrix[ColliderType_Player][ColliderType_Player] = false;
-	matrix[ColliderType_Player][ColliderType_Inem] = false;
-	matrix[ColliderType_Player][ColliderType_Enterprise] = false;
-	matrix[ColliderType_Player][ColliderType_XXX] = false;
-	matrix[ColliderType_Player][ColliderType_Barrio] = false;
-	matrix[ColliderType_Player][ColliderType_University] = false;
-	matrix[ColliderType_Player][ColliderType_DiningRoom] = false;
+	matrix[ColliderType_Player][ColliderType_Inem] = true;
+	matrix[ColliderType_Player][ColliderType_Enterprise] = true;
+	matrix[ColliderType_Player][ColliderType_XXX] = true;
+	matrix[ColliderType_Player][ColliderType_Street] = true;
+	matrix[ColliderType_Player][ColliderType_University] = true;
+	matrix[ColliderType_Player][ColliderType_DiningRoom] = true;
 
-	/// Inem
-	matrix[ColliderType_Inem][ColliderType_Inem] = false;
-	matrix[ColliderType_Inem][ColliderType_Player] = false;
-	matrix[ColliderType_Inem][ColliderType_Enterprise] = false;
-	matrix[ColliderType_Inem][ColliderType_XXX] = false;
-	matrix[ColliderType_Inem][ColliderType_Barrio] = false;
-	matrix[ColliderType_Inem][ColliderType_University] = false;
-	matrix[ColliderType_Inem][ColliderType_DiningRoom] = false;
+	matrix[ColliderType_Player][ColliderType_ChangeStreet] = true;
+	matrix[ColliderType_Player][ColliderType_ChangeUniversity] = true;
+	matrix[ColliderType_Player][ColliderType_ChangeDiningRoom] = true;
 
-	/// Enterprise
-	matrix[ColliderType_Enterprise][ColliderType_Enterprise] = false;
-	matrix[ColliderType_Enterprise][ColliderType_Inem] = false;
-	matrix[ColliderType_Enterprise][ColliderType_Player] = false;
-	matrix[ColliderType_Enterprise][ColliderType_XXX] = false;
-	matrix[ColliderType_Enterprise][ColliderType_Barrio] = false;
-	matrix[ColliderType_Enterprise][ColliderType_University] = false;
-	matrix[ColliderType_Enterprise][ColliderType_DiningRoom] = false;
+	matrix[ColliderType_Player][ColliderType_End] = true;
 
-	/// XXX
-	matrix[ColliderType_XXX][ColliderType_XXX] = false;
-	matrix[ColliderType_XXX][ColliderType_Enterprise] = false;
-	matrix[ColliderType_XXX][ColliderType_Inem] = false;
-	matrix[ColliderType_XXX][ColliderType_Player] = false;
-	matrix[ColliderType_XXX][ColliderType_Barrio] = false;
-	matrix[ColliderType_XXX][ColliderType_University] = false;
-	matrix[ColliderType_XXX][ColliderType_DiningRoom] = false;
-
-	/// Barrio
-	matrix[ColliderType_Barrio][ColliderType_Barrio] = false;
-	matrix[ColliderType_Barrio][ColliderType_Enterprise] = false;
-	matrix[ColliderType_Barrio][ColliderType_Inem] = false;
-	matrix[ColliderType_Barrio][ColliderType_Player] = false;
-	matrix[ColliderType_Barrio][ColliderType_XXX] = false;
-	matrix[ColliderType_Barrio][ColliderType_University] = false;
-	matrix[ColliderType_Barrio][ColliderType_DiningRoom] = false;
-
-	/// University
-	matrix[ColliderType_University][ColliderType_University] = false;
-	matrix[ColliderType_University][ColliderType_Enterprise] = false;
-	matrix[ColliderType_University][ColliderType_Inem] = false;
-	matrix[ColliderType_University][ColliderType_Player] = false;
-	matrix[ColliderType_University][ColliderType_XXX] = false;
-	matrix[ColliderType_University][ColliderType_Barrio] = false;
-	matrix[ColliderType_University][ColliderType_DiningRoom] = false;
-
-	/// Dining Room
-	matrix[ColliderType_DiningRoom][ColliderType_DiningRoom] = false;
-	matrix[ColliderType_DiningRoom][ColliderType_Enterprise] = false;
-	matrix[ColliderType_DiningRoom][ColliderType_Inem] = false;
-	matrix[ColliderType_DiningRoom][ColliderType_Player] = false;
-	matrix[ColliderType_DiningRoom][ColliderType_XXX] = false;
-	matrix[ColliderType_DiningRoom][ColliderType_Barrio] = false;
-	matrix[ColliderType_DiningRoom][ColliderType_University] = false;
-	
 	// DEBUG COLORS
-	debugColors[ColliderType_Player] = ColorDarkBlue;
-	debugColors[ColliderType_Inem] = ColorDarkRed;
-	debugColors[ColliderType_Enterprise] = ColorWhite;
-	debugColors[ColliderType_XXX] = ColorDarkBlue;
-	debugColors[ColliderType_Barrio] = ColorDarkRed;
-	debugColors[ColliderType_University] = ColorWhite;
-	debugColors[ColliderType_DiningRoom] = ColorLightBlue;
+	// red: player
+	// white: buildings
+	// blue: change between characters
+	// orange: things that happen in the world
+
+	/// Player
+	debugColors[ColliderType_Player] = ColorRed;
+
+	/// Buildings
+	debugColors[ColliderType_Inem] = ColorGreen;
+	debugColors[ColliderType_Enterprise] = ColorGreen;
+	debugColors[ColliderType_Street] = ColorGreen;
+	debugColors[ColliderType_University] = ColorGreen;
+	debugColors[ColliderType_DiningRoom] = ColorGreen;
+
+	/// Change between characters
+	debugColors[ColliderType_ChangeStreet] = ColorBlue;
+	debugColors[ColliderType_ChangeUniversity] = ColorBlue;
+	debugColors[ColliderType_ChangeDiningRoom] = ColorBlue;
+
+	/// End
+	debugColors[ColliderType_XXX] = ColorOrange;
+	debugColors[ColliderType_End] = ColorOrange;
 }
 
 // Destructor
@@ -258,7 +231,7 @@ bool j1Collision::CleanUp()
 
 void j1Collision::DebugDraw()
 {
-	Uint8 alpha = 60;
+	Uint8 alpha = 100;
 	SDL_Color color;
 
 	list<Collider*>::const_iterator it = colliders.begin();
@@ -267,7 +240,7 @@ void j1Collision::DebugDraw()
 
 		color = debugColors[(*it)->colliderType];
 
-		App->printer->PrintQuad((*it)->colliderRect, { color.r,color.g,color.b,alpha }, true);
+		App->printer->PrintQuad((*it)->colliderRect, { color.r,color.g,color.b,alpha }, true, Layers_DebugDraw);
 
 		it++;
 	}
