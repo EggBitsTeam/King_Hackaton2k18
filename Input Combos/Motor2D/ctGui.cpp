@@ -12,6 +12,7 @@
 #include "UIButton.h"
 #include "UITextBox.h"
 #include "UIDialog.h"
+#include "UICharacterSelector.h"
 
 #include "UIElement.h"
 
@@ -157,6 +158,16 @@ UIElement* ctGui::AddUIDialog(int position_x, int position_y, ctAnimation dialog
 UIElement* ctGui::AddUIImage(int position_x, int position_y, SDL_Rect rect, ctModule* callback, UIElement* parent) {
 
 	UIElement* tmp_img = new UIImage(position_x, position_y, IMAGE, rect, callback, parent);
+	ui_elements.push_back(tmp_img);
+	return tmp_img;
+
+	LOG("Error: Cant add the UIImage");
+	return nullptr;
+}
+
+UIElement* ctGui::AddUICharacterSelector(int position_x, int position_y, SDL_Rect rect, ctModule* callback, UIElement* parent) {
+
+	UIElement* tmp_img = new UICharacterSelector(position_x, position_y, CHARACTER_SELECTOR, rect, callback, parent);
 	ui_elements.push_back(tmp_img);
 	return tmp_img;
 

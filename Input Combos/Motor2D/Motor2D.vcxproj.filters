@@ -133,6 +133,9 @@
     <ClCompile Include="bandaDelPatio.cpp">
       <Filter>Core\Modules\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="UICharacterSelector.cpp">
+      <Filter>Core\Modules\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ctApp.h">
@@ -252,6 +255,9 @@
     </ClInclude>
     <ClInclude Include="bandaDelPatio.h">
       <Filter>Core\Modules\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="UICharacterSelector.h">
+      <Filter>Core\Modules\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
