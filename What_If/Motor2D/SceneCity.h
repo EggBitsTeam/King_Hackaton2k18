@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 
+class Player;
 class Goal_Think;
 
 class SceneCity : public ctModule
@@ -45,8 +46,8 @@ public:
 
 private:
 
+	Player* player = nullptr;
 	Goal_Think* brain = nullptr;
-
 };
 
 

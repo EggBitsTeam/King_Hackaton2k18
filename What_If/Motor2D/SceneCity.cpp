@@ -8,6 +8,7 @@
 #include "ctFadeToBlack.h"
 #include "ctGui.h"
 #include "j1Collision.h"
+#include "Player.h"
 #include "Goal.h"
 
 #include "UIElement.h"
@@ -37,6 +38,14 @@ bool SceneCity::Awake(pugi::xml_node& config)
 	LOG("Loading Scene City");
 	bool ret = true;
 
+	return ret;
+}
+
+// Called before the first frame
+bool SceneCity::Start()
+{
+	bool ret = true;
+
 	// Colliders
 	SDL_Rect inemRect = { 0,0,0,0 };
 	App->collision->CreateCollider(ColliderType_Barrio, inemRect, this);
@@ -51,18 +60,16 @@ bool SceneCity::Awake(pugi::xml_node& config)
 	SDL_Rect diningRoomRect = { 0,0,0,0 };
 	App->collision->CreateCollider(ColliderType_Barrio, diningRoomRect, this);
 
-	return ret;
-}
+	// Player
+	iPoint playerPos = { 0,0 };
+	player = new Player(playerPos.x, playerPos.y, EntityType::PLAYER);
 
-// Called before the first frame
-bool SceneCity::Start()
-{
-	bool ret = true;
+	// Player's brain
+	brain = new Goal_Think(player);
+	brain->RemoveAllSubgoals();
 
-	//brain = new Goal_Think();
-
-	//brain->RemoveAllSubgoals();
-	//brain->AddGoal_WalkingIntro();
+	// Intro cinematic
+	brain->AddGoal_IntroCinematic();
 
 	return ret;
 }

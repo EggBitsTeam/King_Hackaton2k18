@@ -163,16 +163,16 @@ void Goal_Think::Terminate()
 	// TODO: Add some code here
 }
 
-void Goal_Think::AddGoal_WalkingIntro()
+void Goal_Think::AddGoal_IntroCinematic()
 {
-	AddSubgoal(new Goal_WalkingIntro(owner));
+	AddSubgoal(new Goal_IntroCinematic(owner));
 }
 
 // Goal_WalkingIntro ---------------------------------------------------------------------
 
-Goal_WalkingIntro::Goal_WalkingIntro(Player* owner) :CompositeGoal(owner, GoalType_WalkingIntro) {}
+Goal_IntroCinematic::Goal_IntroCinematic(Player* owner) :CompositeGoal(owner, GoalType_IntroCinematic) {}
 
-void Goal_WalkingIntro::Activate()
+void Goal_IntroCinematic::Activate()
 {
 	// This happens once (when this goal is started)
 	goalStatus = GoalStatus_Active;
@@ -181,7 +181,7 @@ void Goal_WalkingIntro::Activate()
 	AddSubgoal(new Goal_MoveToPos(owner));
 }
 
-GoalStatus Goal_WalkingIntro::Process(float dt)
+GoalStatus Goal_IntroCinematic::Process(float dt)
 {
 	ActivateIfInactive();
 	goalStatus = ProcessSubgoals(dt);
@@ -190,7 +190,7 @@ GoalStatus Goal_WalkingIntro::Process(float dt)
 	return goalStatus;
 }
 
-void Goal_WalkingIntro::Terminate()
+void Goal_IntroCinematic::Terminate()
 {
 	// This happens once (when this goal is completed)
 }

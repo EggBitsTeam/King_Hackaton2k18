@@ -20,7 +20,7 @@ enum GoalType {
 	// Composite Goals
 	GoalType_Think,
 
-	GoalType_WalkingIntro,
+	GoalType_IntroCinematic,
 	GoalType_MoveToPos,
 
 	// Atomic Goals
@@ -136,14 +136,14 @@ public:
 	// Arbitrate between available strategies, choosing the most appropriate
 	// to be pursued. Calculate the desirability of the strategies
 	//void Arbitrate();
-	void AddGoal_WalkingIntro();
+	void AddGoal_IntroCinematic();
 };
 
-class Goal_WalkingIntro :public CompositeGoal
+class Goal_IntroCinematic :public CompositeGoal
 {
 public:
 
-	Goal_WalkingIntro(Player* owner);
+	Goal_IntroCinematic(Player* owner);
 
 	void Activate();
 	GoalStatus Process(float dt);
