@@ -30,7 +30,7 @@ bool ctEntities::Awake(pugi::xml_node& config)
 
 bool ctEntities::Start()
 {
-	atlasEntities = App->tex->Load("textures/player.png");
+	atlasEntities = App->tex->Load("textures/characters_spritesheets.png");
 
 	return true;
 }
