@@ -9,6 +9,9 @@
 #include "Entity.h"
 #include "Player.h"
 #include "ctInput.h"
+#include "ctRender.h"
+#include "SceneCity.h"
+#include "ctWindow.h"
 
 //#include "Brofiler\Brofiler.h"
 
@@ -172,9 +175,9 @@ void Goal_Think::AddGoal_IntroCinematic(UIImage* title, UILabel* pressStart)
 	AddSubgoal(new Goal_IntroCinematic(owner, title, pressStart));
 }
 
-void Goal_Think::AddGoal_Goal_MoveCameraDownAndStartGame(UIImage* title)
+void Goal_Think::AddGoal_Goal_MoveCameraDownAndStartGame(UIImage* title, UILabel* pressStart)
 {
-	AddSubgoal(new Goal_MoveCameraDownAndStartGame(owner, title));
+	AddSubgoal(new Goal_MoveCameraDownAndStartGame(owner, title, pressStart));
 }
 
 // Goal_WalkingIntro ---------------------------------------------------------------------
@@ -185,8 +188,10 @@ void Goal_IntroCinematic::Activate()
 {
 	// This happens once (when this goal is started)
 	goalStatus = GoalStatus_Active;
+	RemoveAllSubgoals();
 	// -----
 
+	AddSubgoal(new Goal_MoveCameraDownAndStartGame(owner, title, pressStart));
 	AddSubgoal(new Goal_PressStart(owner, title, pressStart));
 }
 
@@ -195,6 +200,8 @@ GoalStatus Goal_IntroCinematic::Process(float dt)
 	ActivateIfInactive();
 
 	goalStatus = ProcessSubgoals(dt);
+
+	ReactivateIfFailed();
 	// -----
 
 	return goalStatus;
@@ -211,9 +218,10 @@ Goal_PressStart::Goal_PressStart(Player* owner, UIImage* title, UILabel* pressSt
 
 void Goal_PressStart::Activate()
 {
-	// This happens once (when this goal is started)
 	goalStatus = GoalStatus_Active;
 	// -----
+
+	alpha = 255;
 }
 
 GoalStatus Goal_PressStart::Process(float dt)
@@ -221,12 +229,10 @@ GoalStatus Goal_PressStart::Process(float dt)
 	ActivateIfInactive();
 	// -----
 
-	float speed = 0.0f;
-	alpha -= 5.0f * dt;
+	float speed = 200.0f;
+	alpha -= speed * dt;
 	if (alpha <= 0)
 		alpha = 255;
-
-	pressStart->alpha = alpha;
 
 	if (App->input->gamepad.A == GAMEPAD_STATE::PAD_BUTTON_DOWN) {
 
@@ -234,26 +240,28 @@ GoalStatus Goal_PressStart::Process(float dt)
 		goalStatus = GoalStatus_Completed;
 	}
 
+	pressStart->alpha = alpha;
+
 	return goalStatus;
 }
 
 void Goal_PressStart::Terminate()
 {
-	// This happens once (when this goal is completed)
-	App->gui->DeleteUIElement(*(UIElement*)pressStart);
-
+	title = nullptr;
 	pressStart = nullptr;
 }
 
 // Goal_MoveCameraDownAndStartGame ---------------------------------------------------------------------
 
-Goal_MoveCameraDownAndStartGame::Goal_MoveCameraDownAndStartGame(Player* owner, UIImage* title) :AtomicGoal(owner, GoalType_MoveToPos), title(title) {}
+Goal_MoveCameraDownAndStartGame::Goal_MoveCameraDownAndStartGame(Player* owner, UIImage* title, UILabel* pressStart) :AtomicGoal(owner, GoalType_MoveToPos), title(title), pressStart(pressStart) {}
 
 void Goal_MoveCameraDownAndStartGame::Activate()
 {
-	// This happens once (when this goal is started)
 	goalStatus = GoalStatus_Active;
 	// -----
+
+	titleAlpha = 255;
+	pressStartAlpha = 255;
 }
 
 GoalStatus Goal_MoveCameraDownAndStartGame::Process(float dt)
@@ -261,16 +269,30 @@ GoalStatus Goal_MoveCameraDownAndStartGame::Process(float dt)
 	ActivateIfInactive();
 	// -----
 
-	float speed = 0.0f;
-	alpha -= 5.0f * dt;
-	if (alpha <= 0)
-		alpha = 0;
+	if (pressStartAlpha > 0) {
 
-	title->alpha = alpha;
+		float pressStartAlphaSpeed = 100.0f;
+		pressStartAlpha -= pressStartAlphaSpeed * dt;
+		if (pressStartAlpha <= 0)
+			pressStartAlpha = 0;
+		pressStart->alpha = pressStartAlpha;
+	}
 
+	float titleAlphaSpeed = 50.0f;
+	titleAlpha -= titleAlphaSpeed * dt;
+	if (titleAlpha <= 0)
+		titleAlpha = 0;
+	title->alpha = titleAlpha;
 
-
-	//goalStatus = GoalStatus_Completed;
+	// Move camera down
+	float cameraSpeed = 1.0f;
+	if (App->render->camera.y <= -(App->city->mapHeight - App->render->camera.h * App->win->GetScale()))
+		App->render->camera.y -= cameraSpeed;
+	else {
+	
+		App->render->camera.y = -(App->city->mapHeight - App->render->camera.h * App->win->GetScale());
+		goalStatus = GoalStatus_Completed;
+	}
 
 	return goalStatus;
 }
@@ -278,6 +300,7 @@ GoalStatus Goal_MoveCameraDownAndStartGame::Process(float dt)
 void Goal_MoveCameraDownAndStartGame::Terminate()
 {
 	// This happens once (when this goal is completed)
+	App->gui->DeleteUIElement(*(UIElement*)pressStartAlpha);
 	App->gui->DeleteUIElement(*(UIElement*)title);
 
 	title = nullptr;

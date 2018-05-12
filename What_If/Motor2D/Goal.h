@@ -140,7 +140,7 @@ public:
 	// to be pursued. Calculate the desirability of the strategies
 	//void Arbitrate();
 	void AddGoal_IntroCinematic(UIImage* title, UILabel* pressStart);
-	void AddGoal_Goal_MoveCameraDownAndStartGame(UIImage* title);
+	void AddGoal_Goal_MoveCameraDownAndStartGame(UIImage* title, UILabel* pressStart);
 };
 
 class Goal_IntroCinematic :public CompositeGoal
@@ -182,7 +182,7 @@ class Goal_MoveCameraDownAndStartGame :public AtomicGoal
 {
 public:
 
-	Goal_MoveCameraDownAndStartGame(Player* owner, UIImage* title);
+	Goal_MoveCameraDownAndStartGame(Player* owner, UIImage* title, UILabel* pressStart);
 
 	void Activate();
 	GoalStatus Process(float dt);
@@ -191,8 +191,10 @@ public:
 private:
 
 	UIImage* title = nullptr;
+	UILabel* pressStart = nullptr;
 
-	int alpha = 0;
+	int titleAlpha = 0;
+	int pressStartAlpha = 0;
 };
 
 #endif //__GOAL_H__

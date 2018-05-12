@@ -18,7 +18,7 @@
 		</button>
 	</gui>
 	<window>
-		<resolution width="640" height="360" scale="1" />
+		<resolution width="640" height="360" scale="2" />
 		<fullscreen value="false" />
 		<borderless value="false" />
 		<resizable value="false" />

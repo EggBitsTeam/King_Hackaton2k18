@@ -49,6 +49,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2, CollisionState collisionState);
 
 public:
+
 	// Player
 	Homeless* homelessEntity = nullptr;
 	Girl* girlEntity = nullptr;
@@ -63,6 +64,10 @@ public:
 		HOMELESS_ACTUAL,
 		GIRL_ACTUAL,
 	} currentPlayer = NO_FOLLOW;
+
+	// Map
+	int mapWidth = 0;
+	int mapHeight = 0;
 
 private:
 

@@ -60,6 +60,8 @@ bool SceneCity::Start()
 
 	// Map
 	mapTexture = App->tex->Load("textures/map.png");
+	mapWidth = 4194;
+	mapHeight = 316;
 
 	// Colliders
 	SDL_Rect inemRect = { 280,184,160,107 };
@@ -100,6 +102,12 @@ bool SceneCity::Start()
 	// Player's brain
 	blackBrain = new Goal_Think(blackEntity);
 	blackBrain->RemoveAllSubgoals();
+	whiteBrain = new Goal_Think(whiteEntity);
+	whiteBrain->RemoveAllSubgoals();
+	homelessBrain = new Goal_Think(homelessEntity);
+	homelessBrain->RemoveAllSubgoals();
+	girlBrain = new Goal_Think(girlEntity);
+	girlBrain->RemoveAllSubgoals();
 
 	// Intro cinematic
 	blackBrain->AddGoal_IntroCinematic(title, pressStart);
@@ -125,9 +133,13 @@ bool SceneCity::Update(float dt)
 {
 	int scale = App->win->GetScale();
 
+	// Update brains
+	blackBrain->ProcessSubgoals(dt);
+	whiteBrain->ProcessSubgoals(dt);
+	homelessBrain->ProcessSubgoals(dt);
+	girlBrain->ProcessSubgoals(dt);
+
 	// Blit map
-	int mapWidth = 4194;
-	int mapHeight = 316;
 	App->printer->PrintSprite({ 0,0 }, mapTexture, { 0,0,mapWidth, mapHeight }, Layers_Map);
 
 	// Debug camera

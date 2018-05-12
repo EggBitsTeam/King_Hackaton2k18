@@ -56,7 +56,8 @@ public:
 
 	double          scale_factor = 1;
 	SDL_Renderer*	renderer = nullptr;
-	SDL_Rect		camera = { 0, 0, 0, 0 };
+	//SDL_Rect		camera = { 0, 0, 0, 0 };
+	SDL_fRect		camera = { 0, 0, 0, 0 };
 	SDL_Rect		last_camera = { 0, 0, 0, 0 };
 	SDL_Rect		viewport = { 0, 0, 0, 0 };
 	SDL_Color		background = { 0, 0, 0, 0 };
