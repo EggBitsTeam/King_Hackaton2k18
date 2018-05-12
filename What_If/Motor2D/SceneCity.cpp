@@ -94,7 +94,18 @@ bool SceneCity::Start()
 
 	// Intro cinematic
 	brain->AddGoal_IntroCinematic();
-	homelessEntity = (Homeless*)App->entities->SpawnEntity(0, 0, EntityType::HOMELESS);
+
+	homelessEntity = (Homeless*)App->entities->SpawnEntity(0, 260, EntityType::HOMELESS);
+	girlEntity = (Girl*)App->entities->SpawnEntity(0, 260, EntityType::GIRL);
+	blackEntity = (Black*)App->entities->SpawnEntity(0, 260, EntityType::BLACK);
+	whiteEntity = (White*)App->entities->SpawnEntity(0, 260, EntityType::WHITE);
+
+	currentPlayer = NO_FOLLOW;
+
+	homelessEntity->StopPlayer(true);
+	girlEntity->StopPlayer(true);
+	whiteEntity->StopPlayer(true);
+	blackEntity->StopPlayer(true);
 
 	return ret;
 }
@@ -125,6 +136,47 @@ bool SceneCity::Update(float dt)
 		App->render->camera.y += cameraSpeed * dt;
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		App->render->camera.y -= cameraSpeed * dt;
+
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT)
+	{
+		currentPlayer = Current_Player::HOMELESS_ACTUAL;
+		homelessEntity->StopPlayer(false);
+		girlEntity->StopPlayer(true);
+		whiteEntity->StopPlayer(true);
+		blackEntity->StopPlayer(true);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT)
+	{
+		currentPlayer = Current_Player::GIRL_ACTUAL;
+		homelessEntity->StopPlayer(true);
+		girlEntity->StopPlayer(false);
+		whiteEntity->StopPlayer(true);
+		blackEntity->StopPlayer(true);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT)
+	{
+		currentPlayer = Current_Player::WHITE_ACTUAL;
+		homelessEntity->StopPlayer(true);
+		girlEntity->StopPlayer(true);
+		whiteEntity->StopPlayer(false);
+		blackEntity->StopPlayer(true);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT)
+	{
+		currentPlayer = Current_Player::BLACK_ACTUAL;
+		homelessEntity->StopPlayer(true);
+		girlEntity->StopPlayer(true);
+		whiteEntity->StopPlayer(true);
+		blackEntity->StopPlayer(false);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_5) == KEY_REPEAT)
+	{
+		currentPlayer = Current_Player::NO_FOLLOW;
+		homelessEntity->StopPlayer(true);
+		girlEntity->StopPlayer(true);
+		whiteEntity->StopPlayer(true);
+		blackEntity->StopPlayer(true);
+	}
 
 	// Debug draw
 	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)

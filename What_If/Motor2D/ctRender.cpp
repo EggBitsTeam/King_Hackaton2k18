@@ -81,15 +81,12 @@ bool ctRender::PreUpdate()
 
 bool ctRender::Update(float dt)
 {
-
 	uint winWidth, winHeight;
 
 	App->win->GetWindowSize(winWidth, winHeight);
 
 	if (SetCameraPlayer)
 		SetCameraToPlayer();
-
-	SDL_RenderSetLogicalSize(renderer, camera.w, camera.h) == 0;
 
 	return true;
 }
@@ -441,11 +438,30 @@ bool ctRender::IsInScreen(const SDL_Rect& item) const
 
 void ctRender::SetCameraToPlayer()
 {
-	fPoint playerPos = App->city->homelessEntity->GetPos();
-	
+	fPoint playerPos = { 0,0 };
+
+	switch (App->city->currentPlayer)
+	{
+	case SceneCity::Current_Player::HOMELESS_ACTUAL:
+		playerPos = App->city->homelessEntity->GetPos();
+		break;
+	case SceneCity::Current_Player::BLACK_ACTUAL:
+		playerPos = App->city->blackEntity->GetPos();
+		break;
+	case SceneCity::Current_Player::WHITE_ACTUAL:
+		playerPos = App->city->whiteEntity->GetPos();
+		break;
+	case SceneCity::Current_Player::GIRL_ACTUAL:
+		playerPos = App->city->girlEntity->GetPos();
+		break;
+	case SceneCity::Current_Player::NO_FOLLOW:
+		return;
+		break;
+	}
+
 	uint widht, height;
 	App->win->GetWindowSize(widht, height);
 	camera.x = (((int)-playerPos.x * App->win->GetScale()) + (widht * App->win->GetScale()) / 2) ;
-	camera.y = (int)playerPos.y + (height * App->win->GetScale()) / 2;
+	camera.y = (((int)-playerPos.y * App->win->GetScale()) + (height * App->win->GetScale()) / 2);
 
 }
