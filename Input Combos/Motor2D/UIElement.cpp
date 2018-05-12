@@ -65,6 +65,9 @@ void UIElement::Draw(SDL_Texture* sprites)
 		case TEXTBOX:
 			App->render->Blit(texture, screen_position.x, screen_position.y, &current_rect, 0.0f, SDL_FLIP_NONE, 0.0, this->alpha);
 			break;
+		case DIALOG:
+			//App->render->Blit(App->dialogs->atlas, screen_position.x, screen_position.y, &current_animation.GetCurrentFrame(), 2.0f, SDL_FLIP_NONE, 0.0, this->alpha);
+			break;
 		default:
 			break;
 		}

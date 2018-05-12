@@ -15,6 +15,7 @@ class Player;
 
 class UIImage;
 class UILabel;
+class UIDialog;
 
 enum GoalType {
 
@@ -212,19 +213,28 @@ private:
 	int alpha = 0;
 	bool isWhiteWalk = false;
 	bool isWhiteStart = false;
+	bool isWhiteDialog = false;
 
 	bool isGirlWalk = false;
 	bool isGirlStart = false;
+	bool isGirlDialog = false;
 
 	bool isBlackWalk = false;
 	bool isBlackStart = false;
+	bool isBlackDialog = false;
 
 	bool isFirstBlackWalk = false;
 	bool isHomelessWalk = false;
 	bool isHomelessStart = false;
+	bool isHomelessDialog = false;
 
 	ctTimer walkTimer;
 	ctTimer timer;
+
+	UIDialog* whiteDialog = nullptr;
+	UIDialog* blackDialog = nullptr;
+	UIDialog* girlDialog = nullptr;
+	UIDialog* homelessDialog = nullptr;
 };
 
 class Goal_MoveCameraRightAndControlBlackCharacter :public AtomicGoal

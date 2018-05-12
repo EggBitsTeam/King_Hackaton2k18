@@ -116,11 +116,11 @@ bool SceneCity::Start()
 	girlBrain->RemoveAllSubgoals();
 
 	// Intro cinematic
-	blackBrain->AddGoal_IntroCinematic(title, pressStart);
+	//blackBrain->AddGoal_IntroCinematic(title, pressStart);
 
 	currentPlayer = NO_FOLLOW;
 
-	homelessEntity->StopPlayer(false);
+	homelessEntity->StopPlayer(true);
 	girlEntity->StopPlayer(true);
 	whiteEntity->StopPlayer(true);
 	blackEntity->StopPlayer(true);

@@ -18,6 +18,8 @@
 #include "Girl.h"
 #include "Homeless.h"
 #include "Player.h"
+#include "Dialogs.h"
+#include "UIDialog.h"
 
 //#include "Brofiler\Brofiler.h"
 
@@ -192,7 +194,15 @@ void Goal_IntroCinematic::Activate()
 	RemoveAllSubgoals();
 	// -----
 
-	AddSubgoal(new Goal_MoveCameraRightAndControlBlackCharacter(owner));
+	App->city->homelessEntity->StopPlayer(true);
+	App->city->girlEntity->StopPlayer(true);
+	App->city->whiteEntity->StopPlayer(true);
+	App->city->blackEntity->StopPlayer(true);
+
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+
+	//AddSubgoal(new Goal_MoveCameraRightAndControlBlackCharacter(owner));
 	AddSubgoal(new Goal_InemDialogs(owner));
 	AddSubgoal(new Goal_MoveCameraDownAndStartGame(owner, title, pressStart));
 	AddSubgoal(new Goal_PressStart(owner, title, pressStart));
@@ -213,6 +223,17 @@ GoalStatus Goal_IntroCinematic::Process(float dt)
 void Goal_IntroCinematic::Terminate()
 {
 	// This happens once (when this goal is completed)
+	App->city->homelessEntity->StopPlayer(false);
+	App->city->currentPlayer = SceneCity::Current_Player::HOMELESS_ACTUAL;
+
+	App->city->girlEntity->StopPlayer(true);
+	App->city->whiteEntity->StopPlayer(true);
+	App->city->blackEntity->StopPlayer(true);
+
+	App->city->girlEntity->SetPrintAlpha(255);
+	App->city->whiteEntity->SetPrintAlpha(255);
+	App->city->blackEntity->SetPrintAlpha(255);
+	App->city->homelessEntity->SetPrintAlpha(255);
 }
 
 // Goal_PressStart ---------------------------------------------------------------------
@@ -224,8 +245,6 @@ void Goal_PressStart::Activate()
 	goalStatus = GoalStatus_Active;
 	// -----
 
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
 	alpha = 255;
 }
 
@@ -343,7 +362,12 @@ GoalStatus Goal_InemDialogs::Process(float dt)
 
 	if (isWhiteWalk) {
 		
-		if (!isWhiteStart) {
+		if (isWhiteDialog) {
+		
+			whiteDialog = (UIDialog*)App->gui->AddUIDialog(0, 0, App->dialogs->tom_01);			
+			isWhiteDialog = false;
+		}
+		if (!isWhiteStart && whiteDialog->current_animation.Finished()) {
 		
 			walkTimer.Start();
 			isWhiteStart = true;
@@ -455,11 +479,12 @@ GoalStatus Goal_InemDialogs::Process(float dt)
 			if (App->city->blackEntity->pos.x >= 337) {
 				App->city->blackEntity->SetAnimation(Player::Animations::Idle);
 				alpha -= alphaSpeed * dt;
-				if (alpha <= 0)
+				if (alpha <= 0) {
 					alpha = 0;
+					goalStatus = GoalStatus_Completed;
+					return goalStatus;
+				}
 				App->city->blackEntity->SetPrintAlpha(alpha);
-
-				goalStatus = GoalStatus_Completed;
 			}
 			else {
 				App->city->blackEntity->SetAnimation(Player::Animations::Move);
@@ -470,7 +495,7 @@ GoalStatus Goal_InemDialogs::Process(float dt)
 
 	if (isHomelessWalk) {
 
-		if (App->city->homelessEntity->pos.x >= App->render->camera.x + 300) {
+		if (App->city->homelessEntity->pos.x >= App->render->camera.x + 300 / App->win->GetScale()) {
 
 			App->city->homelessEntity->SetAnimation(Player::Animations::Idle);
 
