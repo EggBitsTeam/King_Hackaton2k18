@@ -19,6 +19,7 @@ enum EntityType
 	HOMELESS,
 	NPC,
 	NPCBADBOY,
+	BANDADELPATIO,
 	NO_TYPE
 };
 
