@@ -155,6 +155,20 @@ bool SceneCity::Update(float dt)
 
 	int scale = App->win->GetScale();
 
+	if (App->input->GetKey(SDL_SCANCODE_9))
+	{
+		homelessEntity->StopPlayer(true);
+		girlEntity->StopPlayer(true);
+		whiteEntity->StopPlayer(false);
+		blackEntity->StopPlayer(true);
+		girlEntity->to_destroy = true;
+		homelessEntity->to_destroy = true;
+		blackEntity->to_destroy = true;
+		currentPlayer = WHITE_ACTUAL;
+		whiteEntity->pos = { 1000,257 };
+		whiteEntity->speedFactor = 60.0f;
+	}
+
 	// Update brains
 	blackBrain->ProcessSubgoals(dt);
 	whiteBrain->ProcessSubgoals(dt);

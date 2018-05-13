@@ -69,6 +69,8 @@ public:
 	int mapHeight = 0;
 	int barHeight = 0;
 
+	bool WHITEMANON = false;
+
 private:
 
 	Goal_Think* homelessBrain = nullptr;
