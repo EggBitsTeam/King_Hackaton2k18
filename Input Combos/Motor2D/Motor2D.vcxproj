@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="bandaDelPatio.cpp" />
     <ClCompile Include="Black.cpp" />
+    <ClCompile Include="BlackDead.cpp" />
     <ClCompile Include="BullyBoy1.cpp" />
     <ClCompile Include="BullyBoy2.cpp" />
     <ClCompile Include="ctApp.cpp" />
@@ -34,6 +35,7 @@
     <ClCompile Include="Girl.cpp" />
     <ClCompile Include="Goal.cpp" />
     <ClCompile Include="Homeless.cpp" />
+    <ClCompile Include="HomelessDead.cpp" />
     <ClCompile Include="j1Collision.cpp" />
     <ClCompile Include="j1Printer.cpp" />
     <ClCompile Include="Npc.cpp" />
@@ -49,10 +51,12 @@
     <ClCompile Include="UILabel.cpp" />
     <ClCompile Include="UITextBox.cpp" />
     <ClCompile Include="White.cpp" />
+    <ClCompile Include="WomanFat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bandaDelPatio.h" />
     <ClInclude Include="Black.h" />
+    <ClInclude Include="BlackDead.h" />
     <ClInclude Include="BullyBoy1.h" />
     <ClInclude Include="BullyBoy2.h" />
     <ClInclude Include="ctAnimation.h" />
@@ -77,6 +81,7 @@
     <ClInclude Include="Girl.h" />
     <ClInclude Include="Goal.h" />
     <ClInclude Include="Homeless.h" />
+    <ClInclude Include="HomelessDead.h" />
     <ClInclude Include="j1Collision.h" />
     <ClInclude Include="j1Printer.h" />
     <ClInclude Include="MemLeaks.h" />
@@ -94,6 +99,7 @@
     <ClInclude Include="UILabel.h" />
     <ClInclude Include="UITextBox.h" />
     <ClInclude Include="White.h" />
+    <ClInclude Include="WomanFat.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2AF9969B-F202-497B-AF30-7BEF9CE8005E}</ProjectGuid>

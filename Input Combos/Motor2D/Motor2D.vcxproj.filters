@@ -139,6 +139,16 @@
     <ClCompile Include="BullyBoy2.cpp">
       <Filter>Core\Modules\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="UICharacterSelector.cpp" />
+    <ClCompile Include="WomanFat.cpp">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackDead.cpp">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="HomelessDead.cpp">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ctApp.h">
@@ -263,6 +273,16 @@
       <Filter>Core\Modules\Entities</Filter>
     </ClInclude>
     <ClInclude Include="BullyBoy2.h">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="UICharacterSelector.h" />
+    <ClInclude Include="WomanFat.h">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackDead.h">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="HomelessDead.h">
       <Filter>Core\Modules\Entities</Filter>
     </ClInclude>
   </ItemGroup>
