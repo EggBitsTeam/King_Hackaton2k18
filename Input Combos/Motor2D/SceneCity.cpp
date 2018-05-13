@@ -167,6 +167,9 @@ bool SceneCity::Update(float dt)
 		currentPlayer = WHITE_ACTUAL;
 		whiteEntity->pos = { 1000,257 };
 		whiteEntity->speedFactor = 60.0f;
+
+
+		App->entities->SpawnEntity( 1730,257, EntityType::WOMANFAT);
 	}
 
 	// Update brains

@@ -11,6 +11,9 @@
 #include "Npc.h"
 #include "NPCbadboy.h"
 #include "bandaDelPatio.h"
+#include "BlackDead.h"
+#include "HomelessDead.h"
+#include "WomanFat.h"
 
 ctEntities::ctEntities()
 {
@@ -137,6 +140,21 @@ Entity* ctEntities:: SpawnEntity(int x, int y, EntityType type)
 
 	case EntityType::BULLYBOY2:
 		toSpawn = new bandaDelPatio(x, y, BULLYBOY2);
+		entities.push_back(toSpawn);
+		break;
+
+	case EntityType::HOMLESSDEAD:
+		toSpawn = new HomelessDead(x, y, HOMLESSDEAD);
+		entities.push_back(toSpawn);
+		break;
+
+	case EntityType::WOMANFAT:
+		toSpawn = new WomanFat(x, y, WOMANFAT);
+		entities.push_back(toSpawn);
+		break;
+
+	case EntityType::BLACKDEAD:
+		toSpawn = new BlackDead(x, y, BLACKDEAD);
 		entities.push_back(toSpawn);
 		break;
 	default:
