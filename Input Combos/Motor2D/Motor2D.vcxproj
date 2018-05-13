@@ -13,6 +13,8 @@
   <ItemGroup>
     <ClCompile Include="bandaDelPatio.cpp" />
     <ClCompile Include="Black.cpp" />
+    <ClCompile Include="BullyBoy1.cpp" />
+    <ClCompile Include="BullyBoy2.cpp" />
     <ClCompile Include="ctApp.cpp" />
     <ClCompile Include="ctAudio.cpp" />
     <ClCompile Include="ctEntities.cpp" />
@@ -50,6 +52,8 @@
   <ItemGroup>
     <ClInclude Include="bandaDelPatio.h" />
     <ClInclude Include="Black.h" />
+    <ClInclude Include="BullyBoy1.h" />
+    <ClInclude Include="BullyBoy2.h" />
     <ClInclude Include="ctAnimation.h" />
     <ClInclude Include="ctApp.h" />
     <ClInclude Include="ctAudio.h" />

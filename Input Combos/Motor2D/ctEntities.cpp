@@ -129,6 +129,16 @@ Entity* ctEntities:: SpawnEntity(int x, int y, EntityType type)
 		toSpawn = new bandaDelPatio(x, y, BANDADELPATIO);
 		entities.push_back(toSpawn);
 		break;
+
+	case EntityType::BULLYBOY1:
+		toSpawn = new bandaDelPatio(x, y, BULLYBOY1);
+		entities.push_back(toSpawn);
+		break;
+
+	case EntityType::BULLYBOY2:
+		toSpawn = new bandaDelPatio(x, y, BULLYBOY2);
+		entities.push_back(toSpawn);
+		break;
 	default:
 		break;
 	}

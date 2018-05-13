@@ -133,6 +133,12 @@
     <ClCompile Include="bandaDelPatio.cpp">
       <Filter>Core\Modules\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="BullyBoy1.cpp">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="BullyBoy2.cpp">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ctApp.h">
@@ -251,6 +257,12 @@
       <Filter>Core\Modules\Entities</Filter>
     </ClInclude>
     <ClInclude Include="bandaDelPatio.h">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="BullyBoy1.h">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="BullyBoy2.h">
       <Filter>Core\Modules\Entities</Filter>
     </ClInclude>
   </ItemGroup>
