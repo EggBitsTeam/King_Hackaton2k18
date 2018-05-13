@@ -133,8 +133,11 @@
     <ClCompile Include="bandaDelPatio.cpp">
       <Filter>Core\Modules\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="UICharacterSelector.cpp">
-      <Filter>Core\Modules\GUI</Filter>
+    <ClCompile Include="BullyBoy1.cpp">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="BullyBoy2.cpp">
+      <Filter>Core\Modules\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,8 +259,11 @@
     <ClInclude Include="bandaDelPatio.h">
       <Filter>Core\Modules\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="UICharacterSelector.h">
-      <Filter>Core\Modules\GUI</Filter>
+    <ClInclude Include="BullyBoy1.h">
+      <Filter>Core\Modules\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="BullyBoy2.h">
+      <Filter>Core\Modules\Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
