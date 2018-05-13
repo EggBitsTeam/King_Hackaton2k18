@@ -51,6 +51,9 @@ bool SceneCity::Start()
 {
 	bool ret = true;
 
+	if (App->audio->PlayMusic("audio/music/ambience.ogg") == false)
+		int a = 0;
+
 	App->entities->SpawnEntity(1500, 247, EntityType::BANDADELPATIO);
 
 	int scale = App->win->GetScale();
@@ -148,6 +151,8 @@ bool SceneCity::PreUpdate()
 // Called each loop iteration
 bool SceneCity::Update(float dt)
 {
+	
+
 	int scale = App->win->GetScale();
 
 	// Update brains
